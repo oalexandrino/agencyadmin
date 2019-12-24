@@ -1,4 +1,7 @@
+import { PortfolioService } from './../../services/portfolio/portfolio-service.service';
 import { Component, OnInit } from '@angular/core';
+import { Router, Params } from '@angular/router';
+
 
 @Component({
   selector: 'app-portfolio-view',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PortfolioViewComponent implements OnInit {
 
-  constructor() { }
+  portfolioItems: Array<any>;
+
+  constructor(
+    public firebasePortfolioService: PortfolioService,
+    private router: Router
+  ) { }
+
 
   ngOnInit() {
+  this.getData();
+
+  }
+
+  getData(){
+    this.firebasePortfolioService.getPortfolioListing()
+    .subscribe(result => {
+      this.portfolioItems = result;
+    });
+  }
+
+  viewDetails(item) {
+    this.router.navigate(['/details/'+ item.payload.doc.id]);
   }
 
 }
