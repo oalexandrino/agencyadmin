@@ -5,44 +5,44 @@
             <a routerLink="/portfolio-view">All Portfolio</a> > Edit Portfolio</li>
       </ol>
     </nav>
-</div>
-<div class="page-content">
-    <div class="row">
-        <div class="col col-md-8">
-            <form class="edit-form" [formGroup]="portfolioForm" novalidate (ngSubmit)="onSubmit(portfolioForm.value)">
-                <div class="form-group">
-                    <mat-form-field class="input-style">
-                      <input matInput placeholder="Name" class="form-control" formControlName="name">
-                    </mat-form-field>
-                    <ng-container *ngFor="let validation of validation_messages.name">
-                      <mat-error *ngIf="portfolioForm.get('name').hasError(validation.type) && (portfolioForm.get('name').dirty || portfolioForm.get('name').touched)">{{validation.message}}</mat-error>
-                    </ng-container>
-                </div>
-                <div class="form-group">
-                    <mat-form-field class="input-style">
-                      <input matInput placeholder="Description" class="form-control" formControlName="desc">
-                    </mat-form-field>
-                    <ng-container *ngFor="let validation of validation_messages.desc">
-                      <mat-error *ngIf="portfolioForm.get('desc').hasError(validation.type) && (portfolioForm.get('desc').dirty || portfolioForm.get('desc').touched)">{{validation.message}}</mat-error>
-                    </ng-container>
-                </div>
-                <div class="form-group">
-                    <mat-form-field class="input-style">
-                      <input matInput placeholder="Price" class="form-control" formControlName="price">
-                    </mat-form-field>
-                    <ng-container *ngFor="let validation of validation_messages.price">
-                      <mat-error *ngIf="portfolioForm.get('price').hasError(validation.type) && (portfolioForm.get('price').dirty || portfolioForm.get('price').touched)">{{validation.message}}</mat-error>
-                    </ng-container>
-                </div>
-                <div class="row submit-button-container">
-                    <div class="col-md-4">
-                      <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!portfolioForm.valid">Save</button>
-                    </div>
-                    <div class="col-md-4">
-                      <button mat-raised-button class="delete-button" color="warn" type="button" (click)="delete()">Delete</button>
-                    </div>
+    <div class="page-content">
+      <div class="row">
+          <div class="col col-md-8">
+              <form class="edit-form" [formGroup]="portfolioForm" novalidate (ngSubmit)="onSubmit(portfolioForm.value)">
+                  <div class="form-group">
+                      <mat-form-field class="input-style">
+                        <input matInput placeholder="Name" class="form-control" formControlName="name">
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.name">
+                        <mat-error *ngIf="portfolioForm.get('name').hasError(validation.type) && (portfolioForm.get('name').dirty || portfolioForm.get('name').touched)">{{validation.message}}</mat-error>
+                      </ng-container>
                   </div>
-            </form>
-        </div>
-    </div>
-</div>
+                  <div class="form-group">
+                      <mat-form-field class="input-style">
+                        <input matInput placeholder="Description" class="form-control" formControlName="desc">
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.desc">
+                        <mat-error *ngIf="portfolioForm.get('desc').hasError(validation.type) && (portfolioForm.get('desc').dirty || portfolioForm.get('desc').touched)">{{validation.message}}</mat-error>
+                      </ng-container>
+                  </div>
+                  <div class="form-group">
+                      <mat-form-field class="input-style">
+                        <input matInput placeholder="Price" class="form-control" formControlName="price">
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.price">
+                        <mat-error *ngIf="portfolioForm.get('price').hasError(validation.type) && (portfolioForm.get('price').dirty || portfolioForm.get('price').touched)">{{validation.message}}</mat-error>
+                      </ng-container>
+                  </div>
+                  <div class="row submit-button-container">
+                      <div class="col-md-4">
+                        <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!portfolioForm.valid">Save</button>
+                      </div>
+                      <div class="col-md-4">
+                        <button mat-raised-button class="delete-button" color="warn" type="button" (click)="delete()">Delete</button>
+                      </div>
+                    </div>
+              </form>
+          </div>
+      </div>
+  </div>
+  </div>
