@@ -6,6 +6,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
 
 
 // import GUI Angular material modules
@@ -84,7 +86,15 @@ import { HomeComponent } from './home/home.component';
     MatFormFieldModule,
     BrowserAnimationsModule,
     FormsModule,
-    AngularFirestoreModule.enablePersistence()
+    AngularFirestoreModule.enablePersistence(),
+    HttpClientModule,
+    CommonModule,
+    ReactiveFormsModule,
+  ],
+  exports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [PortfolioService],
   bootstrap: [AppComponent],

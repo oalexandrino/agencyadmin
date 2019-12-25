@@ -1,16 +1,16 @@
 <div class="w-100">
   <h2 class="mb-4">Portfolio listing</h2>
   <div class="list-group users-list">
-      <div *ngFor="let item of portfolioItems" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div *ngFor="let portfolioItem of portfolioItems" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="row">
           <div class="col col-md-8 text-col">
-            <h3 class="mb-3">{{item.payload.doc.data().name}}</h3>
-            {{item.payload.doc.data().desc}}
-            <h4 class="mb-3"><small>Price ($): {{item.payload.doc.data().price}}</small></h4>
+            <h3 class="mb-3">{{portfolioItem.payload.doc.data().name}}</h3>
+            {{portfolioItem.payload.doc.data().desc}}
+            <h4 class="mb-3"><small>Price ($): {{portfolioItem.payload.doc.data().price}}</small></h4>
 
           </div>
           <div class="col col-md-2 actions-col">
-            <button class="btn btn-outline-primary action" (click)="viewDetails(item)" type="button">
+            <button class="btn btn-outline-primary action" (click)="viewPortfolioDetails(portfolioItem)" type="button">
               <ion-icon class="icon" name="arrow-round-forward"></ion-icon>
             </button>
           </div>

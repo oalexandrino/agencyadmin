@@ -11,4 +11,18 @@ export class PortfolioService {
   getPortfolioListing() {
     return this.db.collection('portfolio').snapshotChanges();
   }
+
+  getPortfolio(portfolioKey) {
+    return this.db.collection('portfolio').doc(portfolioKey).snapshotChanges();
+  }
+
+  deletePortfolio(portfolioKey){
+    return this.db.collection('portfolio').doc(portfolioKey).delete();
+  }
+
+  updatePortfolio(portfolioKey, value){
+    value.nameToSearch = value.name.toLowerCase();
+    return this.db.collection('portfolio').doc(portfolioKey).set(value);
+  }
+
 }
