@@ -7,7 +7,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 // import GUI Angular material modules
@@ -94,6 +94,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
+    TooltipModule.forRoot(),
   ],
   exports: [
     CommonModule,
