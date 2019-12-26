@@ -1,1 +1,49 @@
-<p>new-portfolio works!</p>
+<div class="form-pages">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a routerLink="/portfolio-view">Portfolio Listing</a></li>        
+        <li class="breadcrumb-item active" aria-current="page">Add portfolio</li>        
+      </ol>
+    </nav>
+    <div class="page-content">
+      <div class="row">
+          <div class="col col-md-8">
+              <form class="edit-form" [formGroup]="portfolioForm" novalidate (ngSubmit)="onSubmit(portfolioForm.value)">
+                  <div class="form-group">
+                      <mat-form-field class="input-style">
+                        <input matInput placeholder="Name" class="form-control" formControlName="name">
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.name">
+                        <mat-error *ngIf="portfolioForm.get('name').hasError(validation.type) && (portfolioForm.get('name').dirty || portfolioForm.get('name').touched)">{{validation.message}}</mat-error>
+                      </ng-container>
+                  </div>
+                  <div class="form-group">
+                      <mat-form-field class="input-style">
+                        <input matInput placeholder="Description" class="form-control" formControlName="desc">
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.desc">
+                        <mat-error *ngIf="portfolioForm.get('desc').hasError(validation.type) && (portfolioForm.get('desc').dirty || portfolioForm.get('desc').touched)">{{validation.message}}</mat-error>
+                      </ng-container>
+                  </div>
+                  <div class="form-group">
+                      <mat-form-field class="input-style">
+                        <input matInput placeholder="Price" class="form-control" formControlName="price">
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.price">
+                        <mat-error *ngIf="portfolioForm.get('price').hasError(validation.type) && (portfolioForm.get('price').dirty || portfolioForm.get('price').touched)">{{validation.message}}</mat-error>
+                      </ng-container>
+                  </div>
+                  <div class="row submit-button-container">
+                      <div class="col-md-4">
+                        <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!portfolioForm.valid">Save</button>
+                      </div>
+                      <div class="col-md-4">
+                        <button mat-raised-button class="btn btn-secondary"   type="button" (click)="cancel()">Cancel</button>
+                      </div>                      
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>

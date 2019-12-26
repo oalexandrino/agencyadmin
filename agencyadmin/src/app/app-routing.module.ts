@@ -5,12 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { PortfolioViewComponent } from './portfolio/portfolio-view/portfolio-view.component';
 import { PortfolioResolver } from './portfolio/portfolio-edit/portfolio.resolver';
+import { NewPortfolioComponent } from './portfolio/new-portfolio/new-portfolio.component';
 
 const routes: Routes = [
   { path: '', component: PortfolioViewComponent },
   { path: 'home', component: HomeComponent },
   { path: 'portfolio-view', component: PortfolioViewComponent },
-  { path: 'portfolio-details/:id', component: PortfolioEditComponent, resolve: {data : PortfolioResolver} }
+  { path: 'new-portfolio', component: NewPortfolioComponent },
+  { path: 'portfolio-details/:id', component: PortfolioEditComponent, resolve: {portfolio : PortfolioResolver} }
 ];
 
 @NgModule({

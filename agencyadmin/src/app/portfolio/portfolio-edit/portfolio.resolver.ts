@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 import { PortfolioService } from './../../services/portfolio/portfolio-service.service';
 
 @Injectable({
@@ -9,7 +9,7 @@ export class PortfolioResolver implements Resolve<any> {
 
   constructor(public firebasePortfolioService: PortfolioService) { }
 
-  resolve(route: ActivatedRouteSnapshot,) {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
     return new Promise((resolve, reject) => {
       const portfolioId = route.paramMap.get('id');

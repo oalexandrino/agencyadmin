@@ -51,6 +51,7 @@ import { OurServicesService } from './services/ourservices/ourservices-service.s
 import { SettingsService } from './services/settings/settings-service.service';
 import { AboutService } from './services/about/about-service.service';
 import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { HomeComponent } from './home/home.component';
     AboutEditComponent,
     AboutViewComponent,
     SettingsEditComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

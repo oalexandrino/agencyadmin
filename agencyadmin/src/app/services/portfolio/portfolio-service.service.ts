@@ -25,4 +25,12 @@ export class PortfolioService {
     return this.db.collection('portfolio').doc(portfolioKey).set(value);
   }
 
+  insertPortfolio(value){
+    return this.db.collection('portfolio').add({
+      name: value.name,
+      desc: value.desc,
+      price: parseInt(value.price),
+    });
+  }  
+
 }

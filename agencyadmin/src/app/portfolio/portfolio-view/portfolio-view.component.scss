@@ -37,3 +37,31 @@
       }
     }
   }
+
+  .content-page {
+
+    padding: 20px 60px;
+  
+    .page-content {
+      background-color: #FFF;
+  
+      .change-img-button {
+        display: block;
+        margin: 0px auto;
+      }
+  
+      .edit-form {
+        padding: 20px;
+  
+  
+        .input-style{
+          width: 100%;
+        }
+  
+        .mat-error {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  

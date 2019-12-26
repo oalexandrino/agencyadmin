@@ -38,14 +38,18 @@ export class PortfolioEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.subscribePortfolioData();
+  }
+
+  private subscribePortfolioData() {
     this.route.data.subscribe(routeData => {
-      const data = routeData.data;
-      if (data) {
-        this.item = data.payload.data();
-        this.item.id = data.payload.id;
+      const portfolioData = routeData.portfolio;
+      if (portfolioData) {
+        this.item = portfolioData.payload.data();
+        this.item.id = portfolioData.payload.id;
         this.createForm();
       }
-    })
+    });
   }
 
   createForm() {
@@ -57,8 +61,7 @@ export class PortfolioEditComponent implements OnInit {
   }
 
   onSubmit(value) {
-    value.avatar = this.item.avatar;
-    value.age = Number(value.age);
+    value.price = Number(value.price);
     this.firebasePortfolioService.updatePortfolio(this.item.id, value)
     .then(
       res => {
@@ -68,15 +71,21 @@ export class PortfolioEditComponent implements OnInit {
   }
 
    delete() {
-    this.firebasePortfolioService.deletePortfolio(this.item.id)
-    .then(
-      res => {
-        this.router.navigate(['/portfolio-view']);
-      },
-      err => {
-        console.log(err);
-      }
-    )
+
+    if (confirm("Are you sure you want to delete this item?")) 
+    { 
+      this.firebasePortfolioService.deletePortfolio(this.item.id)
+      .then(
+        res => {
+          this.router.navigate(['/portfolio-view']);
+        },
+        err => {
+          console.log(err);
+        }
+      )
+    }
+     
+
   }
 
   cancel() {
