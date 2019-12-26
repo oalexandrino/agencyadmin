@@ -52,6 +52,7 @@ import { SettingsService } from './services/settings/settings-service.service';
 import { AboutService } from './services/about/about-service.service';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     AboutViewComponent,
     SettingsEditComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
