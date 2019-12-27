@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { NgxNavbarModule  } from 'ngx-bootstrap-navbar';
 
 
 // import GUI Angular material modules
@@ -53,6 +54,7 @@ import { AboutService } from './services/about/about-service.service';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { PortfolioFormComponent } from './forms/portfolio-form/portfolio-form.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     SettingsEditComponent,
     HomeComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    PortfolioFormComponent
   ],
   imports: [
     BrowserModule,
@@ -95,6 +98,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     CommonModule,
     ReactiveFormsModule,
     TooltipModule.forRoot(),
+    NgxNavbarModule
   ],
   exports: [
     CommonModule,

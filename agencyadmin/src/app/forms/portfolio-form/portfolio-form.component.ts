@@ -7,17 +7,19 @@ import { AgencyService } from './../../services/agency.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-portfolio-edit',
-  templateUrl: './portfolio-edit.component.html',
-  styleUrls: ['./portfolio-edit.component.scss']
+  selector: 'app-portfolio-form',
+  templateUrl: './portfolio-form.component.html',
+  styleUrls: ['./portfolio-form.component.scss']
 })
 
 @Injectable({
   providedIn: 'root'
 })
-export class PortfolioEditComponent implements OnInit {
+export class PortfolioFormComponent implements OnInit {
+  
   public portfolioForm: FormGroup;
   portfolioData: any;
+  isNew = true;
 
   validationMessages = {
     name: [
@@ -46,9 +48,14 @@ export class PortfolioEditComponent implements OnInit {
     this.route.data.subscribe(routeData => {
       const portfolioData = routeData.portfolio;
       if (portfolioData) {
+	      this.isNew = false;
         this.portfolioData = portfolioData.payload.data();
         this.portfolioData.id = portfolioData.payload.id;
         this.createForm();
+      }
+      else
+      {
+        this.isNew = true;
       }
     });
   }
@@ -62,13 +69,28 @@ export class PortfolioEditComponent implements OnInit {
   }
 
   onSubmit(value) {
+    if (this.isNew){
+      this.update(value);  
+    }
+    else{
+        this.insert(value);
+    }
+  }
+
+  private insert(value: any) {
     value.price = Number(value.price);
     this.firebaseAgencyService.update('portfolio', this.portfolioData.id, value)
-    .then(
-      res => {
+      .then(res => {
         this.router.navigate(['/portfolio-view']);
-      }
-    )
+      });
+  }
+
+  private update(value: any) {
+    value.price = Number(value.price);
+    this.firebaseAgencyService.update('portfolio', this.portfolioData.id, value)
+      .then(res => {
+        this.router.navigate(['/portfolio-view']);
+      });
   }
 
    delete() {

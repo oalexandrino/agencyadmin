@@ -2,9 +2,11 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><a routerLink="/portfolio-view">Portfolio Listing</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><a routerLink="/new-portfolio">Add portfolio</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Edit Portfolio</li>
+        <li class="breadcrumb-item" aria-current="page"><a routerLink="/portfolio-view">Portfolio Listing</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <span *ngIf="isNew">New portfolio item</span>
+            <span *ngIf="!isNew">Edit portfolio</span>
+        </li>
       </ol>
     </nav>
     <div class="page-content">
@@ -36,18 +38,21 @@
                       </ng-container>
                   </div>
                   <div class="row submit-button-container">
-                      <div class="col-md-4">
-                        <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!portfolioForm.valid">Save</button>
-                      </div>
-                      <div class="col-md-4">
-                        <button mat-raised-button class="delete-button" color="warn" type="button" (click)="delete()">Delete</button>
-                      </div>
-                      <div class="col-md-4">
-                        <button mat-raised-button class="btn btn-secondary"   type="button" (click)="cancel()">Cancel</button>
-                      </div>
-                  </div>
+                    <div class="col-md-4" *ngIf="isNew">
+                      <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!portfolioForm.valid">Insert</button>
+                    </div>                    
+                    <div class="col-md-4" *ngIf="!isNew">
+                      <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!portfolioForm.valid">Update</button>
+                    </div>
+                    <div class="col-md-4" *ngIf="!isNew" >
+                      <button mat-raised-button class="delete-button" color="warn" type="button" (click)="delete()">Delete</button>
+                    </div>
+                    <div class="col-md-4">
+                      <button mat-raised-button class="btn btn-secondary"   type="button" (click)="cancel()">Cancel</button>
+                    </div>
+                </div>
               </form>
           </div>
       </div>
-    </div>
+  </div>
 </div>
