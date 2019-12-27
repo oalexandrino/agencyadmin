@@ -17,8 +17,7 @@ export class PortfolioViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  this.getData();
-
+    this.getData();
   }
 
   getData() {

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { PortfolioService } from './../../services/portfolio/portfolio-service.service';
+import { AgencyService } from './../../services/agency.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -32,6 +33,7 @@ export class PortfolioEditComponent implements OnInit {
 
   constructor(
     public firebasePortfolioService: PortfolioService,
+    public firebaseAgencyService: AgencyService,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
@@ -62,7 +64,7 @@ export class PortfolioEditComponent implements OnInit {
 
   onSubmit(value) {
     value.price = Number(value.price);
-    this.firebasePortfolioService.updatePortfolio(this.item.id, value)
+    this.firebaseAgencyService.update('portfolio', this.item.id, value)
     .then(
       res => {
         this.router.navigate(['/portfolio-view']);
@@ -71,10 +73,8 @@ export class PortfolioEditComponent implements OnInit {
   }
 
    delete() {
-
-    if (confirm("Are you sure you want to delete this item?"))
-    {
-      this.firebasePortfolioService.deletePortfolio(this.item.id)
+    if (confirm('Are you sure you want to delete this item?')) {
+      this.firebaseAgencyService.delete('portfolio', this.item.id)
       .then(
         res => {
           this.router.navigate(['/portfolio-view']);
@@ -91,7 +91,4 @@ export class PortfolioEditComponent implements OnInit {
   cancel() {
     this.router.navigate(['/portfolio-view']);
   }
-
-
-
 }

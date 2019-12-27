@@ -14,8 +14,8 @@
         <div class="row">
           <div class="col col-md-8 text-col">
             <h3 class="mb-3">{{portfolioItem.payload.doc.data().name}}</h3>
-            {{portfolioItem.payload.doc.data().desc}}
-            <h4 class="mb-3"><small>Price ($): {{portfolioItem.payload.doc.data().price}}</small></h4>
+            {{portfolioItem.payload.doc.data(value).desc}}
+            <h4 class="mb-3"><small>Price ($): {{portfolioItem.payload.doc.data(value).price}}</small></h4>
           </div>
           <div class="col col-md-2 actions-col">
             <button class="btn btn-outline-primary action" (click)="viewPortfolioDetails(portfolioItem)" type="button">

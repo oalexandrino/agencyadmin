@@ -26,11 +26,7 @@ export class AgencyService {
   }
 
   insert(collectionName: string, value) {
-    return this.db.collection(collectionName).add({
-      name: value.name,
-      desc: value.desc,
-      price: parseInt(value.price),
-    });
+    return this.db.collection(collectionName).add(value);
   }
 
 }

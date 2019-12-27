@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { PortfolioService } from './../../services/portfolio/portfolio-service.service';
+import { AgencyService } from './../../services/agency.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -32,6 +33,7 @@ export class NewPortfolioComponent implements OnInit {
 
   constructor(
     public firebasePortfolioService: PortfolioService,
+    public firebaseAgencyService: AgencyService,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
@@ -42,13 +44,15 @@ export class NewPortfolioComponent implements OnInit {
   }
 
   onSubmit(value){
-    this.firebasePortfolioService.insertPortfolio(value)
-    .then(
-      res => {
+    this.savePortfolio(value);
+  }
+
+  private savePortfolio(value: any) {
+      this.firebaseAgencyService.insert('portfolio', { name: value.name, desc: value.desc, price: value.price })
+      .then(res => {
         this.createForm();
         this.router.navigate(['/portfolio-view']);
-      }
-    )
+      });
   }
 
   createForm() {

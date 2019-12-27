@@ -8,7 +8,7 @@ import { PortfolioResolver } from './portfolio/portfolio-edit/portfolio.resolver
 import { NewPortfolioComponent } from './portfolio/new-portfolio/new-portfolio.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: PortfolioViewComponent },
   { path: 'home', component: HomeComponent },
   { path: 'portfolio-view', component: PortfolioViewComponent },
   { path: 'new-portfolio', component: NewPortfolioComponent },
