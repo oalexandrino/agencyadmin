@@ -31,6 +31,6 @@ export class PortfolioService {
       desc: value.desc,
       price: parseInt(value.price),
     });
-  }  
+  }
 
 }
