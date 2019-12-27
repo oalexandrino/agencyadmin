@@ -18,7 +18,7 @@ export class NewPortfolioComponent implements OnInit {
   public portfolioForm: FormGroup;
   item: any;
 
-  validation_messages = {
+  validationMessages = {
     name: [
       { type: 'required', message: 'Name is required.' }
     ],
@@ -28,7 +28,7 @@ export class NewPortfolioComponent implements OnInit {
     price: [
       { type: 'required', message: 'Price is required.' },
     ]
-  };  
+  };
 
   constructor(
     public firebasePortfolioService: PortfolioService,
@@ -49,7 +49,7 @@ export class NewPortfolioComponent implements OnInit {
         this.router.navigate(['/portfolio-view']);
       }
     )
-  }  
+  }
 
   createForm() {
     this.portfolioForm = this.fb.group({
@@ -61,6 +61,6 @@ export class NewPortfolioComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/portfolio-view']);
-  }  
+  }
 
 }

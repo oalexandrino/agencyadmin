@@ -18,7 +18,7 @@ export class PortfolioEditComponent implements OnInit {
   public portfolioForm: FormGroup;
   item: any;
 
-  validation_messages = {
+  validationMessages = {
     name: [
       { type: 'required', message: 'Name is required.' }
     ],
@@ -72,8 +72,8 @@ export class PortfolioEditComponent implements OnInit {
 
    delete() {
 
-    if (confirm("Are you sure you want to delete this item?")) 
-    { 
+    if (confirm("Are you sure you want to delete this item?"))
+    {
       this.firebasePortfolioService.deletePortfolio(this.item.id)
       .then(
         res => {
@@ -84,7 +84,7 @@ export class PortfolioEditComponent implements OnInit {
         }
       )
     }
-     
+
 
   }
 
