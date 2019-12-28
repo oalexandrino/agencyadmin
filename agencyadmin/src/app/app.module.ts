@@ -55,6 +55,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PortfolioFormComponent } from './forms/portfolio-form/portfolio-form.component';
+import { CardAgencywebsiteItemsComponent } from './card-agencywebsite-items/card-agencywebsite-items.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { PortfolioFormComponent } from './forms/portfolio-form/portfolio-form.co
     HomeComponent,
     NavbarComponent,
     SidebarComponent,
-    PortfolioFormComponent
+    PortfolioFormComponent,
+    CardAgencywebsiteItemsComponent
   ],
   imports: [
     BrowserModule,
