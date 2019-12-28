@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MatDialog } from '@angular/material';
 import { AgencyService } from './../../services/agency.service';
 import { Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { DeleteMsgComponent } from './../../modals/delete-msg/delete-msg.component';
 
 @Component({
   selector: 'app-portfolio-form',
@@ -15,7 +18,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class PortfolioFormComponent implements OnInit {
-
+  modalRef: BsModalRef;
   public portfolioForm: FormGroup;
   portfolioData: any;
   isNew = true;
@@ -33,6 +36,7 @@ export class PortfolioFormComponent implements OnInit {
   };
 
   constructor(
+    private modalService: BsModalService,
     public firebaseAgencyService: AgencyService,
     private route: ActivatedRoute,
     private router: Router,
@@ -42,6 +46,17 @@ export class PortfolioFormComponent implements OnInit {
   ngOnInit() {
     this.subscribePortfolioData();
   }
+
+
+  openModal() {
+    this.modalRef = this.modalService.show(DeleteMsgComponent, {
+      initialState: {
+        title: 'Modal title',
+        data: {}
+      }
+    });
+  }
+
 
   private subscribePortfolioData() {
     this.route.data.subscribe(routeData => {
@@ -83,7 +98,7 @@ export class PortfolioFormComponent implements OnInit {
   }
 
   private insert(value: any) {
-    if (value){
+    if (value) {
       value.price = Number(value.price);
       this.firebaseAgencyService.insert('portfolio', value)
         .then(res => {
@@ -112,7 +127,7 @@ export class PortfolioFormComponent implements OnInit {
         err => {
           console.log(err);
         }
-      )
+      );
     }
 
 

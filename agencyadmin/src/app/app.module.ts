@@ -40,6 +40,9 @@ import { AboutNewComponent } from './about/about-new/about-new.component';
 import { AboutEditComponent } from './about/about-edit/about-edit.component';
 import { AboutViewComponent } from './about/about-view/about-view.component';
 import { SettingsEditComponent } from './settings/settings-edit/settings-edit.component';
+import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 // Import firebase modules
 import { AngularFireModule } from '@angular/fire';
@@ -51,11 +54,11 @@ import { TeamServiceService } from './services/team/team-service.service';
 import { OurServicesService } from './services/ourservices/ourservices-service.service';
 import { SettingsService } from './services/settings/settings-service.service';
 import { AboutService } from './services/about/about-service.service';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+
 import { PortfolioFormComponent } from './forms/portfolio-form/portfolio-form.component';
 import { CardAgencywebsiteItemsComponent } from './card-agencywebsite-items/card-agencywebsite-items.component';
+import { DeleteMsgComponent } from './modals/delete-msg/delete-msg.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -77,7 +80,8 @@ import { CardAgencywebsiteItemsComponent } from './card-agencywebsite-items/card
     NavbarComponent,
     SidebarComponent,
     PortfolioFormComponent,
-    CardAgencywebsiteItemsComponent
+    CardAgencywebsiteItemsComponent,
+    DeleteMsgComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +104,9 @@ import { CardAgencywebsiteItemsComponent } from './card-agencywebsite-items/card
     CommonModule,
     ReactiveFormsModule,
     TooltipModule.forRoot(),
-    NgxNavbarModule
+    NgxNavbarModule,
+    ModalModule.forRoot(),
+    DeleteMsgComponent
   ],
   exports: [
     CommonModule,
