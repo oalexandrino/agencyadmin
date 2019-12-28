@@ -10,13 +10,13 @@ import { PortfolioFormComponent } from './forms/portfolio-form/portfolio-form.co
 import { PortfolioFormResolver } from './forms/portfolio-form/PortfolioForm.resolver';
 
 const routes: Routes = [
-  { path: '', component: PortfolioViewComponent },
+  { path: '', component: PortfolioFormComponent },
   { path: 'home', component: HomeComponent },
   { path: 'portfolio-view', component: PortfolioViewComponent },
   { path: 'new-portfolio', component: NewPortfolioComponent },
   { path: 'portfolio-details/:id', component: PortfolioEditComponent, resolve: {portfolio : PortfolioResolver} },
-  { path: 'portfolio-management', component: PortfolioFormComponent },  
-  { path: 'portfolio-management/:id', component: PortfolioFormComponent, resolve: {portfolio : PortfolioFormResolver} }  
+  { path: 'portfolio-new', component: PortfolioFormComponent },
+  { path: 'portfolio-edit/:id', component: PortfolioFormComponent, resolve: {portfolio : PortfolioFormResolver} }
 ];
 
 @NgModule({

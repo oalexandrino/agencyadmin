@@ -2,7 +2,6 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { PortfolioService } from './../../services/portfolio/portfolio-service.service';
 import { AgencyService } from './../../services/agency.service';
 import { Router } from '@angular/router';
 
@@ -16,7 +15,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class PortfolioFormComponent implements OnInit {
-  
+
   public portfolioForm: FormGroup;
   portfolioData: any;
   isNew = true;
@@ -37,7 +36,7 @@ export class PortfolioFormComponent implements OnInit {
     public firebaseAgencyService: AgencyService,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -48,20 +47,27 @@ export class PortfolioFormComponent implements OnInit {
     this.route.data.subscribe(routeData => {
       const portfolioData = routeData.portfolio;
       if (portfolioData) {
-	      this.isNew = false;
-        this.portfolioData = portfolioData.payload.data();
-        this.portfolioData.id = portfolioData.payload.id;
-        this.createForm();
-      }
-      else
-      {
+       this.isNew = false;
+       this.portfolioData = portfolioData.payload.data();
+       this.portfolioData.id = portfolioData.payload.id;
+       this.createFormWithData();
+      } else {
         this.isNew = true;
+        this.createForm();
       }
     });
   }
 
   createForm() {
-    this.portfolioForm = this.fb.group({
+    this.portfolioForm = this.formBuilder.group({
+      name: ['', Validators.required ],
+      desc: ['', Validators.required ],
+      price: ['', Validators.required ]
+    });
+  }
+
+  createFormWithData() {
+    this.portfolioForm = this.formBuilder.group({
       name: [this.portfolioData.name, Validators.required],
       desc: [this.portfolioData.desc, Validators.required],
       price: [this.portfolioData.price, Validators.required]
@@ -69,20 +75,23 @@ export class PortfolioFormComponent implements OnInit {
   }
 
   onSubmit(value) {
-    if (this.isNew){
-      this.update(value);  
-    }
-    else{
-        this.insert(value);
+    if (this.isNew) {
+      this.insert(value);
+    } else {
+      this.update(value);
     }
   }
 
   private insert(value: any) {
-    value.price = Number(value.price);
-    this.firebaseAgencyService.update('portfolio', this.portfolioData.id, value)
-      .then(res => {
-        this.router.navigate(['/portfolio-view']);
-      });
+    if (value){
+      value.price = Number(value.price);
+      this.firebaseAgencyService.insert('portfolio', value)
+        .then(res => {
+          this.router.navigate(['/portfolio-view']);
+        });
+    }
+
+
   }
 
   private update(value: any) {

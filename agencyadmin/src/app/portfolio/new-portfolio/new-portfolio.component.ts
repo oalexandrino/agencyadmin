@@ -2,7 +2,6 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { PortfolioService } from './../../services/portfolio/portfolio-service.service';
 import { AgencyService } from './../../services/agency.service';
 import { Router } from '@angular/router';
 
@@ -32,7 +31,6 @@ export class NewPortfolioComponent implements OnInit {
   };
 
   constructor(
-    public firebasePortfolioService: PortfolioService,
     public firebaseAgencyService: AgencyService,
     private route: ActivatedRoute,
     private router: Router,

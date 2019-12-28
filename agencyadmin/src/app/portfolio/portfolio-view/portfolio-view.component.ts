@@ -26,12 +26,8 @@ export class PortfolioViewComponent implements OnInit {
       this.portfolioItems = result;
     });
   }
-  viewPortfolioDetails_2(item) {
-    this.router.navigate(['/portfolio-details/' + item.payload.doc.id]);
-  }
-
   viewPortfolioDetails(item) {
-    this.router.navigate(['/portfolio-management/' + item.payload.doc.id]);
+    this.router.navigate(['/portfolio-details/' + item.payload.doc.id]);
   }
 
 }
