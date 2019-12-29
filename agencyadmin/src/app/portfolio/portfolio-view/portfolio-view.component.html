@@ -10,8 +10,9 @@
 
 	<div class="card">
 		<div class="card-header">
-			<span class="card-title">Filter by price (<span>0 </span> to <span>5000</span>):</span>
-		</div>
+      <span class="card-title">Filter by price (<span>0 </span> to <span>2500</span>):</span>
+      Displaying items more expensive or equals to ${{ selectedPrice }}
+    </div>
 		<div class="card-body">
       <div class="row">
         <div class="col filter-by-price">
@@ -19,9 +20,12 @@
             <div class="col">
               <mat-slider
                 class="age-price"
-                max="5000"
+                max="2500"
                 min="0"
-                step="1"
+                showTicks="true"
+                autoTicks="false"
+                tickInterval="50"
+                step="50"
                 thumbLabel="true"
                 (ngModel)="priceValue"
                 (change)="getPorfolioByPrice($event)">
@@ -35,6 +39,7 @@
 
   <div class="page-content">
     <div class="list-group items-list">
+      <span *ngIf="noElementsMessage" style="text-align: center;">No items found according to the provided filter.</span>
       <div *ngFor="let portfolioItem of portfolioItems" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="row">
           <div class="col col-md-8 text-col">

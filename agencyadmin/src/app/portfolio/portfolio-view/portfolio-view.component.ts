@@ -9,10 +9,11 @@ import { AgencyService } from 'src/app/services/agency.service';
   styleUrls: ['./portfolio-view.component.scss']
 })
 export class PortfolioViewComponent implements OnInit {
-
+  selectedPrice: number = 0;
   portfolioItems: Array<any>;
   portfolioFilteredItems: Array<any>;
   priceValue: number = 0;
+  noElementsMessage = false;
 
   constructor(
     public firebaseAgencyService: AgencyService,
@@ -35,12 +36,21 @@ export class PortfolioViewComponent implements OnInit {
   }
 
   getPorfolioByPrice(event) {
+
+    this.selectedPrice = event.value;
     this.firebasePortfolioService.getPorfolioByPrice(event.value)
     .subscribe(result =>{
       this.portfolioFilteredItems = result;
       this.portfolioItems = this.combineLists(result, this.portfolioFilteredItems);
+
+      if (result.length === 0) {
+        this.noElementsMessage  = true;
+      } else {
+        this.noElementsMessage  = false;
+      }
     });
   }
+
 
   combineLists(a, b) {
     const result = [];
