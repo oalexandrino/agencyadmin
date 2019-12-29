@@ -9,10 +9,12 @@ import { AgencyService } from 'src/app/services/agency.service';
   styleUrls: ['./portfolio-view.component.scss']
 })
 export class PortfolioViewComponent implements OnInit {
-  selectedPrice: number = 0;
+  selectedPrice = 0;
+  searchValue = '';
   portfolioItems: Array<any>;
-  portfolioFilteredItems: Array<any>;
-  priceValue: number = 0;
+  portfolioFilteredItemsByPrice: Array<any>;
+  portfolioFilteredItemsByName: Array<any>;
+  priceValue = 0;
   noElementsMessage = false;
 
   constructor(
@@ -29,19 +31,30 @@ export class PortfolioViewComponent implements OnInit {
     this.firebaseAgencyService.getListing('portfolio')
     .subscribe(result => {
       this.portfolioItems = result;
+      this.portfolioFilteredItemsByPrice = result;
+      this.portfolioFilteredItemsByName = result;
     });
   }
   viewPortfolioDetails(item) {
     this.router.navigate(['/portfolio-details/' + item.payload.doc.id]);
   }
 
-  getPorfolioByPrice(event) {
+  searchByName() {
+    const value = this.searchValue.toLowerCase();
+    this.firebaseAgencyService.searchByValue('portfolio', 'name', this.searchValue)
+    .subscribe(result => {
+      this.portfolioFilteredItemsByName = result;
+      this.portfolioItems = this.combineLists(result, this.portfolioFilteredItemsByPrice);
+    });
+  }
+
+  rangeOfPricesChange(event) {
 
     this.selectedPrice = event.value;
     this.firebasePortfolioService.getPorfolioByPrice(event.value)
-    .subscribe(result =>{
-      this.portfolioFilteredItems = result;
-      this.portfolioItems = this.combineLists(result, this.portfolioFilteredItems);
+    .subscribe(result => {
+      this.portfolioFilteredItemsByPrice = result;
+      this.portfolioItems = this.combineLists(result, this.portfolioFilteredItemsByName);
 
       if (result.length === 0) {
         this.noElementsMessage  = true;
@@ -50,7 +63,6 @@ export class PortfolioViewComponent implements OnInit {
       }
     });
   }
-
 
   combineLists(a, b) {
     const result = [];

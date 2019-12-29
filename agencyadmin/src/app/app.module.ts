@@ -59,6 +59,7 @@ import { PortfolioFormComponent } from './forms/portfolio-form/portfolio-form.co
 import { CardAgencywebsiteItemsComponent } from './card-agencywebsite-items/card-agencywebsite-items.component';
 import { DeleteMsgComponent } from './modals/delete-msg/delete-msg.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AgencyService } from './services/agency.service';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ReactiveFormsModule
   ],
   entryComponents: [ DeleteMsgComponent ],
-  providers: [PortfolioService],
+  providers: [PortfolioService, AgencyService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

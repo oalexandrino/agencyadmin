@@ -9,6 +9,12 @@ export class AgencyService {
 
   constructor(public db: AngularFirestore) {}
 
+  searchByValue(collectionName: string, searchColumn, searchValue) {
+    return this.db.collection(collectionName, ref => ref.where(searchColumn, '>=', searchValue)
+      .where(searchColumn, '<=', searchValue + '\uf8ff'))
+      .snapshotChanges();
+  }
+
   getListing(collectionName: string) {
     return this.db.collection(collectionName).snapshotChanges();
   }

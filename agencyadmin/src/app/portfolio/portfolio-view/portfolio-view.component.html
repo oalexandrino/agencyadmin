@@ -8,6 +8,24 @@
     </ol>
   </nav>
 
+  <div class="card">
+    <div class="card-header">
+      <input type="text" class="form-control" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by name..." (keyup)="searchByName()">
+
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col filter-by-price">
+          <div class="row">
+            <div class="col">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 	<div class="card">
 		<div class="card-header">
       <span class="card-title">Filter by price (<span>0 </span> to <span>2500</span>):</span>
@@ -25,10 +43,10 @@
                 showTicks="true"
                 autoTicks="false"
                 tickInterval="50"
-                step="50"
+                step="25"
                 thumbLabel="true"
                 (ngModel)="priceValue"
-                (change)="getPorfolioByPrice($event)">
+                (change)="rangeOfPricesChange($event)">
               </mat-slider>
             </div>
           </div>

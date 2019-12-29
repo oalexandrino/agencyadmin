@@ -11,7 +11,7 @@ import { PortfolioFormResolver } from './forms/portfolio-form/PortfolioForm.reso
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: PortfolioViewComponent },
   { path: 'portfolio-view', component: PortfolioViewComponent },
   { path: 'portfolio-details/:id', component: PortfolioFormComponent, resolve: {portfolio : PortfolioFormResolver} },
   { path: 'portfolio-new', component: PortfolioFormComponent },
