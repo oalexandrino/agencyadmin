@@ -48,12 +48,12 @@ export class PortfolioFormComponent implements OnInit {
   }
 
 
-  openModal() {
+  delete() {
 
     this.modalRef = this.modalService.show(DeleteMsgComponent, {
       initialState: {
         modalMainMessage: 'Are you sure you want to delete this item?',
-        modalSecondaryMessage: 'This action cannot be undone.',
+        modalSecondaryMessage: 'Details',
         collectionId: this.portfolioData.id,
         collectionName: 'portfolio',
 
@@ -122,6 +122,7 @@ export class PortfolioFormComponent implements OnInit {
       });
   }
 
+  /*
    delete() {
     if (confirm('Are you sure you want to delete this item?')) {
       this.firebaseAgencyService.delete('portfolio', this.portfolioData.id)
@@ -134,10 +135,8 @@ export class PortfolioFormComponent implements OnInit {
         }
       );
     }
-
-
   }
-
+    */
   cancel() {
     this.router.navigate(['/portfolio-view']);
   }

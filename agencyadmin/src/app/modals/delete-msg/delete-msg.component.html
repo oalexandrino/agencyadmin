@@ -5,6 +5,16 @@
     </button>
 </div>
 <div class="modal-body">
-	{{ modalSecondaryMessage }}
-	{{ collectionName }}
+	<div class="card">
+		<div class="card-header">
+			{{ modalSecondaryMessage }}
+		</div>
+		<div class="card-body">
+		  <h5 class="card-title"></h5>
+		  <p class="card-text">{{ itemToBeDeleted }}</p>
+		  <a (click)="delete()" class="btn btn-danger">Delete item</a>
+		  <a (click)="cancel()" class="btn btn-primary">Cancel</a>
+		</div>
+	  </div>
+
 </div>
