@@ -1,26 +1,18 @@
-.filter-by-age {
+.filter-by-price {
     color: #6c757d;
-
+    font-size: 20px;
     .title {
       align-self: center;
     }
 
-    .age-slider {
-      width: 85%;
+    .age-price {
+      width: 100%;
+      font-size: 20px;
     }
   }
 
-  .users-list {
-    padding: 40px 60px;
-
-    .image-col {
-      text-align:center;
-
-      .image {
-        border-radius: 50%;
-        width: 100px;
-        height: 100px;
-      }
+  .items-list {
+    padding: 20px 20px;
     }
     .text-col {
       margin: auto 0px;
@@ -36,32 +28,26 @@
         font-size: 20px;
       }
     }
-  }
+
 
   .content-page {
 
-    padding: 20px 60px;
-  
+    padding: 20px 20px;
+
     .page-content {
       background-color: #FFF;
-  
-      .change-img-button {
-        display: block;
-        margin: 0px auto;
-      }
-  
+
       .edit-form {
         padding: 20px;
-  
-  
+
+
         .input-style{
           width: 100%;
         }
-  
+
         .mat-error {
           font-size: 12px;
         }
       }
     }
   }
-  

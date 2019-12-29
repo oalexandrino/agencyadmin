@@ -10,7 +10,7 @@ import { PortfolioFormComponent } from './forms/portfolio-form/portfolio-form.co
 import { PortfolioFormResolver } from './forms/portfolio-form/PortfolioForm.resolver';
 
 const routes: Routes = [
-  { path: '', component: PortfolioFormComponent },
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'portfolio-view', component: PortfolioViewComponent },
   { path: 'portfolio-details/:id', component: PortfolioFormComponent, resolve: {portfolio : PortfolioFormResolver} },

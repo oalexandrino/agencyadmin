@@ -97,6 +97,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
+    MatSliderModule,
     BrowserAnimationsModule,
     FormsModule,
     AngularFirestoreModule.enablePersistence(),
