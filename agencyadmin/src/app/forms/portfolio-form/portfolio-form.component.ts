@@ -49,9 +49,14 @@ export class PortfolioFormComponent implements OnInit {
 
 
   openModal() {
+
     this.modalRef = this.modalService.show(DeleteMsgComponent, {
       initialState: {
-        title: 'Modal title',
+        modalMainMessage: 'Are you sure you want to delete this item?',
+        modalSecondaryMessage: 'This action cannot be undone.',
+        collectionId: this.portfolioData.id,
+        collectionName: 'portfolio',
+
         data: {}
       }
     });

@@ -47,10 +47,9 @@
                     <div class="col-md-4" *ngIf="!isNew" >
                       <button mat-raised-button class="delete-button" color="warn" type="button" (click)="delete()">Delete</button>
                     </div>
-
-
-                      <div (click)="openModal()" class="btn btn-success">Modal Component</div>
-
+                    <div class="col-md-4" *ngIf="!isNew" >
+                      <button mat-raised-button class="delete-button" color="warn" type="button" (click)="openModal()">Delete via Modal</button>
+                    </div>
                     <div class="col-md-4">
                       <button mat-raised-button class="btn btn-secondary"   type="button" (click)="cancel()">Cancel</button>
                     </div>

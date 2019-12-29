@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal/public_api';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { AgencyService } from './../../services/agency.service';
 
 @Component({
   selector: 'app-delete-msg',
@@ -8,12 +9,21 @@ import { BsModalRef } from 'ngx-bootstrap/modal/public_api';
 })
 export class DeleteMsgComponent implements OnInit {
 
-  title;
-  constructor(
-    public modalRef: BsModalRef
-  ) { }
+  modalMainMessage;
+  modalSecondaryMessage;
+  collectionId;
+  collectionName;
+  collectionObject;
 
+  constructor(
+    public modalRef: BsModalRef,
+    public firebaseAgencyService: AgencyService,
+  ) { }
+j
   ngOnInit() {
+    let collectionItem = this.firebaseAgencyService.getCollectionItem(this.collectionName, this.collectionId);
+    this.modalMainMessage = collectionItem;
+
   }
 
 }

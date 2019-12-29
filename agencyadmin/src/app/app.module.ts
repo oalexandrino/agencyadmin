@@ -106,13 +106,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TooltipModule.forRoot(),
     NgxNavbarModule,
     ModalModule.forRoot(),
-    DeleteMsgComponent
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule
   ],
+  entryComponents: [ DeleteMsgComponent ],
   providers: [PortfolioService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
