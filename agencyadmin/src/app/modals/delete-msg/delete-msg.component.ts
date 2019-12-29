@@ -27,13 +27,17 @@ export class DeleteMsgComponent implements OnInit {
     this.firebaseAgencyService.getCollectionItem(this.collectionName, this.collectionId)
     .subscribe((data) => {
       console.log(data);
-      this.itemToBeDeleted = data.name;
+      const mapObject = new Map();
+      for (const x in data) {
+        mapObject.set(x, data[x]);
+      }
+      this.itemToBeDeleted = mapObject;
     });
   }
 
   private delete() {
     this.firebaseAgencyService.delete(this.collectionName, this.collectionId).then(res => {
-      alert('Item deleted.');
+
       this.modalRef.hide();
       this.router.navigate(['/portfolio-view']);
     });
