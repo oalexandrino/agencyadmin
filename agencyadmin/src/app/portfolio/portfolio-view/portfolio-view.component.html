@@ -55,7 +55,7 @@
       <div *ngFor="let portfolioItem of portfolioItems" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="row">
           <div class="col col-md-8 text-col">
-            <h3 class="mb-3">{{portfolioItem.payload.doc.data().name}}</h3>
+            <h3 class="mb-5">{{portfolioItem.payload.doc.data().name}}</h3>
             <span *ngIf="!noDescription">{{portfolioItem.payload.doc.data(value).desc}}</span>
             <h4 class="mb-3"><small *ngIf="!noPrice">Price ($): {{portfolioItem.payload.doc.data(value).price}}</small></h4>
           </div>

@@ -14,6 +14,7 @@ import { NgxNavbarModule  } from 'ngx-bootstrap-navbar';
 // import GUI Angular material modules
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {
   MatButtonModule,
   MatInputModule,
@@ -111,6 +112,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     NgxNavbarModule,
     ModalModule.forRoot(),
     MatGridListModule,
+    MatExpansionModule,
       ],
   exports: [
     CommonModule,
