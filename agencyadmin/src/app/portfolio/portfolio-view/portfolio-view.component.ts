@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, Params } from '@angular/router';
 import { PortfolioService } from './../../services/portfolio/portfolio-service.service';
 import { AgencyService } from 'src/app/services/agency.service';
+import { MatSlideToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-portfolio-view',
@@ -16,6 +17,9 @@ export class PortfolioViewComponent implements OnInit {
   portfolioFilteredItemsByName: Array<any>;
   priceValue = 0;
   noElementsMessage = false;
+  noPrice = false;
+  noDescription = false;
+  noEditing = false;
 
   constructor(
     public firebaseAgencyService: AgencyService,
@@ -26,6 +30,30 @@ export class PortfolioViewComponent implements OnInit {
   ngOnInit() {
     this.getData();
   }
+
+  toggleCancelEditing(event: MatSlideToggleChange) {
+    console.log('toggleCancelEditing');
+    if (this.noEditing)
+      this.noEditing = false;
+    else
+      this.noEditing = true;    
+  }
+
+  toggleHidePrices(event: MatSlideToggleChange) {
+    console.log('toggleHidePrices');
+    if (this.noPrice)
+      this.noPrice = false;
+    else
+      this.noPrice = true;
+  }
+
+  toggleHideDescription(event: MatSlideToggleChange) {
+    console.log('toggleHideDescription');
+    if (this.noDescription)
+      this.noDescription = false;
+    else
+      this.noDescription = true;    
+  }  
 
   getData() {
     this.firebaseAgencyService.getListing('portfolio')

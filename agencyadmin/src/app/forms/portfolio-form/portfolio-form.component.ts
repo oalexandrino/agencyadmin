@@ -32,7 +32,10 @@ export class PortfolioFormComponent implements OnInit {
     ],
     price: [
       { type: 'required', message: 'Price is required.' },
-    ]
+    ],
+    availableDate: [
+      { type: 'required', message: 'Date is required.' },
+    ]    
   };
 
   constructor(
@@ -82,7 +85,8 @@ export class PortfolioFormComponent implements OnInit {
     this.portfolioForm = this.formBuilder.group({
       name: ['', Validators.required ],
       desc: ['', Validators.required ],
-      price: ['', Validators.required ]
+      price: ['', Validators.required ],
+      availableDate: ['', Validators.required ],
     });
   }
 
@@ -90,7 +94,8 @@ export class PortfolioFormComponent implements OnInit {
     this.portfolioForm = this.formBuilder.group({
       name: [this.portfolioData.name, Validators.required],
       desc: [this.portfolioData.desc, Validators.required],
-      price: [this.portfolioData.price, Validators.required]
+      price: [this.portfolioData.price, Validators.required],
+      availableDate: [this.portfolioData.availableDate, Validators.required],
     });
   }
 

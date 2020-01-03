@@ -13,17 +13,23 @@ import { NgxNavbarModule  } from 'ngx-bootstrap-navbar';
 
 // import GUI Angular material modules
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {
   MatButtonModule,
   MatInputModule,
   MatDialogModule,
   MatSliderModule,
+  MatSlideToggleModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSortModule,
   MatTableModule,
   MatIconModule,
   MatCardModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+
   MatFormFieldModule } from '@angular/material';
 
 // import application`s modules
@@ -99,6 +105,7 @@ import { AgencyService } from './services/agency.service';
     MatCardModule,
     MatFormFieldModule,
     MatSliderModule,
+    MatSlideToggleModule,
     BrowserAnimationsModule,
     FormsModule,
     AngularFirestoreModule.enablePersistence(),
@@ -108,14 +115,19 @@ import { AgencyService } from './services/agency.service';
     TooltipModule.forRoot(),
     NgxNavbarModule,
     ModalModule.forRoot(),
-  ],
+    MatGridListModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+
+      ],
   exports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   entryComponents: [ DeleteMsgComponent ],
-  providers: [PortfolioService, AgencyService],
+  providers: [PortfolioService, AgencyService, MatDatepickerModule],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
