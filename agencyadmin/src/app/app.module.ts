@@ -27,6 +27,9 @@ import {
   MatTableModule,
   MatIconModule,
   MatCardModule,
+  MatDatepickerModule,
+  MatNativeDateModule, 
+ 
   MatFormFieldModule } from '@angular/material';
 
 // import application`s modules
@@ -113,6 +116,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ModalModule.forRoot(),
     MatGridListModule,
     MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule, 
+
       ],
   exports: [
     CommonModule,
@@ -120,7 +126,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ReactiveFormsModule,
   ],
   entryComponents: [ DeleteMsgComponent ],
-  providers: [PortfolioService],
+  providers: [PortfolioService, MatDatepickerModule],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
