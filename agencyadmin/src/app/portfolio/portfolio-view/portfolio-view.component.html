@@ -66,16 +66,43 @@
       <mat-slide-toggle [checked]="useDefault" (change)="toggleHideDescription($event)">Hide description</mat-slide-toggle>
     </mat-grid-tile>
   </mat-grid-list>
-  
+
   <div class="page-content">
     <div class="list-group items-list">
       <span *ngIf="noElementsMessage" style="text-align: center;">No items found according to the provided filter.</span>
       <div *ngFor="let portfolioItem of portfolioItems" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="row">
           <div class="col col-md-8 text-col">
-            <h3 class="mb-5">{{portfolioItem.payload.doc.data().name}}</h3>
-            <span *ngIf="!noDescription">{{portfolioItem.payload.doc.data(value).desc}}</span>
-            <h4 class="mb-3"><small *ngIf="!noPrice">Price ($): {{portfolioItem.payload.doc.data(value).price}}</small></h4>
+
+            <table class="table-borderless">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Value</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Name</th>
+                  <td>{{portfolioItem.payload.doc.data().name}}</td>
+                </tr>
+                <tr *ngIf="!noDescription">
+                  <th scope="row">Description</th>
+                  <td>
+                    <p >{{portfolioItem.payload.doc.data(value).desc}}</p>
+                  </td>
+                </tr>
+                <tr *ngIf="!noPrice">
+                  <th scope="row">Price ($): </th>
+                  <td>{{portfolioItem.payload.doc.data(value).price}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Available date:</th>
+                  <td>{{portfolioItem.payload.doc.data(value).availableDate.seconds*1000 | date}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="col col-md-2 actions-col">
             <button  *ngIf="!noEditing" class="btn btn-outline-primary action" (click)="viewPortfolioDetails(portfolioItem)" type="button">

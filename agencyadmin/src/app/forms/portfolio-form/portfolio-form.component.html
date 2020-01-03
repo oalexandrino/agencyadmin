@@ -9,19 +9,14 @@
         </li>
       </ol>
     </nav>
-
     <div class="page-content">
       <div class="row">
           <div class="col col-md-8">
-
               <form class="edit-form" [formGroup]="portfolioForm" novalidate (ngSubmit)="onSubmit(portfolioForm.value)">
-
-
                 <mat-accordion>
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title>Basic information</mat-panel-title>
-                      <mat-panel-description>Name and Description</mat-panel-description>
                     </mat-expansion-panel-header>
                     <div class="form-group">
                       <mat-form-field class="input-style">
@@ -43,7 +38,6 @@
                   <mat-expansion-panel (opened)="panelOpenState = true"  (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
                       <mat-panel-title>Details</mat-panel-title>
-                      <mat-panel-description>Price and available date</mat-panel-description>
                     </mat-expansion-panel-header>
                         <div class="form-group">
                           <mat-form-field class="input-style">
@@ -58,32 +52,31 @@
                             <input matInput [matDatepicker]="picker" placeholder="Available date" formControlName="availableDate">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
-                          </mat-form-field>                        
-                        
+                          </mat-form-field>
                         </div>
                   </mat-expansion-panel>
                 </mat-accordion>
 
+                <p></p>
 
-
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="row submit-button-container">
-                        <div class="col-md-4" *ngIf="isNew">
-                          <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!portfolioForm.valid">Insert</button>
-                        </div>
-                        <div class="col-md-4" *ngIf="!isNew">
-                          <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!portfolioForm.valid">Update</button>
-                        </div>
-                        <div class="col-md-4" *ngIf="!isNew" >
-                          <button mat-raised-button class="delete-button" color="warn" type="button" (click)="delete()">Delete</button>
-                        </div>
-                        <div class="col-md-4">
-                          <button mat-raised-button class="btn btn-secondary"   type="button" (click)="cancel()">Cancel</button>
-                        </div>
-                      </div>                      
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row submit-button-container">
+                      <div class="col-md-4" *ngIf="isNew">
+                        <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!portfolioForm.valid">Insert</button>
+                      </div>
+                      <div class="col-md-4" *ngIf="!isNew">
+                        <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!portfolioForm.valid">Update</button>
+                      </div>
+                      <div class="col-md-4" *ngIf="!isNew" >
+                        <button mat-raised-button class="delete-button" color="warn" type="button" (click)="delete()">Delete</button>
+                      </div>
+                      <div class="col-md-4">
+                        <button mat-raised-button class="btn btn-secondary"   type="button" (click)="cancel()">Cancel</button>
+                      </div>
                     </div>
                   </div>
+                </div>
 
               </form>
           </div>

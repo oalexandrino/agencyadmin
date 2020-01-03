@@ -33,27 +33,30 @@ export class PortfolioViewComponent implements OnInit {
 
   toggleCancelEditing(event: MatSlideToggleChange) {
     console.log('toggleCancelEditing');
-    if (this.noEditing)
+    if (this.noEditing) {
       this.noEditing = false;
-    else
-      this.noEditing = true;    
+    } else {
+      this.noEditing = true;
+    }
   }
 
   toggleHidePrices(event: MatSlideToggleChange) {
     console.log('toggleHidePrices');
-    if (this.noPrice)
+    if (this.noPrice) {
       this.noPrice = false;
-    else
+    } else {
       this.noPrice = true;
+    }
   }
 
   toggleHideDescription(event: MatSlideToggleChange) {
     console.log('toggleHideDescription');
-    if (this.noDescription)
+    if (this.noDescription) {
       this.noDescription = false;
-    else
-      this.noDescription = true;    
-  }  
+    } else {
+      this.noDescription = true;
+    }
+  }
 
   getData() {
     this.firebaseAgencyService.getListing('portfolio')
