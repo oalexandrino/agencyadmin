@@ -36,7 +36,19 @@
       </div>
     </div>
   </div>
+  <mat-grid-list cols="3" rowHeight="10:1" >
+    <mat-grid-tile>
+      <mat-slide-toggle [checked]="useDefault" (change)="toggleCancelEditing($event)">Cancel editing</mat-slide-toggle>
 
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-slide-toggle [checked]="useDefault" (change)="toggleHidePrices($event)">Hide prices</mat-slide-toggle>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-slide-toggle [checked]="useDefault" (change)="toggleHideDescription($event)">Hide description</mat-slide-toggle>
+    </mat-grid-tile>
+  </mat-grid-list>
+  
   <div class="page-content">
     <div class="list-group items-list">
       <span *ngIf="noElementsMessage" style="text-align: center;">No items found according to the provided filter.</span>
@@ -44,11 +56,11 @@
         <div class="row">
           <div class="col col-md-8 text-col">
             <h3 class="mb-3">{{portfolioItem.payload.doc.data().name}}</h3>
-            {{portfolioItem.payload.doc.data(value).desc}}
-            <h4 class="mb-3"><small>Price ($): {{portfolioItem.payload.doc.data(value).price}}</small></h4>
+            <span *ngIf="!noDescription">{{portfolioItem.payload.doc.data(value).desc}}</span>
+            <h4 class="mb-3"><small *ngIf="!noPrice">Price ($): {{portfolioItem.payload.doc.data(value).price}}</small></h4>
           </div>
           <div class="col col-md-2 actions-col">
-            <button class="btn btn-outline-primary action" (click)="viewPortfolioDetails(portfolioItem)" type="button">
+            <button  *ngIf="!noEditing" class="btn btn-outline-primary action" (click)="viewPortfolioDetails(portfolioItem)" type="button">
               <ion-icon class="icon" name="arrow-round-forward"></ion-icon>
             </button>
           </div>

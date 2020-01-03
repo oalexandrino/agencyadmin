@@ -13,11 +13,13 @@ import { NgxNavbarModule  } from 'ngx-bootstrap-navbar';
 
 // import GUI Angular material modules
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatGridListModule} from '@angular/material/grid-list';
 import {
   MatButtonModule,
   MatInputModule,
   MatDialogModule,
   MatSliderModule,
+  MatSlideToggleModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSortModule,
@@ -98,6 +100,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     MatCardModule,
     MatFormFieldModule,
     MatSliderModule,
+    MatSlideToggleModule,
     BrowserAnimationsModule,
     FormsModule,
     AngularFirestoreModule.enablePersistence(),
@@ -107,11 +110,12 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TooltipModule.forRoot(),
     NgxNavbarModule,
     ModalModule.forRoot(),
-  ],
+    MatGridListModule,
+      ],
   exports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   entryComponents: [ DeleteMsgComponent ],
   providers: [PortfolioService],
