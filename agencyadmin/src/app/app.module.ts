@@ -35,7 +35,6 @@ import {
 // import application`s modules
 import { NewPortfolioComponent } from './portfolio/new-portfolio/new-portfolio.component';
 import { PortfolioViewComponent } from './portfolio/portfolio-view/portfolio-view.component';
-import { PortfolioEditComponent } from './portfolio/portfolio-edit/portfolio-edit.component';
 import { NewServiceComponent } from './service/new-service/new-service.component';
 import { ServiceViewComponent } from './service/service-view/service-view.component';
 import { ServiceEditComponent } from './service/service-edit/service-edit.component';
@@ -61,7 +60,7 @@ import { OurServicesService } from './services/ourservices/ourservices-service.s
 import { SettingsService } from './services/settings/settings-service.service';
 import { AboutService } from './services/about/about-service.service';
 
-import { PortfolioFormComponent } from './forms/portfolio-form/portfolio-form.component';
+import { PortfolioFormComponent } from './portfolio/portfolio-form/portfolio-form.component';
 import { CardAgencywebsiteItemsComponent } from './card-agencywebsite-items/card-agencywebsite-items.component';
 import { DeleteMsgComponent } from './modals/delete-msg/delete-msg.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -72,7 +71,6 @@ import { AgencyService } from './services/agency.service';
     AppComponent,
     NewPortfolioComponent,
     PortfolioViewComponent,
-    PortfolioEditComponent,
     NewServiceComponent,
     ServiceViewComponent,
     ServiceEditComponent,

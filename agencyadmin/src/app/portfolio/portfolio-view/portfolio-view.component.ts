@@ -3,6 +3,7 @@ import { Router, Params } from '@angular/router';
 import { PortfolioService, PortfolioByDate } from './../../services/portfolio/portfolio-service.service';
 import { AgencyService } from 'src/app/services/agency.service';
 import { MatSlideToggleChange } from '@angular/material';
+import { ArrayList } from 'src/app/lib/util/ArrayList';
 
 @Component({
   selector: 'app-portfolio-view',
@@ -71,25 +72,6 @@ export class PortfolioViewComponent implements OnInit {
     }
   }
 
-  private setAllItems() {
-    this.firebasePortfolioService.getPortfolioBydate(PortfolioByDate.All)
-      .subscribe(result => {
-        this.portfolioNoAvailableItems = result;
-        this.portfolioItems = this.combineLists(result, this.portfolioFilteredItemsByName);
-        this.portfolioItems = this.combineLists(this.portfolioItems, this.portfolioFilteredItemsByPrice);
-      });
-  }
-
-  private setOldItems() {
-    const currentDate = new Date();
-    this.firebasePortfolioService.getPortfolioBydate(PortfolioByDate.Old, currentDate)
-      .subscribe(result => {
-        this.portfolioNoAvailableItems = result;
-        this.portfolioItems = this.combineLists(result, this.portfolioFilteredItemsByName);
-        this.portfolioItems = this.combineLists(this.portfolioItems, this.portfolioFilteredItemsByPrice);
-      });
-  }
-
   getData() {
     this.firebaseAgencyService.getListing('portfolio')
     .subscribe(result => {
@@ -106,9 +88,10 @@ export class PortfolioViewComponent implements OnInit {
       this.firebaseAgencyService.searchByValue('portfolio', 'name', this.searchValue)
       .subscribe(result => {
         this.portfolioFilteredItemsByName = result;
-        this.portfolioItems = this.combineLists(result, this.portfolioFilteredItemsByPrice);
-        this.portfolioItems = this.combineLists(this.portfolioItems, this.portfolioNoAvailableItems);
+        this.portfolioItems = ArrayList.combine(result, this.portfolioFilteredItemsByPrice);
+        this.portfolioItems = ArrayList.combine(this.portfolioItems, this.portfolioNoAvailableItems);
       });
+
   }
 
   searchByRangeOfPrices(event) {
@@ -117,8 +100,9 @@ export class PortfolioViewComponent implements OnInit {
       this.firebasePortfolioService.getPorfolioByPrice(event.value)
       .subscribe(result => {
         this.portfolioFilteredItemsByPrice = result;
-        this.portfolioItems = this.combineLists(result, this.portfolioFilteredItemsByName);
-        this.portfolioItems = this.combineLists(this.portfolioItems, this.portfolioNoAvailableItems);
+        this.portfolioItems = ArrayList.combine(result, this.portfolioFilteredItemsByName);
+        this.portfolioItems = ArrayList.combine(result, this.portfolioFilteredItemsByName);
+        this.portfolioItems = ArrayList.combine(this.portfolioItems, this.portfolioNoAvailableItems);
 
         if (result.length === 0) {
           this.noElementsMessage  = true;
@@ -128,23 +112,30 @@ export class PortfolioViewComponent implements OnInit {
       });
   }
 
-  private combineLists(a, b) {
-  const result = [];
-
-  a.filter(x => {
-    return b.filter(x2 => {
-      if (x2.payload.doc.id === x.payload.doc.id) {
-        result.push(x2);
-      }
-    });
-  });
-  return result;
-  }
-
   private setPortfolioArrays(result) {
     this.portfolioItems = result;
     this.portfolioNoAvailableItems = result;
     this.portfolioFilteredItemsByPrice = result;
     this.portfolioFilteredItemsByName = result;
   }
+
+  private setAllItems() {
+    this.firebasePortfolioService.getPortfolioBydate(PortfolioByDate.All)
+      .subscribe(result => {
+        this.portfolioNoAvailableItems = result;
+        this.portfolioItems = ArrayList.combine(result, this.portfolioFilteredItemsByName);
+        this.portfolioItems = ArrayList.combine(this.portfolioItems, this.portfolioFilteredItemsByPrice);
+      });
+  }
+
+  private setOldItems() {
+    const currentDate = new Date();
+    this.firebasePortfolioService.getPortfolioBydate(PortfolioByDate.Old, currentDate)
+      .subscribe(result => {
+        this.portfolioNoAvailableItems = result;
+        this.portfolioItems = ArrayList.combine(result, this.portfolioFilteredItemsByName);
+        this.portfolioItems = ArrayList.combine(this.portfolioItems, this.portfolioFilteredItemsByPrice);
+      });
+  }
+
 }
