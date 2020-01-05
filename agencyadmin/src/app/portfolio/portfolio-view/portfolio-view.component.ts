@@ -85,7 +85,7 @@ export class PortfolioViewComponent implements OnInit {
 
   searchByName() {
       const value = this.searchValue.toLowerCase();
-      this.firebaseAgencyService.searchByValue('portfolio', 'name', this.searchValue)
+      this.firebaseAgencyService.searchByValue('portfolio', 'nameToSearch', value)
       .subscribe(result => {
         this.portfolioFilteredItemsByName = result;
         this.portfolioItems = ArrayList.combine(result, this.portfolioFilteredItemsByPrice);
