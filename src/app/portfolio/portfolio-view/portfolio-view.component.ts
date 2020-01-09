@@ -4,6 +4,7 @@ import { PortfolioService, PortfolioByDate } from './../../services/portfolio/po
 import { AgencyService } from 'src/app/services/agency.service';
 import { MatSlideToggleChange } from '@angular/material';
 import { ArrayList } from 'src/app/lib/util/ArrayList';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-portfolio-view',
@@ -27,8 +28,17 @@ export class PortfolioViewComponent implements OnInit {
   constructor(
     public firebaseAgencyService: AgencyService,
     public firebasePortfolioService: PortfolioService,
-    private router: Router
-  ) { }
+    private router: Router,
+    // private http: HttpClient,
+  ) {
+    /*
+    this.http.get('http://localhost:3000/api/v1/ipaddress').subscribe((data: any) => {
+      alert(data.ip_address);
+    }, error => {
+        console.log('There was an error getting ip_address', error);
+    });
+    */
+   }
 
   ngOnInit() {
     this.getData();
