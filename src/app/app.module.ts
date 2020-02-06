@@ -58,12 +58,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { PortfolioService } from './app-services/db/firebase/portfolio/portfolio-service.service';
-import { TeamServiceService } from './app-services/team/team-service.service';
-import { OurServicesService } from './app-services/ourservices/ourservices-service.service';
-import { SettingsService } from './app-services/settings/settings-service.service';
-import { AboutService } from './app-services/about/about-service.service';
-
-
 
 
 import { ModalModule } from 'ngx-bootstrap/modal';

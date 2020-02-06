@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatList } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
+import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 
 @Component({
   selector: 'app-service-view',
@@ -9,13 +10,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ServiceViewComponent implements OnInit {
 
-  constructor() { }
+  constructor( public mongoAgencyWebSiteService: MongoAgencyWebSiteService) { }
 
   ngOnInit() {
+    this.getData();
   }
 
   getData() {
-
+    console.log(this.mongoAgencyWebSiteService.getListing("/service/"));
   }
 
 }
