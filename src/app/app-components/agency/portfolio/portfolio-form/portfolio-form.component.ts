@@ -2,11 +2,11 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { AgencyService } from '../../services/agency.service';
+import { FirebaseAgencyWebSiteService } from '../../../../app-services/db/firebase/FirebaseAgencyWebSiteService.service';
 import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { DeleteMsgComponent } from '../../modals/delete-msg/delete-msg.component';
+import { DeleteMsgComponent } from '../../../admin-layout/modals/delete-msg/delete-msg.component';
 
 @Component({
   selector: 'app-portfolio-form',
@@ -35,12 +35,12 @@ export class PortfolioFormComponent implements OnInit {
     ],
     availableDate: [
       { type: 'required', message: 'Date is required.' },
-    ]    
+    ]
   };
 
   constructor(
     private modalService: BsModalService,
-    public firebaseAgencyService: AgencyService,
+    public firebaseAgencyService: FirebaseAgencyWebSiteService,
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder

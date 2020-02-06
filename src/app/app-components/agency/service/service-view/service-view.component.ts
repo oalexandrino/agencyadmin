@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatList } from '@angular/material';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-service-view',
@@ -10,6 +12,10 @@ export class ServiceViewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  getData() {
+
   }
 
 }

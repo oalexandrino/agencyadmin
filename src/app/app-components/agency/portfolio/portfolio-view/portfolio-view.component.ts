@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Params } from '@angular/router';
-import { PortfolioService, PortfolioByDate } from './../../services/portfolio/portfolio-service.service';
-import { AgencyService } from 'src/app/services/agency.service';
+import { PortfolioService, PortfolioByDate } from '../../../../app-services/db/firebase/portfolio/portfolio-service.service';
+import { FirebaseAgencyWebSiteService } from 'src/app/app-services/db/firebase/FirebaseAgencyWebSiteService.service';
 import { MatSlideToggleChange } from '@angular/material';
 import { ArrayList } from 'src/app/lib/util/ArrayList';
 import { HttpClient } from '@angular/common/http';
@@ -26,7 +26,7 @@ export class PortfolioViewComponent implements OnInit {
   noAvailableItems = false;
 
   constructor(
-    public firebaseAgencyService: AgencyService,
+    public firebaseAgencyService: FirebaseAgencyWebSiteService,
     public firebasePortfolioService: PortfolioService,
     private router: Router,
     // private http: HttpClient,

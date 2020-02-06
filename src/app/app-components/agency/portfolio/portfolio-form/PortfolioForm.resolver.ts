@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
-import { AgencyService } from '../../services/agency.service';
+import { FirebaseAgencyWebSiteService } from '../../../../app-services/db/firebase/FirebaseAgencyWebSiteService.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioFormResolver implements Resolve<any> {
 
-  constructor(public firebaseAgencyService: AgencyService) { }
+  constructor(public firebaseAgencyService: FirebaseAgencyWebSiteService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 

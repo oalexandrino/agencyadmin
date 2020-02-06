@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { AgencyService } from './../../services/agency.service';
+import { FirebaseAgencyWebSiteService } from '../../../../app-services/db/firebase/FirebaseAgencyWebSiteService.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +19,7 @@ export class DeleteMsgComponent implements OnInit {
 
   constructor(
     public modalRef: BsModalRef,
-    public firebaseAgencyService: AgencyService,
+    public firebaseAgencyService: FirebaseAgencyWebSiteService,
     private router: Router,
   ) { }
 

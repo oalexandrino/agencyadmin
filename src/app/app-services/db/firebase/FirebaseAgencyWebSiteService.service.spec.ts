@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AgencyService } from './agency.service';
+import { FirebaseAgencyWebSiteService } from './FirebaseAgencyWebSiteService.service';
 
 describe('AgencyService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AgencyService = TestBed.get(AgencyService);
+    const service: FirebaseAgencyWebSiteService = TestBed.get(FirebaseAgencyWebSiteService);
     expect(service).toBeTruthy();
   });
 });

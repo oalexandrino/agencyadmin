@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NgxNavbarModule  } from 'ngx-bootstrap-navbar';
 
-
 // import GUI Angular material modules
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -28,44 +27,47 @@ import {
   MatTableModule,
   MatIconModule,
   MatCardModule,
+  MatListModule,
   MatDatepickerModule,
   MatNativeDateModule,
-
   MatFormFieldModule } from '@angular/material';
 
 // import application`s modules
-import { NewPortfolioComponent } from './portfolio/new-portfolio/new-portfolio.component';
-import { PortfolioViewComponent } from './portfolio/portfolio-view/portfolio-view.component';
-import { NewServiceComponent } from './service/new-service/new-service.component';
-import { ServiceViewComponent } from './service/service-view/service-view.component';
-import { ServiceEditComponent } from './service/service-edit/service-edit.component';
-import { TeamEditComponent } from './team/team-edit/team-edit.component';
-import { TeamViewComponent } from './team/team-view/team-view.component';
-import { TeamNewComponent } from './team/team-new/team-new.component';
-import { AboutNewComponent } from './about/about-new/about-new.component';
-import { AboutEditComponent } from './about/about-edit/about-edit.component';
-import { AboutViewComponent } from './about/about-view/about-view.component';
-import { SettingsEditComponent } from './settings/settings-edit/settings-edit.component';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { NewPortfolioComponent } from './app-components/agency/portfolio/new-portfolio/new-portfolio.component';
+import { PortfolioViewComponent } from './app-components/agency/portfolio/portfolio-view/portfolio-view.component';
+import { PortfolioFormComponent } from './app-components/agency/portfolio/portfolio-form/portfolio-form.component';
+import { NewServiceComponent } from './app-components/agency/service/new-service/new-service.component';
+import { ServiceViewComponent } from './app-components/agency/service/service-view/service-view.component';
+import { ServiceEditComponent } from './app-components/agency/service/service-edit/service-edit.component';
+import { TeamEditComponent } from './app-components/agency/team/team-edit/team-edit.component';
+import { TeamViewComponent } from './app-components/agency/team/team-view/team-view.component';
+import { TeamNewComponent } from './app-components/agency/team/team-new/team-new.component';
+import { AboutNewComponent } from './app-components/agency/about/about-new/about-new.component';
+import { AboutEditComponent } from './app-components/agency/about/about-edit/about-edit.component';
+import { AboutViewComponent } from './app-components/agency/about/about-view/about-view.component';
+import { SettingsEditComponent } from './app-components/agency/settings/settings-edit/settings-edit.component';
+import { HomeComponent } from './app-components/admin-layout/home/home.component';
+import { NavbarComponent } from './app-components/admin-layout/navbar/navbar.component';
+import { SidebarComponent } from './app-components/admin-layout/sidebar/sidebar.component';
+import { DeleteMsgComponent } from './app-components/admin-layout/modals/delete-msg/delete-msg.component';
+import { CardAgencywebsiteItemsComponent } from './app-components/admin-layout/card-agencywebsite-items/card-agencywebsite-items.component';
 
 // Import firebase modules
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
-import { PortfolioService } from './services/portfolio/portfolio-service.service';
-import { TeamServiceService } from './services/team/team-service.service';
-import { OurServicesService } from './services/ourservices/ourservices-service.service';
-import { SettingsService } from './services/settings/settings-service.service';
-import { AboutService } from './services/about/about-service.service';
+import { PortfolioService } from './app-services/db/firebase/portfolio/portfolio-service.service';
+import { TeamServiceService } from './app-services/team/team-service.service';
+import { OurServicesService } from './app-services/ourservices/ourservices-service.service';
+import { SettingsService } from './app-services/settings/settings-service.service';
+import { AboutService } from './app-services/about/about-service.service';
 
-import { PortfolioFormComponent } from './portfolio/portfolio-form/portfolio-form.component';
-import { CardAgencywebsiteItemsComponent } from './card-agencywebsite-items/card-agencywebsite-items.component';
-import { DeleteMsgComponent } from './modals/delete-msg/delete-msg.component';
+
+
+
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { AgencyService } from './services/agency.service';
+import { FirebaseAgencyWebSiteService } from './app-services/db/firebase/FirebaseAgencyWebSiteService.service';
 
 @NgModule({
   declarations: [
@@ -104,6 +106,7 @@ import { AgencyService } from './services/agency.service';
     MatCardModule,
     MatFormFieldModule,
     MatSliderModule,
+    MatListModule,
     MatSlideToggleModule,
     MatTabsModule,
     BrowserAnimationsModule,
@@ -119,7 +122,6 @@ import { AgencyService } from './services/agency.service';
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
-
       ],
   exports: [
     CommonModule,
@@ -127,7 +129,7 @@ import { AgencyService } from './services/agency.service';
     ReactiveFormsModule,
   ],
   entryComponents: [ DeleteMsgComponent ],
-  providers: [PortfolioService, AgencyService, MatDatepickerModule],
+  providers: [PortfolioService, FirebaseAgencyWebSiteService, MatDatepickerModule],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
