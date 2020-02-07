@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, tap, map } from 'rxjs/operators';
+import { Service } from 'src/model/service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MongoAgencyWebSiteService {
 
-  apiURL = 'https://localhost:3000/api';
+  apiURL = 'http://localhost:3000/api';
 
   constructor(
     public router: Router,
@@ -17,17 +19,29 @@ export class MongoAgencyWebSiteService {
 
    }
 
-  getListing(endpoint: string) {
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
 
-    this.http.get(this.apiURL + endpoint).subscribe((data: any) => {
-      console.log(data);
-      return data;
-    }, error => {
-        console.log('There was an error at getting the collection: ' + endpoint, error.desc);
-    });
+      console.error(error);
+
+      return of(result as T);
+    };
+  }
+
+  getListing(endpoint: string): Observable<Service[]> {
+
+    var output;
+    let apiUrl = this.apiURL + endpoint;
+
+    return this.http.get<Service[]>(apiUrl)
+      .pipe(
+        tap(serviceItems => console.log('reading serviceItems')),
+        catchError(this.handleError('getListing', []))
+      );
 
   }
 
+/*
   insert(endpoint: string, value) {
 
   }
@@ -40,7 +54,7 @@ export class MongoAgencyWebSiteService {
 
   }
 
-  /*
+
   getCollectionItem(endpoint: string, key): Observable<any> {
 
   }*/
