@@ -14,6 +14,8 @@
           <mat-list-item *ngFor="let service of serviceItems.services">
             <h4 mat-line>{{service.title}}</h4>
             <p mat-line> {{service.description}} </p>
+            <button mat-raised-button class="submit-button" color="primary" type="submit"
+              (click)="edit(service._id)" title="Edit '{{service.title}}'" >Edit</button>
           </mat-list-item>
         </mat-list>
     </div>

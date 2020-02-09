@@ -32,6 +32,10 @@ export class ServiceViewComponent implements OnInit {
         this.isLoadingResults = false;
       });
   }
+  
+  edit(value: any) {
+    alert(value);
+  }
 
 
 }
