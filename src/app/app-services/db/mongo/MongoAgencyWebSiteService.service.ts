@@ -30,8 +30,7 @@ export class MongoAgencyWebSiteService {
 
   getListing(endpoint: string): Observable<Service[]> {
 
-    var output;
-    let apiUrl = this.apiURL + endpoint;
+    const apiUrl = this.apiURL + endpoint;
 
     return this.http.get<Service[]>(apiUrl)
       .pipe(

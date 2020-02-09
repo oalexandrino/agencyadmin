@@ -35,9 +35,7 @@ import {
 // import application`s modules
 import { PortfolioViewComponent } from './app-components/agency/portfolio/portfolio-view/portfolio-view.component';
 import { PortfolioFormComponent } from './app-components/agency/portfolio/portfolio-form/portfolio-form.component';
-import { NewServiceComponent } from './app-components/agency/service/new-service/new-service.component';
 import { ServiceViewComponent } from './app-components/agency/service/service-view/service-view.component';
-import { ServiceEditComponent } from './app-components/agency/service/service-edit/service-edit.component';
 import { TeamEditComponent } from './app-components/agency/team/team-edit/team-edit.component';
 import { TeamViewComponent } from './app-components/agency/team/team-view/team-view.component';
 import { TeamNewComponent } from './app-components/agency/team/team-new/team-new.component';
@@ -61,14 +59,13 @@ import { PortfolioService } from './app-services/db/firebase/portfolio/portfolio
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FirebaseAgencyWebSiteService } from './app-services/db/firebase/FirebaseAgencyWebSiteService.service';
+import { ServiceFormComponent } from './app-components/agency/service/service-form/service-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PortfolioViewComponent,
-    NewServiceComponent,
     ServiceViewComponent,
-    ServiceEditComponent,
     TeamEditComponent,
     TeamViewComponent,
     TeamNewComponent,
@@ -82,6 +79,7 @@ import { FirebaseAgencyWebSiteService } from './app-services/db/firebase/Firebas
     PortfolioFormComponent,
     CardAgencywebsiteItemsComponent,
     DeleteMsgComponent,
+    ServiceFormComponent,
   ],
   imports: [
     BrowserModule,

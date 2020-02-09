@@ -1,3 +1,4 @@
+import { ArrayList } from './../../../../lib/util/ArrayList';
 import { Component, OnInit } from '@angular/core';
 import { MatList } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
@@ -22,17 +23,19 @@ export class ServiceViewComponent implements OnInit {
   }
 
   private getData() {
-    this.mongoAgencyWebSiteService.getListing("/service/")
-      .subscribe(res => {
-        this.serviceItems = res;
-        console.log(this.serviceItems);
+    this.mongoAgencyWebSiteService.getListing('/service/')
+      .subscribe(data => {
+
+        // property services comes to the endpoint
+        // tslint:disable-next-line: no-string-literal
+        this.serviceItems = data['services'];
         this.isLoadingResults = false;
       }, err => {
         console.log(err);
         this.isLoadingResults = false;
       });
   }
-  
+
   edit(value: any) {
     alert(value);
   }

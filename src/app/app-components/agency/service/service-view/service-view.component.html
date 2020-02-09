@@ -4,16 +4,14 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Service listing</li>
-        <li class="breadcrumb-item active" aria-current="page"><a routerLink="/portfolio-new">Add a new service</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a routerLink="/service-new">Add a new service</a></li>
       </ol>
     </nav>
     <div class="page-content">
-        <mat-list
-          role="list"
-        >
-          <mat-list-item *ngFor="let service of serviceItems.services">
-            <h4 mat-line>{{service.title}}</h4>
-            <p mat-line> {{service.description}} </p>
+        <mat-list role="list">
+          <mat-list-item *ngFor="let service of serviceItems">
+            <h4 mat-line>Title: {{service.title}}</h4>
+            <p mat-line>Description: {{service.description}} </p>
             <button mat-raised-button class="submit-button" color="primary" type="submit"
               (click)="edit(service._id)" title="Edit '{{service.title}}'" >Edit</button>
           </mat-list-item>

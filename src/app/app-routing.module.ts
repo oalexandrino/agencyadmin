@@ -5,6 +5,7 @@ import { PortfolioFormResolver } from './app-components/agency/portfolio/portfol
 import { HomeComponent } from './app-components/admin-layout/home/home.component';
 import { PortfolioViewComponent } from './app-components/agency/portfolio/portfolio-view/portfolio-view.component';
 import { ServiceViewComponent } from './app-components/agency/service/service-view/service-view.component';
+import { ServiceFormComponent } from './app-components/agency/service/service-form/service-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'portfolio-view', component: PortfolioViewComponent },
   { path: 'portfolio-view/:id', component: PortfolioFormComponent, resolve: {portfolio : PortfolioFormResolver} },
   { path: 'portfolio-new', component: PortfolioFormComponent },
+  { path: 'service-new', component: ServiceFormComponent },
   { path: 'service-view', component: ServiceViewComponent },
 ];
 
