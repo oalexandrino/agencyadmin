@@ -10,9 +10,9 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'portfolio-view', component: PortfolioViewComponent },
-  { path: 'service-view', component: ServiceViewComponent },
-  { path: 'portfolio-details/:id', component: PortfolioFormComponent, resolve: {portfolio : PortfolioFormResolver} },
+  { path: 'portfolio-view/:id', component: PortfolioFormComponent, resolve: {portfolio : PortfolioFormResolver} },
   { path: 'portfolio-new', component: PortfolioFormComponent },
+  { path: 'service-view', component: ServiceViewComponent },
 ];
 
 @NgModule({

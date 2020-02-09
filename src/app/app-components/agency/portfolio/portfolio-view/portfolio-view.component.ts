@@ -90,7 +90,7 @@ export class PortfolioViewComponent implements OnInit {
   }
 
   viewPortfolioDetails(item) {
-    this.router.navigate(['/portfolio-details/' + item.payload.doc.id]);
+    this.router.navigate(['/portfolio-view/' + item.payload.doc.id]);
   }
 
   searchByName() {
