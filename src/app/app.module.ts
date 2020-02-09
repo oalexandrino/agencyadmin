@@ -33,7 +33,6 @@ import {
   MatFormFieldModule } from '@angular/material';
 
 // import application`s modules
-import { NewPortfolioComponent } from './app-components/agency/portfolio/new-portfolio/new-portfolio.component';
 import { PortfolioViewComponent } from './app-components/agency/portfolio/portfolio-view/portfolio-view.component';
 import { PortfolioFormComponent } from './app-components/agency/portfolio/portfolio-form/portfolio-form.component';
 import { NewServiceComponent } from './app-components/agency/service/new-service/new-service.component';
@@ -66,7 +65,6 @@ import { FirebaseAgencyWebSiteService } from './app-services/db/firebase/Firebas
 @NgModule({
   declarations: [
     AppComponent,
-    NewPortfolioComponent,
     PortfolioViewComponent,
     NewServiceComponent,
     ServiceViewComponent,
