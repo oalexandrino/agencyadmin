@@ -24,22 +24,6 @@ export class ServiceFormComponent implements OnInit {
     ]
   };
 
-  onSubmit(value) {
-    if (this.isNew) {
-      this.insert(value);
-    } else {
-      this.update(value);
-    }
-  }
-
-  insert(value: any) {
-    throw new Error('Method not implemented.');
-  }
-
-  update(value: any) {
-    throw new Error('Method not implemented.');
-  }
-
   constructor(
     public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
     private modalService: BsModalService,
@@ -48,41 +32,60 @@ export class ServiceFormComponent implements OnInit {
     private formBuilder: FormBuilder
   ) { }
 
-  createForm() {
+  ngOnInit() {
+    this.subscribeData();
+  }
+
+  onSubmit(value) {
+    if (this.isNew) {
+      this.insert(value);
+    } else {
+      this.update(value);
+    }
+  }
+
+  private createForm() {
     this.serviceForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
     });
   }
 
-  cancel() {
-    this.router.navigate(['/service-view']);
-  }
-
-  ngOnInit() {
-    this.subscribePortfolioData();
-
-  }
-
-  createFormWithData() {
+  private createFormWithData() {
     this.serviceForm = this.formBuilder.group({
-      title: [this.serviceData.service.title, Validators.required],
-      description: [this.serviceData.service.description, Validators.required],
+      title: [this.serviceData.title, Validators.required],
+      description: [this.serviceData.description, Validators.required],
     });
   }
 
-  private subscribePortfolioData() {
+  private subscribeData() {
     this.route.data.subscribe(routeData => {
-      const serviceData = routeData;
+      const serviceData = routeData.service;
       if (serviceData) {
         this.isNew = false;
         this.serviceData = serviceData;
-        this.serviceData.id = serviceData.service.id;
+        this.serviceData.id = serviceData.id;
         this.createFormWithData();
       } else {
         this.isNew = true;
         this.createForm();
       }
     });
+  }
+
+  private insert(value: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  private update(value: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  private delete() {
+    throw new Error('Method not implemented.');
+  }
+
+  private cancel() {
+    this.router.navigate(['/service-view']);
   }
 }

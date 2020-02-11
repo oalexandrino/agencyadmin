@@ -16,8 +16,8 @@ export class ServiceFormResolver implements Resolve<any> {
         return new Promise((resolve, reject) => {
             const serviceId = route.paramMap.get('id');
             this.mongoAgencyWebSiteService.getCollectionItem('/service/', serviceId)
-                .subscribe(serviceObjectModel => {
-                    resolve(serviceObjectModel);
+                .subscribe(data => {
+                    resolve(data);
                 }, err => { console.log(err); });
         });
     }

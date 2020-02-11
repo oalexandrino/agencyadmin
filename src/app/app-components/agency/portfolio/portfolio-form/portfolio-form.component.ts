@@ -1,7 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material';
 import { FirebaseAgencyWebSiteService } from '../../../../app-services/db/firebase/FirebaseAgencyWebSiteService.service';
 import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -47,26 +46,36 @@ export class PortfolioFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.subscribePortfolioData();
+    this.subscribeData();
   }
 
+  onSubmit(value) {
+    if (this.isNew) {
+      this.insert(value);
+    } else {
+      this.update(value);
+    }
+  }
 
-  delete() {
-
-    this.modalRef = this.modalService.show(DeleteMsgComponent, {
-      initialState: {
-        modalMainMessage: 'Are you sure you want to delete this item?',
-        modalSecondaryMessage: 'Details',
-        collectionId: this.portfolioData.id,
-        collectionName: 'portfolio',
-
-        data: {}
-      }
+  private createForm() {
+    this.portfolioForm = this.formBuilder.group({
+      name: ['', Validators.required ],
+      desc: ['', Validators.required ],
+      price: ['', Validators.required ],
+      availableDate: ['', Validators.required ],
     });
   }
 
+  private createFormWithData() {
+    this.portfolioForm = this.formBuilder.group({
+      name: [this.portfolioData.name, Validators.required],
+      desc: [this.portfolioData.desc, Validators.required],
+      price: [this.portfolioData.price, Validators.required],
+      availableDate: [this.portfolioData.availableDate, Validators.required],
+    });
+  }
 
-  private subscribePortfolioData() {
+  private subscribeData() {
     this.route.data.subscribe(routeData => {
       const portfolioData = routeData.portfolio;
       if (portfolioData) {
@@ -81,32 +90,6 @@ export class PortfolioFormComponent implements OnInit {
     });
   }
 
-  createForm() {
-    this.portfolioForm = this.formBuilder.group({
-      name: ['', Validators.required ],
-      desc: ['', Validators.required ],
-      price: ['', Validators.required ],
-      availableDate: ['', Validators.required ],
-    });
-  }
-
-  createFormWithData() {
-    this.portfolioForm = this.formBuilder.group({
-      name: [this.portfolioData.name, Validators.required],
-      desc: [this.portfolioData.desc, Validators.required],
-      price: [this.portfolioData.price, Validators.required],
-      availableDate: [this.portfolioData.availableDate, Validators.required],
-    });
-  }
-
-  onSubmit(value) {
-    if (this.isNew) {
-      this.insert(value);
-    } else {
-      this.update(value);
-    }
-  }
-
   private insert(value: any) {
     if (value) {
       value.price = Number(value.price);
@@ -115,8 +98,6 @@ export class PortfolioFormComponent implements OnInit {
           this.router.navigate(['/portfolio-view']);
         });
     }
-
-
   }
 
   private update(value: any) {
@@ -127,22 +108,19 @@ export class PortfolioFormComponent implements OnInit {
       });
   }
 
-  /*
-   delete() {
-    if (confirm('Are you sure you want to delete this item?')) {
-      this.firebaseAgencyService.delete('portfolio', this.portfolioData.id)
-      .then(
-        res => {
-          this.router.navigate(['/portfolio-view']);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-    }
+  private delete() {
+    this.modalRef = this.modalService.show(DeleteMsgComponent, {
+      initialState: {
+        modalMainMessage: 'Are you sure you want to delete this item?',
+        modalSecondaryMessage: 'Details',
+        collectionId: this.portfolioData.id,
+        collectionName: 'portfolio',
+        data: {}
+      }
+    });
   }
-    */
-  cancel() {
+
+  private cancel() {
     this.router.navigate(['/portfolio-view']);
   }
 }
