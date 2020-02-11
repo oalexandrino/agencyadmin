@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 import { Service } from 'src/model/service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-service-view',
@@ -16,7 +17,9 @@ export class ServiceViewComponent implements OnInit {
   serviceItems: Service[];
   isLoadingResults = true;
 
-  constructor( public mongoAgencyWebSiteService: MongoAgencyWebSiteService) { }
+  constructor(
+    public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
+    private router: Router) {}
 
   ngOnInit() {
     this.getData();
@@ -36,8 +39,8 @@ export class ServiceViewComponent implements OnInit {
       });
   }
 
-  edit(value: any) {
-    alert(value);
+  viewServiceDetails(value: any) {
+    this.router.navigate(['/service-view/' + value]);
   }
 
 

@@ -1,3 +1,4 @@
+import { ServiceFormResolver } from './app-components/agency/service/service-form/ServiceForm.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PortfolioFormComponent } from './app-components/agency/portfolio/portfolio-form/portfolio-form.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'portfolio-new', component: PortfolioFormComponent },
   { path: 'service-new', component: ServiceFormComponent },
   { path: 'service-view', component: ServiceViewComponent },
+  { path: 'service-view/:id', component: ServiceFormComponent, resolve: { service: ServiceFormResolver } },
 ];
 
 @NgModule({

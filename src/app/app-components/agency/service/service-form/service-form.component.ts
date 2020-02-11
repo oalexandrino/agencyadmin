@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { FirebaseAgencyWebSiteService } from 'src/app/app-services/db/firebase/FirebaseAgencyWebSiteService.service';
+import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 
 @Component({
   selector: 'app-service-form',
@@ -41,6 +41,7 @@ export class ServiceFormComponent implements OnInit {
   }
 
   constructor(
+    public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
     private modalService: BsModalService,
     private route: ActivatedRoute,
     private router: Router,
@@ -60,22 +61,23 @@ export class ServiceFormComponent implements OnInit {
 
   ngOnInit() {
     this.subscribePortfolioData();
+
   }
 
   createFormWithData() {
     this.serviceForm = this.formBuilder.group({
-      title: [this.serviceData.title, Validators.required],
-      description: [this.serviceData.description, Validators.required],
+      title: [this.serviceData.service.title, Validators.required],
+      description: [this.serviceData.service.description, Validators.required],
     });
   }
 
   private subscribePortfolioData() {
     this.route.data.subscribe(routeData => {
-      const serviceData = routeData.portfolio;
+      const serviceData = routeData;
       if (serviceData) {
         this.isNew = false;
-        this.serviceData = serviceData.payload.data();
-        this.serviceData.id = serviceData.payload.id;
+        this.serviceData = serviceData;
+        this.serviceData.id = serviceData.service.id;
         this.createFormWithData();
       } else {
         this.isNew = true;
@@ -83,5 +85,4 @@ export class ServiceFormComponent implements OnInit {
       }
     });
   }
-
 }
