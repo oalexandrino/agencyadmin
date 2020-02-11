@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
+import { Service } from 'src/model/service';
 
 @Component({
   selector: 'app-service-form',
@@ -14,6 +15,8 @@ export class ServiceFormComponent implements OnInit {
   public serviceForm: FormGroup;
   serviceData: any;
   isNew = true;
+  message;
+  showMessage = false;
 
   validationMessages = {
     title: [
@@ -78,7 +81,26 @@ export class ServiceFormComponent implements OnInit {
   }
 
   private update(value: any) {
-    throw new Error('Method not implemented.');
+
+    const updateOptions = {
+      "id": this.serviceData._id,
+      "title": value.title,
+      "description": value.description
+    };
+
+    this.mongoAgencyWebSiteService.update('service', updateOptions)
+      .subscribe(data => {
+        this.showMessage = true;
+        this.message = data.message;
+
+      }, err => {
+        console.log(err);
+      });
+
+  }
+
+  private updateService(id: any) {
+
   }
 
   private delete() {

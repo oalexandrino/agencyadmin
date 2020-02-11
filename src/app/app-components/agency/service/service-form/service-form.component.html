@@ -57,12 +57,15 @@
                     (click)="delete()">Delete</button>
                 </div>
                 <div class="col-md-4">
-                  <button mat-raised-button class="btn btn-secondary" type="button" (click)="cancel()">Cancel</button>
+                  <button mat-raised-button class="btn btn-secondary" type="button" (click)="cancel()">Go to service listing</button>
                 </div>
               </div>
             </div>
           </div>
         </form>
+        <div class="row submit-button-container d-flex justify-content-center">
+          <div *ngIf="showMessage"  class="alert alert-success" role="alert">{{message}}</div>
+        </div>
       </div>
     </div>
   </div>

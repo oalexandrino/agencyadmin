@@ -26,7 +26,7 @@ export class ServiceViewComponent implements OnInit {
   }
 
   private getData() {
-    this.mongoAgencyWebSiteService.getListing('/service/')
+    this.mongoAgencyWebSiteService.getListing('service')
       .subscribe(data => {
 
         // property services comes to the endpoint
