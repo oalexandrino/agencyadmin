@@ -15,11 +15,10 @@ import { Router } from '@angular/router';
 export class ServiceViewComponent implements OnInit {
 
   serviceItems: Service[];
-  isLoadingResults = true;
 
   constructor(
     public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
-    private router: Router) {}
+    private router: Router) { }
 
   ngOnInit() {
     this.getData();
@@ -32,16 +31,26 @@ export class ServiceViewComponent implements OnInit {
         // property services comes to the endpoint
         // tslint:disable-next-line: no-string-literal
         this.serviceItems = data['services'];
-        this.isLoadingResults = false;
       }, err => {
         console.log(err);
-        this.isLoadingResults = false;
       });
   }
 
   viewServiceDetails(value: any) {
     this.router.navigate(['/service-view/' + value]);
   }
+
+  deleteItem(documentId: any) {
+
+    const updateOptions = {
+      id: documentId
+    };
+ 
+    this.mongoAgencyWebSiteService.delete('service', updateOptions)
+      .subscribe(data => { console.log(data.message); }, err => { console.log(err);});
+
+  }
+
 
 
 }

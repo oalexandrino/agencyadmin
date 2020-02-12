@@ -91,7 +91,10 @@ export class ServiceFormComponent implements OnInit {
     this.mongoAgencyWebSiteService.update('service', updateOptions)
       .subscribe(data => {
         this.showMessage = true;
-        this.message = data.message;
+        this.message = data.message + ' Redirecting to the service listing...';
+        setTimeout(() => {
+          this.router.navigate(['service-view']);
+        }, 2000);  // 5s
 
       }, err => {
         console.log(err);

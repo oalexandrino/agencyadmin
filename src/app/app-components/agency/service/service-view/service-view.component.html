@@ -8,13 +8,24 @@
       </ol>
     </nav>
     <div class="page-content">
-        <mat-list role="list">
-          <mat-list-item *ngFor="let service of serviceItems">
-            <h4 mat-line>Title: {{service.title}}</h4>
-            <p mat-line>Description: {{service.description}} </p>
-            <button mat-raised-button class="submit-button" color="primary" type="submit"
-              (click)="viewServiceDetails(service._id)" title="Edit '{{service.title}}'" >Edit</button>
-          </mat-list-item>
-        </mat-list>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Title</th>
+            <th scope="col" class="text-center">Description</th>
+            <th scope="colgroup" colspan="2" class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let service of serviceItems">
+            <th scope="row">{{service.title}}</th>
+            <td> {{service.description}}</td>
+            <td><button mat-raised-button class="submit-button" color="primary" type="submit" (click)="viewServiceDetails(service._id)"
+              title="Edit '{{service.title}}'">Edit</button></td>
+            <td><button mat-raised-button class="submit-button" class="delete-button" color="warn" (click)="deleteItem(service._id)"
+              title="Delete '{{service.title}}'">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 </div>
