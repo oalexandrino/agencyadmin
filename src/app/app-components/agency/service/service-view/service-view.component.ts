@@ -45,9 +45,9 @@ export class ServiceViewComponent implements OnInit {
     const updateOptions = {
       id: documentId
     };
- 
+
     this.mongoAgencyWebSiteService.delete('service', updateOptions)
-      .subscribe(data => { console.log(data.message); }, err => { console.log(err);});
+      .subscribe(data => {  }, err => { console.log(err); });
 
   }
 

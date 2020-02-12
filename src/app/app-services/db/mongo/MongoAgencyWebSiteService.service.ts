@@ -67,9 +67,9 @@ export class MongoAgencyWebSiteService {
 
   delete(endpoint: string, updateOptions: any) {
 
-    const apiUrl = `${this.apiURL}${endpoint}`;
+    const apiUrl = `${this.apiURL}${endpoint}/${updateOptions.id}`;
 
-    return this.http.delete<any>(apiUrl, updateOptions).pipe(
+    return this.http.delete<any>(apiUrl, httpOptions).pipe(
       tap(_ => console.log(`document item id=${updateOptions.id} for the ${endpoint} endpoint has been deleted`)),
       catchError(this.handleError<any>('delete'))
     );
