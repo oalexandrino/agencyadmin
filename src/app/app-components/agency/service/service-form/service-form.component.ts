@@ -94,7 +94,7 @@ export class ServiceFormComponent implements OnInit {
         this.message = data.message + ' Redirecting to the service listing...';
         setTimeout(() => {
           this.router.navigate(['service-view']);
-        }, 2000);  // 5s
+        }, 2000);  // 2s
 
       }, err => {
         console.log(err);
