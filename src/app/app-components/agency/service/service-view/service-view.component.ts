@@ -1,11 +1,10 @@
 import { ArrayList } from './../../../../lib/util/ArrayList';
 import { Component, OnInit } from '@angular/core';
-import { MatList } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 import { Service } from 'src/model/service';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, Resolve } from '@angular/router';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-service-view',
@@ -15,6 +14,9 @@ import { Router } from '@angular/router';
 export class ServiceViewComponent implements OnInit {
 
   serviceItems: Service[];
+  loading = false;
+  showMessage = false;
+  message;
 
   constructor(
     public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
@@ -41,12 +43,32 @@ export class ServiceViewComponent implements OnInit {
   }
 
   deleteItem(documentId: any) {
-
+    this.loading = true;
     const deleteOptions = {
       id: documentId
     };
+    this.promiseToDelete(deleteOptions).then(() => console.log('Task Complete!'));
+  }
 
-    this.mongoAgencyWebSiteService.delete('service', deleteOptions)
-      .subscribe(data => { console.log( data.message); }, err => { console.log(err); });
+  promiseToDelete(deleteOptions: any) {
+
+    return new Promise((resolve, reject) => {
+      this.mongoAgencyWebSiteService.delete('service', deleteOptions)
+        .toPromise()
+        .then(
+          response => {
+            this.loading = false;
+            this.showMessage = true;
+            this.message = response.message;
+            console.log(response.message);
+            resolve();
+          },
+          message => {
+            reject(message);
+          }
+        );
+
+    });
+
   }
 }
