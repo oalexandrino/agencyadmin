@@ -5,6 +5,7 @@ import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAg
 import { Service } from 'src/model/service';
 import { Router, Resolve } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
 
 @Component({
   selector: 'app-service-view',
@@ -28,13 +29,14 @@ export class ServiceViewComponent implements OnInit {
 
   private getData() {
     this.mongoAgencyWebSiteService.getListing('service')
-      .subscribe(data => {
-
+      .subscribe(
+        data => {
         // property services comes to the endpoint
         // tslint:disable-next-line: no-string-literal
         this.serviceItems = data['services'];
       }, err => {
-        console.log(err);
+          this.showMessage = true;
+          this.message = err;
       });
   }
 

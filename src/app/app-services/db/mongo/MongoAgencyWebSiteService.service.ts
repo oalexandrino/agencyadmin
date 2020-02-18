@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Service } from 'src/model/service';
+import 'rxjs/add/observable/throw';
 
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
@@ -14,13 +15,18 @@ export class MongoAgencyWebSiteService {
 
   apiURL = 'http://localhost:3000/api/';
 
-  constructor(public router: Router, public http: HttpClient ) {  }
+  constructor(public router: Router, public http: HttpClient) { }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
-    };
+  private handleError(operation: string) {
+    return (err: any) => {
+      const errMsg = `Error at performing "${operation}()" in MongoAgencyWebSiteService when retrieving from ${this.apiURL}.`;
+      console.log(`${errMsg}:`, err)
+      if (err instanceof HttpErrorResponse) {
+
+        console.log(`status: ${err.status}, ${err.statusText}`);
+      }
+      return Observable.throwError(errMsg);
+    }
   }
 
   getListing(endpoint: string): Observable<any[]> {
@@ -30,7 +36,7 @@ export class MongoAgencyWebSiteService {
     return this.http.get<any[]>(apiUrl)
       .pipe(
         tap(serviceItems => console.log(`reading listing of ${endpoint} endpoint`)),
-        catchError(this.handleError('getListing', []))
+        catchError(this.handleError('getListing'))
       );
   }
 
@@ -40,7 +46,7 @@ export class MongoAgencyWebSiteService {
 
     return this.http.put(apiUrl, updateOptions, httpOptions).pipe(
       tap(_ => console.log(`updating item id=${updateOptions.id} for the ${endpoint} endpoint`)),
-      catchError(this.handleError<any>('update'))
+      catchError(this.handleError('update'))
     );
   }
 
@@ -50,7 +56,7 @@ export class MongoAgencyWebSiteService {
 
     return this.http.get<any>(url).pipe(
       tap(_ => console.log(`reading document item id=${key} for the ${endpoint} endpoint`)),
-      catchError(this.handleError<any>(`getCollectionItem id=${key}`))
+      catchError(this.handleError(`getCollectionItem id=${key}`))
     );
   }
 
@@ -60,7 +66,7 @@ export class MongoAgencyWebSiteService {
 
     return this.http.delete<any>(apiUrl, httpOptions).pipe(
       tap(_ => console.log(`document item id=${deleteOptions.id} for the ${endpoint} endpoint has been deleted`)),
-      catchError(this.handleError<any>('delete'))
+      catchError(this.handleError('delete'))
     );
   }
 }
