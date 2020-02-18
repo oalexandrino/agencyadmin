@@ -9,7 +9,7 @@
     </nav>
     <div class="page-content">
       <div *ngIf="loading" class="alert alert-success" role="alert">Processing</div>
-      <div *ngIf="loading" class="alert alert-info" role="alert">{{message}}</div>
+      <div *ngIf="showMessage" class="alert alert-info" role="alert">{{message}}</div>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -19,7 +19,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let service of serviceItems">
+          <tr *ngFor="let service of serviceItems; let index = index" [attr.id]="service._id">
             <th scope="row">{{service.title}}</th>
             <td> {{service.description}}</td>
             <td><button mat-raised-button class="submit-button" color="primary" type="submit" (click)="viewServiceDetails(service._id)"

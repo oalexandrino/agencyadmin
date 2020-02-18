@@ -43,16 +43,29 @@ export class ServiceViewComponent implements OnInit {
   }
 
   deleteItem(documentId: any) {
-    this.loading = true;
-    const deleteOptions = {
-      id: documentId
-    };
-    this.promiseToDelete(deleteOptions).then(() => console.log('Task Complete!'));
+    if (confirm('Are you sure you want do delete this item?')) {
+      this.loading = true;
+      const deleteOptions = {
+        id: documentId
+      };
+      this.promiseToDelete(deleteOptions).then(() => {
+        this.deleteRow(documentId);
+        this.showMessage = true;
+        setTimeout(() => {
+          this.showMessage = false;
+        }, 1500);
+      });
+    }
+  }
+
+  deleteRow(d) {
+    const index = this.serviceItems.indexOf(d);
+    this.serviceItems.splice(index, 1);
   }
 
   promiseToDelete(deleteOptions: any) {
 
-    return new Promise((resolve, reject) => {
+    return new Promise((onResolve, onReject) => {
       this.mongoAgencyWebSiteService.delete('service', deleteOptions)
         .toPromise()
         .then(
@@ -61,12 +74,14 @@ export class ServiceViewComponent implements OnInit {
             this.showMessage = true;
             this.message = response.message;
             console.log(response.message);
-            resolve();
+            onResolve();
           },
           message => {
-            reject(message);
+            onReject(message);
           }
-        );
+      ).catch(function(err) {
+        console.error(err);
+      });
 
     });
 
