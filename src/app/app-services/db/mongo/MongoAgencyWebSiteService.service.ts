@@ -19,7 +19,7 @@ export class MongoAgencyWebSiteService {
 
   private handleError(operation: string) {
     return (err: any) => {
-      const errMsg = `Error at performing "${operation}()" in MongoAgencyWebSiteService when retrieving from ${this.apiURL}.`;
+      const errMsg = `Error at performing "${operation}()" in MongoAgencyWebSiteService when reaching from ${this.apiURL}.`;
       console.log(`${errMsg}:`, err)
       if (err instanceof HttpErrorResponse) {
 
@@ -38,6 +38,16 @@ export class MongoAgencyWebSiteService {
         tap(serviceItems => console.log(`reading listing of ${endpoint} endpoint`)),
         catchError(this.handleError('getListing'))
       );
+  }
+
+  insert(endpoint: string, insertOptions: any): Observable<any> {
+
+    const apiUrl = `${this.apiURL}${endpoint}`;
+
+    return this.http.post(apiUrl, insertOptions, httpOptions).pipe(
+      tap(_ => console.log(`inserting item for the ${endpoint} endpoint`)),
+      catchError(this.handleError('insert'))
+    );
   }
 
   update(endpoint: string, updateOptions: any): Observable<any> {

@@ -15,6 +15,7 @@
           <tr>
             <th scope="col" class="text-center">Title</th>
             <th scope="col" class="text-center">Description</th>
+            <th scope="col" class="text-center">Font awesome Icon</th>
             <th scope="colgroup" colspan="2" class="text-center">Actions</th>
           </tr>
         </thead>
@@ -22,6 +23,7 @@
           <tr *ngFor="let service of serviceItems; let index = index" [attr.id]="service._id">
             <th scope="row">{{service.title}}</th>
             <td> {{service.description}}</td>
+            <td> {{service.fontawesomeIcon}}</td>
             <td><button mat-raised-button class="submit-button" color="primary" type="submit" (click)="viewServiceDetails(service._id)"
               title="Edit '{{service.title}}'">Edit</button></td>
             <td><button mat-raised-button class="submit-button" class="delete-button" color="warn" (click)="deleteItem(service._id)"

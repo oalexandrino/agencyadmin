@@ -38,6 +38,16 @@
                     {{validation.message}}</mat-error>
                 </ng-container>
               </div>
+              <div class="form-group">
+                <mat-form-field class="input-style">
+                  <input matInput placeholder="Font awesome Icon" class="form-control" formControlName="fontawesomeIcon">
+                </mat-form-field>
+                <ng-container *ngFor="let validation of validationMessages.fontawesomeIcon">
+                  <mat-error
+                    *ngIf="serviceForm.get('fontawesomeIcon').hasError(validation.type) && (serviceForm.get('fontawesomeIcon').dirty || serviceForm.get('fontawesomeIcon').touched)">
+                    {{validation.message}}</mat-error>
+                </ng-container>
+              </div>
             </mat-expansion-panel>
           </mat-accordion>
           <p></p>

@@ -25,6 +25,10 @@ export class ServiceFormComponent implements OnInit {
     description: [
       { type: 'required', message: 'Description is required.' }
     ]
+    ,
+    fontawesomeIcon: [
+      { type: 'required', message: 'Font awesome Icon is required.' }
+    ]
   };
 
   constructor(
@@ -51,6 +55,7 @@ export class ServiceFormComponent implements OnInit {
     this.serviceForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
+      fontawesomeIcon: ['', Validators.required],
     });
   }
 
@@ -58,6 +63,7 @@ export class ServiceFormComponent implements OnInit {
     this.serviceForm = this.formBuilder.group({
       title: [this.serviceData.title, Validators.required],
       description: [this.serviceData.description, Validators.required],
+      fontawesomeIcon: [this.serviceData.fontawesomeIcon, Validators.required],
     });
   }
 
@@ -77,15 +83,33 @@ export class ServiceFormComponent implements OnInit {
   }
 
   private insert(value: any) {
-    throw new Error('Method not implemented.');
+
+    const insertOptions = {
+      title: value.title,
+      description: value.description,
+      fontawesomeIcon: value.fontawesomeIcon
+    };
+
+    this.mongoAgencyWebSiteService.insert('service', insertOptions)
+      .subscribe(data => {
+        this.showMessage = true;
+        this.message = data.message + ' Redirecting to the service listing...';
+        setTimeout(() => {
+          this.router.navigate(['service-view']);
+        }, 2000);  // 2s
+
+      }, err => {
+        console.log(err);
+      });
   }
 
   private update(value: any) {
 
     const updateOptions = {
-      "id": this.serviceData._id,
-      "title": value.title,
-      "description": value.description
+      id: this.serviceData._id,
+      title: value.title,
+      description: value.description,
+      fontawesomeIcon: value.fontawesomeIcon
     };
 
     this.mongoAgencyWebSiteService.update('service', updateOptions)
@@ -106,11 +130,11 @@ export class ServiceFormComponent implements OnInit {
 
   }
 
-  private delete() {
+  delete() {
     throw new Error('Method not implemented.');
   }
 
-  private cancel() {
+  cancel() {
     this.router.navigate(['/service-view']);
   }
 }
