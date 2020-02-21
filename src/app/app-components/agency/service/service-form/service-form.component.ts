@@ -15,7 +15,7 @@ export class ServiceFormComponent implements OnInit {
   public serviceForm: FormGroup;
   serviceData: any;
   isNew = true;
-  message;
+  message = 'Please provide data';
   showMessage = false;
 
   validationMessages = {
