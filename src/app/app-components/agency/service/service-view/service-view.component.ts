@@ -1,9 +1,7 @@
-import { ArrayList } from './../../../../lib/util/ArrayList';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 import { Service } from 'src/model/service';
-import { Router, Resolve } from '@angular/router';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 
@@ -40,7 +38,7 @@ export class ServiceViewComponent implements OnInit {
       });
   }
 
-  viewServiceDetails(value: any) {
+  viewDetails(value: any) {
     this.router.navigate(['/service-view/' + value]);
   }
 

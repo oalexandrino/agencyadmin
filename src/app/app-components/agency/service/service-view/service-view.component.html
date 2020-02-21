@@ -24,7 +24,7 @@
             <th scope="row">{{service.title}}</th>
             <td> {{service.description}}</td>
             <td> {{service.fontawesomeIcon}}</td>
-            <td><button mat-raised-button class="submit-button" color="primary" type="submit" (click)="viewServiceDetails(service._id)"
+            <td><button mat-raised-button class="submit-button" color="primary" type="submit" (click)="viewDetails(service._id)"
               title="Edit '{{service.title}}'">Edit</button></td>
             <td><button mat-raised-button class="submit-button" class="delete-button" color="warn" (click)="deleteItem(service._id)"
               title="Delete '{{service.title}}'">Delete</button></td>

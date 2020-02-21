@@ -1,1 +1,36 @@
-<p>about-view works!</p>
+<div class="content-page">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">About items listing</li>
+      <li class="breadcrumb-item active" aria-current="page"><a routerLink="/about-new">Add a new about item</a></li>
+    </ol>
+  </nav>
+  <div class="page-content">
+    <div *ngIf="loading" class="alert alert-success" role="alert">Processing</div>
+    <div *ngIf="showMessage" class="alert alert-info" role="alert">{{message}}</div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">Date</th>
+          <th scope="col" class="text-center">Headline</th>
+          <th scope="col" class="text-center">Description</th>
+          <th scope="col" class="text-center">Image</th>
+          <th scope="colgroup" colspan="2" class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let about of aboutItems; let index = index" [attr.id]="about._id">
+          <th scope="row">{{about.date}}</th>
+          <td> {{about.headline}}</td>
+          <td> {{about.description}}</td>
+          <td> <img src="{{aboutImages[about._id]}}" class="rounded-circle img-fluid" width="80px"> </td>
+          <td><button mat-raised-button class="submit-button" color="primary" type="submit"
+              (click)="viewDetails(about._id)" title="Edit '{{about.description}}'">Edit</button></td>
+          <td><button mat-raised-button class="submit-button" class="delete-button" color="warn"
+              (click)="deleteItem(about._id)" title="Delete '{{about.description}}'">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

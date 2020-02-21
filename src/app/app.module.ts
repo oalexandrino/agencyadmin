@@ -39,8 +39,6 @@ import { ServiceViewComponent } from './app-components/agency/service/service-vi
 import { TeamEditComponent } from './app-components/agency/team/team-edit/team-edit.component';
 import { TeamViewComponent } from './app-components/agency/team/team-view/team-view.component';
 import { TeamNewComponent } from './app-components/agency/team/team-new/team-new.component';
-import { AboutNewComponent } from './app-components/agency/about/about-new/about-new.component';
-import { AboutEditComponent } from './app-components/agency/about/about-edit/about-edit.component';
 import { AboutViewComponent } from './app-components/agency/about/about-view/about-view.component';
 import { SettingsEditComponent } from './app-components/agency/settings/settings-edit/settings-edit.component';
 import { HomeComponent } from './app-components/admin-layout/home/home.component';
@@ -69,8 +67,6 @@ import { ServiceFormComponent } from './app-components/agency/service/service-fo
     TeamEditComponent,
     TeamViewComponent,
     TeamNewComponent,
-    AboutNewComponent,
-    AboutEditComponent,
     AboutViewComponent,
     SettingsEditComponent,
     HomeComponent,

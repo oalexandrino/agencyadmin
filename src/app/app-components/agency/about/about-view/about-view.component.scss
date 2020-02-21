@@ -1,0 +1,57 @@
+.filter-by-price {
+  color: #6c757d;
+  font-size: 20px;
+
+  .title {
+    align-self: center;
+  }
+
+  .age-price {
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+.items-list {
+  padding: 20px 20px;
+}
+
+.text-col {
+  margin: auto 0px;
+}
+
+.actions-col {
+  text-align: center;
+  margin: auto 0px;
+
+  .action {
+    line-height: 1;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+}
+
+
+.content-page {
+
+  padding: 20px 20px;
+
+  .page-content {
+    background-color: #FFF;
+
+    .edit-form {
+      padding: 20px;
+
+
+      .input-style {
+        width: 100%;
+      }
+
+      .mat-error {
+        font-size: 12px;
+      }
+    }
+  }
+}
