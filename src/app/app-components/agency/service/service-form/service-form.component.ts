@@ -126,10 +126,6 @@ export class ServiceFormComponent implements OnInit {
 
   }
 
-  private updateService(id: any) {
-
-  }
-
   delete() {
     throw new Error('Method not implemented.');
   }

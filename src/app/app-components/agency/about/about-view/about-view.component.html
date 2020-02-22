@@ -16,6 +16,7 @@
           <th scope="col" class="text-center">Headline</th>
           <th scope="col" class="text-center">Description</th>
           <th scope="col" class="text-center">Image</th>
+          <th scope="col" class="text-center">Change image</th>
           <th scope="colgroup" colspan="2" class="text-center">Actions</th>
         </tr>
       </thead>
@@ -24,7 +25,10 @@
           <th scope="row">{{about.date}}</th>
           <td> {{about.headline}}</td>
           <td> {{about.description}}</td>
-          <td> <img src="{{aboutImages[about._id]}}" class="rounded-circle img-fluid" width="80px"> </td>
+          <td> <img src="{{aboutImages[about._id]}}" class="rounded-circle img-fluid" width="80px"></td>
+          <td>
+            <button mat-raised-button class="submit-button" color="primary" type="submit" (click)="openDialog(about._id)"
+            title="Edit '{{about.description}}'">Change image</button></td>
           <td><button mat-raised-button class="submit-button" color="primary" type="submit"
               (click)="viewDetails(about._id)" title="Edit '{{about.description}}'">Edit</button></td>
           <td><button mat-raised-button class="submit-button" class="delete-button" color="warn"

@@ -40,6 +40,7 @@ import { TeamEditComponent } from './app-components/agency/team/team-edit/team-e
 import { TeamViewComponent } from './app-components/agency/team/team-view/team-view.component';
 import { TeamNewComponent } from './app-components/agency/team/team-new/team-new.component';
 import { AboutViewComponent } from './app-components/agency/about/about-view/about-view.component';
+import { AboutDialogComponent } from './app-components/agency/about/about-dialog/AboutDialogComponent';
 import { SettingsEditComponent } from './app-components/agency/settings/settings-edit/settings-edit.component';
 import { HomeComponent } from './app-components/admin-layout/home/home.component';
 import { NavbarComponent } from './app-components/admin-layout/navbar/navbar.component';
@@ -68,6 +69,7 @@ import { ServiceFormComponent } from './app-components/agency/service/service-fo
     TeamViewComponent,
     TeamNewComponent,
     AboutViewComponent,
+    AboutDialogComponent,
     SettingsEditComponent,
     HomeComponent,
     NavbarComponent,
@@ -114,7 +116,7 @@ import { ServiceFormComponent } from './app-components/agency/service/service-fo
     FormsModule,
     ReactiveFormsModule,
   ],
-  entryComponents: [ DeleteMsgComponent ],
+  entryComponents: [DeleteMsgComponent, AboutDialogComponent],
   providers: [PortfolioService, FirebaseAgencyWebSiteService, MatDatepickerModule],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

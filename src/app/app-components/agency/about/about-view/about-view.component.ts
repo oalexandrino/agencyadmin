@@ -1,9 +1,12 @@
 import { About } from 'src/model/about';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
+import { AboutDialogComponent } from '../about-dialog/AboutDialogComponent';
+
 
 @Component({
   selector: 'app-about-view',
@@ -20,15 +23,18 @@ export class AboutViewComponent implements OnInit {
 
   constructor(
     public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
-    private router: Router) { }
+    private router: Router,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.getData();
   }
 
   private getData() {
-    this.getAboutItems();
     this.getAboutImages();
+    this.getAboutItems();
+
   }
 
   private getAboutImages() {
@@ -56,6 +62,19 @@ export class AboutViewComponent implements OnInit {
   }
 
   viewDetails(value: any) {
+
+  }
+
+  openDialog(aboutId) {
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = { aboutId: aboutId };
+    const dialogRef = this.dialog.open(AboutDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      val => console.log('Dialog output:', val)
+    );
 
   }
 
