@@ -1,0 +1,38 @@
+.about {
+  height: 150px;
+  background-color: #FFFFFF;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.about aboutImage {
+  height: 100%;
+}
+
+.column {
+  float: left;
+  width: 50%;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+   padding: 20px 20px;
+}
+
+
+
+
+.content-page {
+
+  padding: 20px 20px;
+
+  .page-content {
+    background-color: #FFF;
+
+
+  }
+}

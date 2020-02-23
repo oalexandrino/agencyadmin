@@ -26,7 +26,7 @@ export class MongoAgencyWebSiteService {
         console.log(`status: ${err.status}, ${err.statusText}`);
       }
       return Observable.throwError(errMsg);
-    }
+    };
   }
 
   getListing(endpoint: string): Observable<any[]> {

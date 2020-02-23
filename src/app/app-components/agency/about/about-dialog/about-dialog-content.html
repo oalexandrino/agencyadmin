@@ -1,16 +1,33 @@
-<h2 mat-dialog-title>Update image | {{aboutItemTitle}}</h2>
-<mat-dialog-content class="mat-typography">
-  <h3>Develop across all platforms</h3>
-  <p>Learn one way to build applications with Angular and reuse your code and abilities to build
-    apps for any deployment target. For web, mobile web, native mobile and native desktop.</p>
+<div class="page-content">
+  <h1 class="display-4">Update image</h1>
+  <div class="jumbotron jumbotron-fluid overflow-auto">
+    <div class="container">
+      
+      <p class="lead">{{aboutHeadline}}</p>
+      <mat-dialog-content class="mat-typography">
+        
+        <div class="row">
+          <div class="column">{{aboutDescription}}</div>
+          <div class="column">
+            <img *ngIf="imageLoaded" src="{{aboutImageItem.cloudImage}}" class="rounded-circle img-fluid about aboutImage">
+          </div>
+        </div>
+      </mat-dialog-content>
+    </div>
 
-<img *ngIf="imageLoaded" src="{{aboutImageItem.cloudImage}}" class="rounded-circle img-fluid">
+  </div>
+  
+ <div class="form-group">
+   <label for="file">Choose File</label>
+  <form [formGroup]="aboutForm" (ngSubmit)="onSubmit(aboutForm.value)">
+    <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+  </form>
+ </div>
 
-</mat-dialog-content>
-<mat-dialog-actions>
-
-  <button class="mat-raised-button" (click)="close()">
-    Close
-  </button>
-
-</mat-dialog-actions>
+  <div class="row d-flex justify-content-center">
+    <mat-dialog-actions>
+      <button class="mat-raised-button" (click)="upload()">Upload</button>
+      <button class="mat-raised-button" (click)="close()">Close</button>
+    </mat-dialog-actions>
+  </div>
+</div>

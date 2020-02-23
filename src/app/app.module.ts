@@ -1,3 +1,4 @@
+import { UploadService } from 'src/app/app-services/db/upload/upload-service.service';
 // import main itens
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
@@ -117,7 +118,7 @@ import { ServiceFormComponent } from './app-components/agency/service/service-fo
     ReactiveFormsModule,
   ],
   entryComponents: [DeleteMsgComponent, AboutDialogComponent],
-  providers: [PortfolioService, FirebaseAgencyWebSiteService, MatDatepickerModule],
+  providers: [PortfolioService, FirebaseAgencyWebSiteService, MatDatepickerModule, UploadService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
