@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 import { AboutImage } from 'src/model/aboutImage';
 import { About } from 'src/model/about';
@@ -26,6 +26,7 @@ export class AboutDialogComponent implements OnInit {
     aboutHeadline: string;
     aboutDescription: string;
     aboutImageId: string;
+    uploadResult: any;
 
 
     constructor(
@@ -47,19 +48,26 @@ export class AboutDialogComponent implements OnInit {
             alert('Please select a file before uploading.');
         } else {
 
-            const formData: FormData = new FormData();
-            formData.append('aboutId', this.aboutItem._id);
-            formData.append('imageName', this.aboutItem.headline);
+            const formData: FormData = this.addFormData();
 
-            this.fileUploadService.postFile(this.fileToUpload, formData, endpointUpload)
+            this.fileUploadService.postFile(formData, endpointUpload)
                 .subscribe(data => {
                     alert(data.message);
+                    this.uploadResult = data;
                     this.close();
                     this.router.navigate(['/about-view']);
                 }, error => {
                     console.log(error);
                 });
         }
+    }
+
+    private addFormData() {
+        const formData: FormData = new FormData();
+        formData.append('aboutId', this.aboutItem._id);
+        formData.append('imageName', this.aboutItem.headline);
+        formData.append('fileKey', this.fileToUpload, this.fileToUpload.name);
+        return formData;
     }
 
     private handleFileInput(files: FileList) {
@@ -98,7 +106,7 @@ export class AboutDialogComponent implements OnInit {
     }
 
     private close() {
-        this.dialogRef.close();
+        this.dialogRef.close( this.uploadResult );
     }
 
     ngOnInit() {

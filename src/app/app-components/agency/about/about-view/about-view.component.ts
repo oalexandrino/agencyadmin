@@ -7,7 +7,6 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 import { AboutDialogComponent } from '../about-dialog/AboutDialogComponent';
 
-
 @Component({
   selector: 'app-about-view',
   templateUrl: './about-view.component.html',
@@ -72,9 +71,16 @@ export class AboutViewComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.data = { aboutId };
     const dialogRef = this.dialog.open(AboutDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      val => console.log('Dialog output:', val)
-    );
+    this.setSrcImageForTheUpdatedItem(dialogRef);
+
+  }
+
+  private setSrcImageForTheUpdatedItem(dialogRef) {
+
+    dialogRef.afterClosed().subscribe(data => {
+      const elementId = 'img_' + data.aboutId;
+      (window.document.getElementById(elementId) as HTMLImageElement).src = data.cloudImage;
+    });
 
   }
 

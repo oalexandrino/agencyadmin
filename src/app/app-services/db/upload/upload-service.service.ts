@@ -18,9 +18,7 @@ export class UploadService {
 
   constructor(public httpClient: HttpClient) { }
 
-  public postFile(fileToUpload: File, formData: FormData, endpoint): Observable<any> {
-
-    formData.append('fileKey', fileToUpload, fileToUpload.name);
+  public postFile(formData: FormData, endpoint): Observable<any> {
 
     return this.httpClient
       .post(endpoint, formData).pipe(

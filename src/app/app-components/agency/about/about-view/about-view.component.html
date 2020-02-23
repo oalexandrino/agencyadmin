@@ -25,7 +25,7 @@
           <th scope="row">{{about.date}}</th>
           <td> {{about.headline}}</td>
           <td> {{about.description}}</td>
-          <td> <img src="{{aboutImages[about._id]}}" class="rounded-circle img-fluid" width="80px"></td>
+          <td> <img src="{{aboutImages[about._id]}}" id="img_{{about._id}}" class="rounded-circle img-fluid" width="80px"></td>
           <td>
             <button mat-raised-button class="submit-button" color="primary" type="submit" (click)="openDialog(about._id)"
             title="Edit '{{about.description}}'">Change image</button></td>
