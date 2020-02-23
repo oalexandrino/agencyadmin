@@ -70,7 +70,7 @@ export class AboutViewComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = { aboutId: aboutId };
+    dialogConfig.data = { aboutId };
     const dialogRef = this.dialog.open(AboutDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       val => console.log('Dialog output:', val)
