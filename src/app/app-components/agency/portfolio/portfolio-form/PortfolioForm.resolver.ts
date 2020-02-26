@@ -19,6 +19,6 @@ export class PortfolioFormResolver implements Resolve<any> {
           resolve(data);
         }
       );
-    })
+    });
   }
 }

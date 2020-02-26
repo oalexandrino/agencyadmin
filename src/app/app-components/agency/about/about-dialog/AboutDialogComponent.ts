@@ -43,7 +43,7 @@ export class AboutDialogComponent implements OnInit {
 
     }
 
-    private upload() {
+    public upload() {
         if (!this.fileToUpload) {
             alert('Please select a file before uploading.');
         } else {
@@ -70,7 +70,7 @@ export class AboutDialogComponent implements OnInit {
         return formData;
     }
 
-    private handleFileInput(files: FileList) {
+    public handleFileInput(files: FileList) {
         this.fileToUpload = files.item(0);
     }
 
@@ -105,7 +105,7 @@ export class AboutDialogComponent implements OnInit {
         this.aboutImageId = this.aboutImageItem.imageId;
     }
 
-    private close() {
+    public close() {
         this.dialogRef.close( this.uploadResult );
     }
 

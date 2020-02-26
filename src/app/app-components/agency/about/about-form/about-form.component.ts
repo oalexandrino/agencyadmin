@@ -1,31 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/lib/util/format-datepicker';
 
 @Component({
-  selector: 'app-service-form',
-  templateUrl: './service-form.component.html',
-  styleUrls: ['./service-form.component.scss']
+  selector: 'app-about-form',
+  templateUrl: './about-form.component.html',
+  styleUrls: ['./about-form.component.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: AppDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
+  ]
 })
-export class ServiceFormComponent implements OnInit {
+export class AboutFormComponent implements OnInit {
 
-  public serviceForm: FormGroup;
-  serviceData: any;
+  public documentForm: FormGroup;
+  aboutData: any;
   isNew = true;
   message = 'Please provide data';
   showMessage = false;
 
   validationMessages = {
-    title: [
-      { type: 'required', message: 'Title is required.' }
+    headline: [
+      { type: 'required', message: 'Headline is required.' }
     ],
     description: [
       { type: 'required', message: 'Description is required.' }
     ]
     ,
-    fontawesomeIcon: [
+    date: [
       { type: 'required', message: 'Font awesome Icon is required.' }
     ]
   };
@@ -50,28 +55,28 @@ export class ServiceFormComponent implements OnInit {
   }
 
   private createForm() {
-    this.serviceForm = this.formBuilder.group({
-      title: ['', Validators.required],
+    this.documentForm = this.formBuilder.group({
+      headline: ['', Validators.required],
       description: ['', Validators.required],
-      fontawesomeIcon: ['', Validators.required],
+      date: ['', Validators.required],
     });
   }
 
   private createFormWithData() {
-    this.serviceForm = this.formBuilder.group({
-      title: [this.serviceData.title, Validators.required],
-      description: [this.serviceData.description, Validators.required],
-      fontawesomeIcon: [this.serviceData.fontawesomeIcon, Validators.required],
+    this.documentForm = this.formBuilder.group({
+      headline: [this.aboutData.headline, Validators.required],
+      description: [this.aboutData.description, Validators.required],
+      date: [this.aboutData.date, Validators.required],
     });
   }
 
   private subscribeData() {
     this.route.data.subscribe(routeData => {
-      const serviceData = routeData.service;
-      if (serviceData) {
+      const aboutData = routeData.about;
+      if (aboutData) {
         this.isNew = false;
-        this.serviceData = serviceData;
-        this.serviceData.id = serviceData.id;
+        this.aboutData = aboutData;
+        this.aboutData.id = aboutData.id;
         this.createFormWithData();
       } else {
         this.isNew = true;
@@ -83,17 +88,17 @@ export class ServiceFormComponent implements OnInit {
   private insert(value: any) {
 
     const insertOptions = {
-      title: value.title,
+      headline: value.headline,
       description: value.description,
-      fontawesomeIcon: value.fontawesomeIcon
+      date: value.date
     };
 
-    this.mongoAgencyWebSiteService.insert('service', insertOptions)
+    this.mongoAgencyWebSiteService.insert('about', insertOptions)
       .subscribe(data => {
         this.showMessage = true;
-        this.message = data.message + ' Redirecting to the service listing...';
+        this.message = data.message + ' Redirecting to the about listing...';
         setTimeout(() => {
-          this.router.navigate(['service-view']);
+          this.router.navigate(['about-view']);
         }, 2000);  // 2s
 
       }, err => {
@@ -104,18 +109,18 @@ export class ServiceFormComponent implements OnInit {
   private update(value: any) {
 
     const updateOptions = {
-      id: this.serviceData._id,
-      title: value.title,
+      id: this.aboutData._id,
+      headline: value.headline,
       description: value.description,
-      fontawesomeIcon: value.fontawesomeIcon
+      date: value.date
     };
 
-    this.mongoAgencyWebSiteService.update('service', updateOptions)
+    this.mongoAgencyWebSiteService.update('about', updateOptions)
       .subscribe(data => {
         this.showMessage = true;
-        this.message = data.message + ' Redirecting to the service listing...';
+        this.message = data.message + ' Redirecting to the about listing...';
         setTimeout(() => {
-          this.router.navigate(['service-view']);
+          this.router.navigate(['about-view']);
         }, 2000);  // 2s
 
       }, err => {
@@ -129,6 +134,6 @@ export class ServiceFormComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/service-view']);
+    this.router.navigate(['/about-view']);
   }
 }

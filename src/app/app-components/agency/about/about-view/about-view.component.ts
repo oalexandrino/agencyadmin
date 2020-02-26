@@ -61,7 +61,7 @@ export class AboutViewComponent implements OnInit {
   }
 
   viewDetails(value: any) {
-
+   this.router.navigate(['/about-view/' + value]);
   }
 
   openDialog(aboutId) {

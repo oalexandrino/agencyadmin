@@ -1,3 +1,4 @@
+import { AboutFormComponent } from './app-components/agency/about/about-form/about-form.component';
 import { ServiceFormResolver } from './app-components/agency/service/service-form/ServiceForm.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -8,14 +9,17 @@ import { PortfolioViewComponent } from './app-components/agency/portfolio/portfo
 import { ServiceViewComponent } from './app-components/agency/service/service-view/service-view.component';
 import { ServiceFormComponent } from './app-components/agency/service/service-form/service-form.component';
 import { AboutViewComponent } from './app-components/agency/about/about-view/about-view.component';
+import { AboutFormResolver } from './app-components/agency/about/about-form/AboutForm.resolver';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'portfolio-new', component: PortfolioFormComponent },
   { path: 'portfolio-view', component: PortfolioViewComponent },
   { path: 'portfolio-view/:id', component: PortfolioFormComponent, resolve: {portfolio : PortfolioFormResolver} },
-  { path: 'portfolio-new', component: PortfolioFormComponent },
+  { path: 'about-new', component: AboutFormComponent },
   { path: 'about-view', component: AboutViewComponent },
+  { path: 'about-view/:id', component: AboutFormComponent, resolve: { about: AboutFormResolver } },
   { path: 'service-new', component: ServiceFormComponent },
   { path: 'service-view', component: ServiceViewComponent },
   { path: 'service-view/:id', component: ServiceFormComponent, resolve: { service: ServiceFormResolver } },

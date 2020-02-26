@@ -6,15 +6,15 @@ import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAg
 @Injectable({
     providedIn: 'root'
 })
-export class ServiceFormResolver implements Resolve<any> {
+export class AboutFormResolver implements Resolve<any> {
 
     constructor(public http: HttpClient, public mongoAgencyWebSiteService: MongoAgencyWebSiteService, ) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
         return new Promise((resolve) => {
-            const serviceId = route.paramMap.get('id');
-            this.mongoAgencyWebSiteService.getCollectionItem('service', serviceId)
+            const aboutId = route.paramMap.get('id');
+            this.mongoAgencyWebSiteService.getCollectionItem('about', aboutId)
                 .subscribe(data => {
                     resolve(data);
                 }, err => { console.log(err); });

@@ -22,7 +22,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let about of aboutItems; let index = index" [attr.id]="about._id">
-          <th scope="row">{{about.date}}</th>
+          <th scope="row">{{about.date | date:'dd/MM/yyyy'}}</th>
           <td> {{about.headline}}</td>
           <td> {{about.description}}</td>
           <td> <img src="{{aboutImages[about._id]}}" id="img_{{about._id}}" class="rounded-circle img-fluid" width="80px"></td>

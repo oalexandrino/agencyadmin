@@ -60,6 +60,7 @@ import { PortfolioService } from './app-services/db/firebase/portfolio/portfolio
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FirebaseAgencyWebSiteService } from './app-services/db/firebase/FirebaseAgencyWebSiteService.service';
 import { ServiceFormComponent } from './app-components/agency/service/service-form/service-form.component';
+import { AboutFormComponent } from './app-components/agency/about/about-form/about-form.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { ServiceFormComponent } from './app-components/agency/service/service-fo
     CardAgencywebsiteItemsComponent,
     DeleteMsgComponent,
     ServiceFormComponent,
+    AboutFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -118,7 +120,12 @@ import { ServiceFormComponent } from './app-components/agency/service/service-fo
     ReactiveFormsModule,
   ],
   entryComponents: [DeleteMsgComponent, AboutDialogComponent],
-  providers: [PortfolioService, FirebaseAgencyWebSiteService, MatDatepickerModule, UploadService],
+  providers: [
+    PortfolioService,
+    FirebaseAgencyWebSiteService,
+    MatDatepickerModule,
+    UploadService
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
