@@ -24,7 +24,7 @@
           <mat-accordion>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
-                <mat-panel-title>Basic information</mat-panel-title>
+                <mat-panel-title>About item information</mat-panel-title>
               </mat-expansion-panel-header>
               <div class="form-group">
                 <mat-form-field class="input-style">
@@ -32,7 +32,7 @@
                 </mat-form-field>
                 <ng-container *ngFor="let validation of validationMessages.headline">
                   <mat-error *ngIf="documentForm.get('headline').hasError(validation.type) && (documentForm.get('headline').dirty
-                        || documentForm.get('title').touched)">
+                        || documentForm.get('headline').touched)">
                     {{validation.message}}</mat-error>
                 </ng-container>
               </div>
@@ -49,7 +49,7 @@
               <div class="form-group">
                 <mat-form-field class="input-style">
                   <input matInput [matDatepicker]="picker" class="form-control" formControlName="date"
-                    placeholder="Available date">
+                    placeholder="Date">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-md-4" *ngIf="!isNew">
                   <button mat-raised-button class="delete-button" color="warn" type="button"
-                    (click)="delete()">Delete</button>
+                    (click)="delete(id)">Delete</button>
                 </div>
                 <div class="col-md-4">
                   <button mat-raised-button class="btn btn-secondary" type="button" (click)="cancel()">Go to about

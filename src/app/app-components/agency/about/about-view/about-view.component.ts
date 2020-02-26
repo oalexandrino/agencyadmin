@@ -61,7 +61,7 @@ export class AboutViewComponent implements OnInit {
   }
 
   viewDetails(value: any) {
-   this.router.navigate(['/about-view/' + value]);
+    this.router.navigate(['/about-view/' + value]);
   }
 
   openDialog(aboutId) {
@@ -85,6 +85,48 @@ export class AboutViewComponent implements OnInit {
   }
 
   deleteItem(documentId: any) {
+    if (confirm('Are you sure you want do delete this item?')) {
+      this.loading = true;
+      const deleteOptions = {
+        id: documentId
+      };
+      this.promiseToDelete(deleteOptions).then(() => {
+        this.deleteRow(documentId);
+        this.showMessage = true;
+        setTimeout(() => {
+          this.showMessage = false;
+        }, 1500);
+      });
+    }
+  }
+
+  deleteRow(d) {
+    const index = this.aboutItems.indexOf(d);
+    this.aboutItems.splice(index, 1);
+  }
+
+  promiseToDelete(deleteOptions: any) {
+
+    return new Promise((onResolve, onReject) => {
+      this.mongoAgencyWebSiteService.delete('about', deleteOptions)
+        .toPromise()
+        .then(
+          response => {
+            this.loading = false;
+            this.showMessage = true;
+            this.message = response.message;
+            console.log(response.message);
+            onResolve();
+          },
+          message => {
+            onReject(message);
+          }
+        ).catch(function (err) {
+          console.error(err);
+        });
+
+    });
 
   }
+
 }

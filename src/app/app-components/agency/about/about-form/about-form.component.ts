@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/lib/util/format-datepicker';
@@ -19,8 +19,10 @@ export class AboutFormComponent implements OnInit {
   public documentForm: FormGroup;
   aboutData: any;
   isNew = true;
+  loading = false;
   message = 'Please provide data';
   showMessage = false;
+  id: string;
 
   validationMessages = {
     headline: [
@@ -36,13 +38,17 @@ export class AboutFormComponent implements OnInit {
   };
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id');
     this.subscribeData();
   }
 
@@ -129,8 +135,45 @@ export class AboutFormComponent implements OnInit {
 
   }
 
-  delete() {
-    throw new Error('Method not implemented.');
+  delete(documentId: any) {
+    if (confirm('Are you sure you want do delete this item?')) {
+      this.loading = true;
+      const deleteOptions = {
+        id: documentId
+      };
+      this.promiseToDelete(deleteOptions).then(() => {
+        this.showMessage = true;
+        this.message = this.message + ' Redirecting to the about listing...';
+        setTimeout(() => {
+          this.router.navigate(['about-view']);
+        }, 2000);  // 2s
+      });
+    }
+  }
+
+  promiseToDelete(deleteOptions: any) {
+
+    return new Promise((onResolve, onReject) => {
+      this.mongoAgencyWebSiteService.delete('about', deleteOptions)
+        .toPromise()
+        .then(
+          response => {
+            this.loading = false;
+            this.showMessage = true;
+            this.message = response.message;
+            console.log(response.message);
+            onResolve();
+          },
+          message => {
+            onReject(message);
+          }
+        ).catch(function (err) {
+          alert(err);
+          console.error(err);
+        });
+
+    });
+
   }
 
   cancel() {
