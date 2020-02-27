@@ -59,6 +59,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { FirebaseAgencyWebSiteService } from './app-services/db/firebase/FirebaseAgencyWebSiteService.service';
 import { ServiceFormComponent } from './app-components/agency/service/service-form/service-form.component';
 import { AboutFormComponent } from './app-components/agency/about/about-form/about-form.component';
+import { TeamDialogComponent } from './app-components/agency/team/team-dialog/team-dialog.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { AboutFormComponent } from './app-components/agency/about/about-form/abo
     DeleteMsgComponent,
     ServiceFormComponent,
     AboutFormComponent,
+    TeamDialogComponent,
   ],
   imports: [
     BrowserModule,
