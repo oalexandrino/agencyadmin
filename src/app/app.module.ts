@@ -37,9 +37,7 @@ import {
 import { PortfolioViewComponent } from './app-components/agency/portfolio/portfolio-view/portfolio-view.component';
 import { PortfolioFormComponent } from './app-components/agency/portfolio/portfolio-form/portfolio-form.component';
 import { ServiceViewComponent } from './app-components/agency/service/service-view/service-view.component';
-import { TeamEditComponent } from './app-components/agency/team/team-edit/team-edit.component';
 import { TeamViewComponent } from './app-components/agency/team/team-view/team-view.component';
-import { TeamNewComponent } from './app-components/agency/team/team-new/team-new.component';
 import { AboutViewComponent } from './app-components/agency/about/about-view/about-view.component';
 import { AboutDialogComponent } from './app-components/agency/about/about-dialog/AboutDialogComponent';
 import { SettingsEditComponent } from './app-components/agency/settings/settings-edit/settings-edit.component';
@@ -67,9 +65,7 @@ import { AboutFormComponent } from './app-components/agency/about/about-form/abo
     AppComponent,
     PortfolioViewComponent,
     ServiceViewComponent,
-    TeamEditComponent,
     TeamViewComponent,
-    TeamNewComponent,
     AboutViewComponent,
     AboutDialogComponent,
     SettingsEditComponent,

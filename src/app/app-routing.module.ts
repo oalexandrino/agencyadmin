@@ -10,6 +10,7 @@ import { ServiceViewComponent } from './app-components/agency/service/service-vi
 import { ServiceFormComponent } from './app-components/agency/service/service-form/service-form.component';
 import { AboutViewComponent } from './app-components/agency/about/about-view/about-view.component';
 import { AboutFormResolver } from './app-components/agency/about/about-form/AboutForm.resolver';
+import { TeamViewComponent } from './app-components/agency/team/team-view/team-view.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'portfolio-new', component: PortfolioFormComponent },
   { path: 'portfolio-view', component: PortfolioViewComponent },
   { path: 'portfolio-view/:id', component: PortfolioFormComponent, resolve: {portfolio : PortfolioFormResolver} },
+  { path: 'team-members-view', component: TeamViewComponent },
   { path: 'about-new', component: AboutFormComponent },
   { path: 'about-view', component: AboutViewComponent },
   { path: 'about-view/:id', component: AboutFormComponent, resolve: { about: AboutFormResolver } },
