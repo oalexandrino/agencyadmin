@@ -1,54 +1,64 @@
 <div class="content-page">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Team members listing</li>
-        <li class="breadcrumb-item active" aria-current="page"><a routerLink="/member-new">Add a new team member</a></li>
-      </ol>
-    </nav>
-    <div class="page-content">
-      <div *ngIf="loading" class="alert alert-success" role="alert">Processing</div>
-      <div *ngIf="showMessage" class="alert alert-info" role="alert">{{message}}</div>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col" class="text-center">Name</th>
-            <th scope="col" class="text-center">E-mail</th>
-            <th scope="col" class="text-center">Role</th>
-            <th scope="col" class="text-center">Twitter</th>
-            <th scope="col" class="text-center">Facebook</th>
-            <th scope="col" class="text-center">Linkedin</th>
-            <th scope="col" class="text-center">Image member</th>
-            <th scope="col" class="text-center">Change image</th>
-            <th scope="colgroup" colspan="2" class="text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let member of teamMembers; let index = index" [attr.id]="member.email">
-            <th scope="row">{{member.name}}</th>
-            <td> <div class="trim-info" tooltip="{{member.email}}">{{member.email}}</div></td>
-            <td>
-              <div class="trim-info" tooltip="{{member.role}}">{{member.role}}</div>
-            </td>
-            <td>
-              <div class="trim-info" tooltip="{{member.twitter}}">{{member.twitter}}</div>
-            </td>
-            <td>
-              <div class="trim-info" tooltip="{{member.facebook}}">{{member.facebook}}</div>
-            </td>
-            <td>
-              <div class="trim-info" tooltip="{{member.linkedin}}">{{member.linkedin}}</div>
-            </td>
-            <td> <img src="{{teamMembersImages[member.email]}}" id="img_{{member.email}}" class="rounded-circle img-fluid" width="80px"></td>
-            <td>
-              <button mat-raised-button class="submit-button" color="primary" type="submit" (click)="openDialog(member.email)"
-              title="Edit '{{member.name}}'">Change image</button></td>
-            <td><button mat-raised-button class="submit-button" color="primary" type="submit"
-                (click)="viewDetails(member.email)" title="Edit '{{member.name}}'">Edit</button></td>
-            <td><button mat-raised-button class="submit-button" class="delete-button" color="warn"
-                (click)="deleteItem(member.email)" title="Delete '{{member.name}}'">Delete</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Team members listing</li>
+      <li class="breadcrumb-item active" aria-current="page"><a routerLink="/member-new">Add a new team member</a></li>
+    </ol>
+  </nav>
+  <div class="page-content">
+    <div *ngIf="loading" class="alert alert-success" role="alert">Processing</div>
+    <div *ngIf="showMessage" class="alert alert-info" role="alert">{{message}}</div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">Name</th>
+          <th scope="col" class="text-center">E-mail</th>
+          <th scope="col" class="text-center">Role</th>
+          <th scope="col" class="text-center">Twitter</th>
+          <th scope="col" class="text-center">Facebook</th>
+          <th scope="col" class="text-center">Linkedin</th>
+          <th scope="col" class="text-center">Image member</th>
+          <th scope="col" class="text-center">Change image</th>
+          <th scope="colgroup" colspan="2" class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let member of teamMembers; let index = index" [attr.id]="member.email">
+          <th scope="row">{{member.name}}</th>
+          <td>
+            <div class="trim-info" tooltip="{{member.email}}">{{member.email}}</div>
+          </td>
+          <td>
+            <div class="trim-info" tooltip="{{member.role}}">{{member.role}}</div>
+          </td>
+          <td>
+            <div class="trim-info" tooltip="{{member.twitter}}">{{member.twitter}}</div>
+          </td>
+          <td>
+            <div class="trim-info" tooltip="{{member.facebook}}">{{member.facebook}}</div>
+          </td>
+          <td>
+            <div class="trim-info" tooltip="{{member.linkedin}}">{{member.linkedin}}</div>
+          </td>
+          <td>
+              <img src="{{teamMembersImages[member.email]}}" id="img_{{member.email}}" title="{{member.name}}" class="rounded-circle img-fluid"
+              width="80px">
+          </td>
+          <td> 
+              <button mat-raised-button class="submit-button" color="primary" type="submit"
+              (click)="openDialog(member.email)" title="Edit {{member.name}}'s image">Change image</button>
+          </td>
+          <td>
+              <button mat-raised-button class="submit-button" color="primary" type="submit"
+              (click)="viewDetails(member.email)" title="Edit '{{member.name}}'">Edit</button>
+          </td>
+          <td>
+              <button mat-raised-button class="submit-button" class="delete-button" color="warn"
+              (click)="deleteItem(member.email)" title="Delete '{{member.name}}'">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
