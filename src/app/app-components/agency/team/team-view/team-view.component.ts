@@ -1,11 +1,11 @@
-import { team } from 'src/model/team';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 import { Router } from '@angular/router';
+import { TeamDialogComponent } from '../team-dialog/team-dialog.component';
+import { TeamMember } from 'src/model/teamMember';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
-import { TeamDialogComponent } from '../team-dialog/team-dialog.component';
 
 @Component({
   selector: 'app-team-view',
@@ -14,7 +14,7 @@ import { TeamDialogComponent } from '../team-dialog/team-dialog.component';
 })
 export class TeamViewComponent implements OnInit {
 
-  teamMembers: team[];
+  teamMembers: TeamMember[];
   teamMembersImages: any[];
   loading = false;
   showMessage = false;
@@ -53,7 +53,7 @@ export class TeamViewComponent implements OnInit {
       .subscribe(data => {
         // property services comes to the endpoint
         // tslint:disable-next-line: no-string-literal
-        this.teamMembers = data['team'][0]["members"];
+        this.teamMembers = data['team'][0]['members'];
         console.log(this.teamMembers);
       }, err => {
         this.showMessage = true;
@@ -131,4 +131,3 @@ export class TeamViewComponent implements OnInit {
   }
 
 }
-

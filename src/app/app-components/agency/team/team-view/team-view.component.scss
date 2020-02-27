@@ -1,16 +1,13 @@
-.filter-by-price {
-    color: #6c757d;
-    font-size: 20px;
 
-    .title {
-      align-self: center;
-    }
-
-    .age-price {
-      width: 100%;
-      font-size: 20px;
-    }
-  }
+   .trim-info {
+     max-width: 50px;
+     display: inline-block;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+     line-height: 15px;
+     position: relative;
+   }
 
   .items-list {
     padding: 20px 20px;

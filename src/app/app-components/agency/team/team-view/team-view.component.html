@@ -26,11 +26,19 @@
         <tbody>
           <tr *ngFor="let member of teamMembers; let index = index" [attr.id]="member.email">
             <th scope="row">{{member.name}}</th>
-            <td> {{member.email}}</td>
-            <td> {{member.role}}</td>
-            <td> {{member.twitter}}</td>
-            <td> {{member.facebook}}</td>
-            <td> {{member.linkedin}}</td>
+            <td> <div class="trim-info" tooltip="{{member.email}}">{{member.email}}</div></td>
+            <td>
+              <div class="trim-info" tooltip="{{member.role}}">{{member.role}}</div>
+            </td>
+            <td>
+              <div class="trim-info" tooltip="{{member.twitter}}">{{member.twitter}}</div>
+            </td>
+            <td>
+              <div class="trim-info" tooltip="{{member.facebook}}">{{member.facebook}}</div>
+            </td>
+            <td>
+              <div class="trim-info" tooltip="{{member.linkedin}}">{{member.linkedin}}</div>
+            </td>
             <td> <img src="{{teamMembersImages[member.email]}}" id="img_{{member.email}}" class="rounded-circle img-fluid" width="80px"></td>
             <td>
               <button mat-raised-button class="submit-button" color="primary" type="submit" (click)="openDialog(member.email)"
