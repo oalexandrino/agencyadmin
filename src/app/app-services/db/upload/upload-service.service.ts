@@ -31,11 +31,10 @@ export class UploadService {
   private handleError(operation: string, endpoint: string) {
 
     return (err: any) => {
-      const errMsg = `Error at performing "${operation}()" in "UploadService" when reaching from "${endpoint}".`;
-      console.log(`${errMsg}:`, err)
+      const errMsg = `Error at performing "${operation}()" in "UploadService" when reaching from "${endpoint}". Error detail: ${err.message}`;
+      console.error(`${errMsg}:`, err)
       if (err instanceof HttpErrorResponse) {
-
-        console.log(`status: ${err.status}, ${err.statusText}`);
+        console.error(`status: ${err.status}, ${err.statusText}`);
       }
       return Observable.throwError(errMsg);
     };

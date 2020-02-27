@@ -20,6 +20,11 @@
 
   <div class="form-group">
     <form [formGroup]="aboutForm">
+      <div class="row" *ngIf="showError">
+        <div class="col-sm">
+          <div class="alert alert-warning" role="alert">{{errorMessage}}</div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-sm">
           <p class="display-7">Choose File</p>
@@ -43,5 +48,5 @@
       </div>
     </mat-dialog-actions>
   </div>
-  
+
 </div>

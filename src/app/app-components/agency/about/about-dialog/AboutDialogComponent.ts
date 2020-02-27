@@ -27,6 +27,8 @@ export class AboutDialogComponent implements OnInit {
     aboutDescription: string;
     aboutImageId: string;
     uploadResult: any;
+    errorMessage;
+    showError: boolean;
 
 
     constructor(
@@ -57,6 +59,8 @@ export class AboutDialogComponent implements OnInit {
                     this.close();
                     this.router.navigate(['/about-view']);
                 }, error => {
+                    this.showError = true;
+                    this.errorMessage = error;
                     console.log(error);
                 });
         }
