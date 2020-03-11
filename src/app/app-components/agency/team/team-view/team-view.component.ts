@@ -65,12 +65,12 @@ export class TeamViewComponent implements OnInit {
     this.router.navigate(['/team-view/' + value]);
   }
 
-  openDialog(teamEmail) {
+  openDialog(email) {
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = { teamEmail };
+    dialogConfig.data = { email };
     const dialogRef = this.dialog.open(TeamDialogComponent, dialogConfig);
     this.setSrcImageForTheUpdatedItem(dialogRef);
 

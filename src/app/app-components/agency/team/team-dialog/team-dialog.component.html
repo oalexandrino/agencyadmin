@@ -1,1 +1,52 @@
-<p>team-dialog works!</p>
+<div class="page-content">
+  <h1 class="display-7">Update image</h1>
+  <div class="jumbotron jumbotron-fluid overflow-auto">
+    <div class="container">
+      <mat-dialog-content class="mat-typography">
+        <div class="row">
+          <div class="col-sm col-3">
+            <p class="lead align-middle justify-content-center">{{teamMemberName}}</p>
+            <div class="column align-middle justify-content-center">{{teamMemberRole}}</div>
+          </div>
+          <div class="col-sm col-3">
+            <img *ngIf="imageLoaded" src="{{teamImageItem.cloudImage}}"
+              class="rounded-circle img-fluid about aboutImage">
+          </div>
+        </div>
+      </mat-dialog-content>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <form [formGroup]="teamForm">
+      <div class="row" *ngIf="showError">
+        <div class="col-sm">
+          <div class="alert alert-warning" role="alert">{{errorMessage}}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <p class="display-7">Choose File</p>
+        </div>
+        <div class="col-sm">
+          <input type="file" id="file" class="form-control-file" (change)="handleFileInput($event.target.files)">
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="row d-flex justify-content-center">
+    <mat-dialog-actions>
+      <div class="row">
+        <div class="col-sm">
+          <button mat-raised-button class="submit-button" color="primary" (click)="upload()">Upload</button>
+        </div>
+        <div class="col-sm">
+          <button class="mat-raised-button" (click)="close()">Close</button>
+        </div>
+      </div>
+    </mat-dialog-actions>
+  </div>
+
+</div>

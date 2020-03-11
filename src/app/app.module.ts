@@ -117,7 +117,7 @@ import { TeamDialogComponent } from './app-components/agency/team/team-dialog/te
     FormsModule,
     ReactiveFormsModule,
   ],
-  entryComponents: [DeleteMsgComponent, AboutDialogComponent],
+  entryComponents: [DeleteMsgComponent, AboutDialogComponent, TeamDialogComponent],
   providers: [
     PortfolioService,
     FirebaseAgencyWebSiteService,
