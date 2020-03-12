@@ -92,7 +92,7 @@ export class TeamDialogComponent implements OnInit {
 
   private getTeamMemberItem() {
     return new Promise((resolve, reject) => {
-      this.mongoAgencyWebSiteService.getCollectionItem('team', this.email)
+      this.mongoAgencyWebSiteService.getCollectionItem('team/members', this.email)
         .subscribe(data => {
           console.log(data);
           this.bindTeamMemberItemData(data);
@@ -102,14 +102,19 @@ export class TeamDialogComponent implements OnInit {
   }
 
   private bindTeamMemberItemData(data: any) {
-    this.teamMember = data;
+
+    this.teamMember = data[0].members[0];
     this.teamMemberName = this.teamMember.name;
     this.teamMemberRole = this.teamMember.role;
     this.teamImageId = this.teamImageItem.imageId;
   }
 
   public close() {
-    this.dialogRef.close(this.uploadResult);
+    if (this.uploadResult) {
+      this.dialogRef.close(this.uploadResult);
+    } else {
+      this.dialogRef.close();
+    }
   }
 
   ngOnInit() {

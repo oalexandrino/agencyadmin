@@ -62,7 +62,7 @@ export class TeamViewComponent implements OnInit {
   }
 
   viewDetails(value: any) {
-    this.router.navigate(['/team-view/' + value]);
+    this.router.navigate(['/team-members-view/' + value]);
   }
 
   openDialog(email) {
@@ -79,8 +79,11 @@ export class TeamViewComponent implements OnInit {
   private setSrcImageForTheUpdatedItem(dialogRef) {
 
     dialogRef.afterClosed().subscribe(data => {
-      const elementId = 'img_' + data.teamEmail;
-      (window.document.getElementById(elementId) as HTMLImageElement).src = data.cloudImage;
+      if (data) {
+        const elementId = 'img_' + data.email;
+        (window.document.getElementById(elementId) as HTMLImageElement).src = data.cloudImage;
+      }
+
     });
 
   }

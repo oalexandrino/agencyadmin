@@ -60,6 +60,7 @@ import { FirebaseAgencyWebSiteService } from './app-services/db/firebase/Firebas
 import { ServiceFormComponent } from './app-components/agency/service/service-form/service-form.component';
 import { AboutFormComponent } from './app-components/agency/about/about-form/about-form.component';
 import { TeamDialogComponent } from './app-components/agency/team/team-dialog/team-dialog.component';
+import { TeamFormComponent } from './app-components/agency/team/team-form/team-form.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { TeamDialogComponent } from './app-components/agency/team/team-dialog/te
     ServiceFormComponent,
     AboutFormComponent,
     TeamDialogComponent,
+    TeamFormComponent,
   ],
   imports: [
     BrowserModule,
