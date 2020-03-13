@@ -19,6 +19,9 @@ export class TeamFormComponent implements OnInit {
   email: string;
 
   validationMessages = {
+    email: [
+      { type: 'required', message: 'E-mail is required.' }
+    ],
     name: [
       { type: 'required', message: 'name is required.' }
     ],
@@ -63,6 +66,7 @@ export class TeamFormComponent implements OnInit {
 
   private createForm() {
     this.documentForm = this.formBuilder.group({
+      email: ['', Validators.required],
       name: ['', Validators.required],
       role: ['', Validators.required],
       twitter: ['', Validators.required],
@@ -74,11 +78,12 @@ export class TeamFormComponent implements OnInit {
 
   private createFormWithData() {
     this.documentForm = this.formBuilder.group({
+      email: [this.teamMemberData.email, Validators.required],
       name: [this.teamMemberData.name, Validators.required],
       role: [this.teamMemberData.role, Validators.required],
       twitter: [this.teamMemberData.twitter, Validators.required],
-      facebook: [this.teamMemberData.twitter, Validators.required],
-      linkedin: [this.teamMemberData.twitter, Validators.required],
+      facebook: [this.teamMemberData.facebook, Validators.required],
+      linkedin: [this.teamMemberData.linkedin, Validators.required],
     });
   }
 
@@ -101,6 +106,7 @@ export class TeamFormComponent implements OnInit {
   private insert(value: any) {
 
     const insertOptions = {
+      email: value.email,
       name: value.name,
       role: value.role,
       twitter: value.twitter,
@@ -124,16 +130,19 @@ export class TeamFormComponent implements OnInit {
   private update(value: any) {
 
     const updateOptions = {
-      id: this.teamMemberData._id,
+      id: this.teamMemberData.email,
+      email: this.teamMemberData.email,
       name: value.name,
       role: value.role,
-      twitter: value.twitter
+      twitter: value.twitter,
+      facebook: value.facebook,
+      linkedin: value.linkedin,
     };
 
-    this.mongoAgencyWebSiteService.update('about', updateOptions)
+    this.mongoAgencyWebSiteService.update('/team/members/', updateOptions)
       .subscribe(data => {
         this.showMessage = true;
-        this.message = data.message + ' Redirecting to the about listing...';
+        this.message = data.message + ' Redirecting to the team member listing...';
         setTimeout(() => {
           this.router.navigate(['team-members-view']);
         }, 2000);  // 2s
