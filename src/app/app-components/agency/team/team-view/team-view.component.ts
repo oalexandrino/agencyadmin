@@ -88,14 +88,14 @@ export class TeamViewComponent implements OnInit {
 
   }
 
-  deleteItem(documentId: any) {
+  deleteItem(email: any) {
     if (confirm('Are you sure you want to remove this member?')) {
       this.loading = true;
       const deleteOptions = {
-        id: documentId
+        id: email
       };
       this.promiseToDelete(deleteOptions).then(() => {
-        this.deleteRow(documentId);
+        this.deleteRow(email);
         this.showMessage = true;
         setTimeout(() => {
           this.showMessage = false;
@@ -112,7 +112,7 @@ export class TeamViewComponent implements OnInit {
   promiseToDelete(deleteOptions: any) {
 
     return new Promise((onResolve, onReject) => {
-      this.mongoAgencyWebSiteService.delete('team', deleteOptions)
+      this.mongoAgencyWebSiteService.delete('team/members', deleteOptions)
         .toPromise()
         .then(
           response => {

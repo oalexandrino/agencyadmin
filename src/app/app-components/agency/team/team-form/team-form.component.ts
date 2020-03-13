@@ -23,10 +23,10 @@ export class TeamFormComponent implements OnInit {
       { type: 'required', message: 'E-mail is required.' }
     ],
     name: [
-      { type: 'required', message: 'name is required.' }
+      { type: 'required', message: 'Name is required.' }
     ],
     role: [
-      { type: 'required', message: 'role is required.' }
+      { type: 'required', message: 'Role is required.' }
     ]
     ,
     twitter: [
@@ -90,7 +90,12 @@ export class TeamFormComponent implements OnInit {
   private subscribeData() {
     this.route.data.subscribe(routeData => {
 
-      const teamMemberData = routeData.teamMember[0].members[0];
+      var teamMemberData;
+
+      if (routeData.teamMember) {
+        teamMemberData = routeData.teamMember[0].members[0];
+      }
+
       if (teamMemberData) {
         this.isNew = false;
         this.teamMemberData = teamMemberData;
@@ -106,6 +111,7 @@ export class TeamFormComponent implements OnInit {
   private insert(value: any) {
 
     const insertOptions = {
+      id: value.email,
       email: value.email,
       name: value.name,
       role: value.role,
@@ -114,7 +120,7 @@ export class TeamFormComponent implements OnInit {
       linkedin: value.linkedin
     };
 
-    this.mongoAgencyWebSiteService.insert('about', insertOptions)
+    this.mongoAgencyWebSiteService.insert('/team/members/', insertOptions)
       .subscribe(data => {
         this.showMessage = true;
         this.message = data.message + ' Redirecting to the team members listing...';

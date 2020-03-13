@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">Team members listing</li>
-      <li class="breadcrumb-item active" aria-current="page"><a routerLink="/member-new">Add a new team member</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a routerLink="/team-members-new">Add a new team member</a></li>
     </ol>
   </nav>
   <div class="page-content">
@@ -45,7 +45,7 @@
               <img src="{{teamMembersImages[member.email]}}" id="img_{{member.email}}" title="{{member.name}}" class="rounded-circle img-fluid"
               width="80px">
           </td>
-          <td> 
+          <td>
               <button mat-raised-button class="submit-button" color="primary" type="submit"
               (click)="openDialog(member.email)" title="Edit {{member.name}}'s image">Change image</button>
           </td>

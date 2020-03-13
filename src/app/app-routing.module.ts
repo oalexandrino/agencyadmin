@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'portfolio-new', component: PortfolioFormComponent },
   { path: 'portfolio-view', component: PortfolioViewComponent },
   { path: 'portfolio-view/:id', component: PortfolioFormComponent, resolve: {portfolio : PortfolioFormResolver} },
+  { path: 'team-members-new', component: TeamFormComponent },
   { path: 'team-members-view', component: TeamViewComponent },
   { path: 'team-members-view/:email', component: TeamFormComponent, resolve: { teamMember: TeamFormResolver } },
   { path: 'about-new', component: AboutFormComponent },
