@@ -56,7 +56,7 @@ export class TeamDialogComponent implements OnInit {
           alert(data.message);
           this.uploadResult = data;
           this.close();
-          this.router.navigate(['/team-view']);
+          this.router.navigate(['/team-members-view']);
         }, error => {
           this.showError = true;
           this.errorMessage = error;

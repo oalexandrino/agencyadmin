@@ -82,7 +82,8 @@ export class TeamViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
         const elementId = 'img_' + data.email;
-        (window.document.getElementById(elementId) as HTMLImageElement).src = data.cloudImage;
+        console.log(data);
+        // (window.document.getElementById(elementId) as HTMLImageElement).src = data.cloudImage;
       }
 
     });
