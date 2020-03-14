@@ -44,3 +44,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# env file
+.env
+/.env
+app_api/lib/agency/db/firebase/serviceAccountKey.json
+
+# resources
+resources/images_uploads/

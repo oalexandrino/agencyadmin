@@ -19,6 +19,7 @@ export class TeamViewComponent implements OnInit {
   loading = false;
   showMessage = false;
   message;
+  responseError;
 
   constructor(
     public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
@@ -95,11 +96,15 @@ export class TeamViewComponent implements OnInit {
         id: email
       };
       this.promiseToDelete(deleteOptions).then(() => {
-        this.deleteRow(email);
+
+        if (this.responseError === 'false') {
+          this.deleteRow(email);
+        }
+
         this.showMessage = true;
         setTimeout(() => {
           this.showMessage = false;
-        }, 1500);
+        }, 2000);
       });
     }
   }
@@ -111,7 +116,7 @@ export class TeamViewComponent implements OnInit {
 
   promiseToDelete(deleteOptions: any) {
 
-    return new Promise((onResolve, onReject) => {
+    return new Promise((resolve, reject) => {
       this.mongoAgencyWebSiteService.delete('team/members', deleteOptions)
         .toPromise()
         .then(
@@ -119,11 +124,12 @@ export class TeamViewComponent implements OnInit {
             this.loading = false;
             this.showMessage = true;
             this.message = response.message;
+            this.responseError = response.error;
             console.log(response.message);
-            onResolve();
+            resolve();
           },
           message => {
-            onReject(message);
+            reject(message);
           }
         ).catch(function (err) {
           console.error(err);
