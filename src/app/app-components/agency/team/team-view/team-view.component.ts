@@ -20,6 +20,7 @@ export class TeamViewComponent implements OnInit {
   showMessage = false;
   message;
   responseError;
+  email;
 
   constructor(
     public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
@@ -68,6 +69,7 @@ export class TeamViewComponent implements OnInit {
 
   openDialog(email) {
 
+    this.email = email;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -81,9 +83,9 @@ export class TeamViewComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
-        const elementId = 'img_' + data.email;
+        const elementId = 'img_' + this.email;
         console.log(data);
-        // (window.document.getElementById(elementId) as HTMLImageElement).src = data.cloudImage;
+        (window.document.getElementById(elementId) as HTMLImageElement).src = data.cloudImage;
       }
 
     });
