@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let member of teamMembers; let index = index" [attr.id]="member.email">
+        <tr *ngFor="let member of teamMembers; let index = index" [attr.id]="index">
           <th scope="row">{{member.name}}</th>
           <td>
             <div class="trim-info" tooltip="{{member.email}}">{{member.email}}</div>
@@ -55,7 +55,7 @@
           </td>
           <td>
               <button mat-raised-button class="submit-button" class="delete-button" color="warn"
-              (click)="deleteItem(member.email)" title="Delete '{{member.name}}'">Delete</button>
+              (click)="deleteItem(member.email, index)" title="Delete '{{member.name}}'">Delete</button>
           </td>
         </tr>
       </tbody>

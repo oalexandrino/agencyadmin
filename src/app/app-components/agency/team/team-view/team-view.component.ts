@@ -92,7 +92,7 @@ export class TeamViewComponent implements OnInit {
 
   }
 
-  deleteItem(email: any) {
+  deleteItem(email: any, index) {
     if (confirm('Are you sure you want to remove this member?')) {
       this.loading = true;
       const deleteOptions = {
@@ -101,7 +101,7 @@ export class TeamViewComponent implements OnInit {
       this.promiseToDelete(deleteOptions).then(() => {
 
         if (this.responseError === 'false') {
-          this.deleteRow(email);
+          this.deleteRow(index);
         }
 
         this.showMessage = true;
@@ -112,8 +112,7 @@ export class TeamViewComponent implements OnInit {
     }
   }
 
-  deleteRow(d) {
-    const index = this.teamMembers.indexOf(d);
+  deleteRow(index) {
     this.teamMembers.splice(index, 1);
   }
 
