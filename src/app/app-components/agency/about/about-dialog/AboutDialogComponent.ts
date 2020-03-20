@@ -110,7 +110,11 @@ export class AboutDialogComponent implements OnInit {
     }
 
     public close() {
-        this.dialogRef.close( this.uploadResult );
+        if (this.uploadResult) {
+            this.dialogRef.close(this.uploadResult);
+        } else {
+            this.dialogRef.close();
+        }
     }
 
     ngOnInit() {

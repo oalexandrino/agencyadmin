@@ -19,7 +19,9 @@ export class AboutViewComponent implements OnInit {
   loading = false;
   showMessage = false;
   message;
-
+  responseError;
+  aboutId;
+  
   constructor(
     public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
     private router: Router,
@@ -70,6 +72,7 @@ export class AboutViewComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = { aboutId };
+    this.aboutId = aboutId;
     const dialogRef = this.dialog.open(AboutDialogComponent, dialogConfig);
     this.setSrcImageForTheUpdatedItem(dialogRef);
 
@@ -78,20 +81,24 @@ export class AboutViewComponent implements OnInit {
   private setSrcImageForTheUpdatedItem(dialogRef) {
 
     dialogRef.afterClosed().subscribe(data => {
-      const elementId = 'img_' + data.aboutId;
-      (window.document.getElementById(elementId) as HTMLImageElement).src = data.cloudImage;
+      if (data) {
+        const elementId = 'img_' + this.aboutId;
+        (window.document.getElementById(elementId) as HTMLImageElement).src = data.cloudImage;
+      }
     });
 
   }
 
-  deleteItem(documentId: any) {
+  deleteItem(documentId: any, index) {
     if (confirm('Are you sure you want do delete this item?')) {
       this.loading = true;
       const deleteOptions = {
         id: documentId
       };
       this.promiseToDelete(deleteOptions).then(() => {
-        this.deleteRow(documentId);
+        if (this.responseError === 'false') {
+          this.deleteRow(index);
+        }
         this.showMessage = true;
         setTimeout(() => {
           this.showMessage = false;
@@ -100,8 +107,7 @@ export class AboutViewComponent implements OnInit {
     }
   }
 
-  deleteRow(d) {
-    const index = this.aboutItems.indexOf(d);
+  deleteRow(index) {
     this.aboutItems.splice(index, 1);
   }
 
@@ -115,6 +121,7 @@ export class AboutViewComponent implements OnInit {
             this.loading = false;
             this.showMessage = true;
             this.message = response.message;
+            this.responseError = response.error;
             console.log(response.message);
             onResolve();
           },

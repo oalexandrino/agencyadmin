@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let about of aboutItems; let index = index" [attr.id]="about._id">
+        <tr *ngFor="let about of aboutItems; let index = index" [attr.id]="index">
           <th scope="row">{{about.date | date:'dd/MM/yyyy'}}</th>
           <td> {{about.headline}}</td>
           <td> {{about.description}}</td>
@@ -32,7 +32,7 @@
           <td><button mat-raised-button class="submit-button" color="primary" type="submit"
               (click)="viewDetails(about._id)" title="Edit '{{about.description}}'">Edit</button></td>
           <td><button mat-raised-button class="submit-button" class="delete-button" color="warn"
-              (click)="deleteItem(about._id)" title="Delete '{{about.description}}'">Delete</button></td>
+              (click)="deleteItem(about._id, index)" title="Delete '{{about.description}}'">Delete</button></td>
         </tr>
       </tbody>
     </table>
