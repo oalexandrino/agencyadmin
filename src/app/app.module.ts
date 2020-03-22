@@ -61,6 +61,7 @@ import { ServiceFormComponent } from './app-components/agency/service/service-fo
 import { AboutFormComponent } from './app-components/agency/about/about-form/about-form.component';
 import { TeamDialogComponent } from './app-components/agency/team/team-dialog/team-dialog.component';
 import { TeamFormComponent } from './app-components/agency/team/team-form/team-form.component';
+import { TeamInfoComponent } from './app-components/agency/team-info/team-info.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { TeamFormComponent } from './app-components/agency/team/team-form/team-f
     AboutFormComponent,
     TeamDialogComponent,
     TeamFormComponent,
+    TeamInfoComponent,
   ],
   imports: [
     BrowserModule,

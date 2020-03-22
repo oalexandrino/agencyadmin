@@ -13,6 +13,10 @@ import { AboutFormResolver } from './app-components/agency/about/about-form/Abou
 import { TeamViewComponent } from './app-components/agency/team/team-view/team-view.component';
 import { TeamFormComponent } from './app-components/agency/team/team-form/team-form.component';
 import { TeamFormResolver } from './app-components/agency/team/team-form/TeamForm.resolver';
+import { TeamInfoComponent } from './app-components/agency/team-info/team-info.component';
+import { TeamInfoFormResolver } from './app-components/agency/team-info/TeamInfoForm.resolver';
+
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +24,7 @@ const routes: Routes = [
   { path: 'portfolio-new', component: PortfolioFormComponent },
   { path: 'portfolio-view', component: PortfolioViewComponent },
   { path: 'portfolio-view/:id', component: PortfolioFormComponent, resolve: {portfolio : PortfolioFormResolver} },
+  { path: 'team-info', component: TeamInfoComponent, resolve: { teamInfoData: TeamInfoFormResolver } },
   { path: 'team-members-new', component: TeamFormComponent },
   { path: 'team-members-view', component: TeamViewComponent },
   { path: 'team-members-view/:email', component: TeamFormComponent, resolve: { teamMember: TeamFormResolver } },
