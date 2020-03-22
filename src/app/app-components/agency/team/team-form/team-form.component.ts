@@ -159,15 +159,15 @@ export class TeamFormComponent implements OnInit {
 
   }
 
-  delete(documentId: any) {
-    if (confirm('Are you sure you want do delete this item?')) {
+  delete(email: any) {
+    if (confirm('Are you sure you want do delete this member?')) {
       this.loading = true;
       const deleteOptions = {
-        id: documentId
+        id: email
       };
       this.promiseToDelete(deleteOptions).then(() => {
         this.showMessage = true;
-        this.message = this.message + ' Redirecting to the about listing...';
+        this.message = this.message + ' Redirecting to the team member listing...';
         setTimeout(() => {
           this.router.navigate(['team-members-view']);
         }, 2000);  // 2s
@@ -178,7 +178,7 @@ export class TeamFormComponent implements OnInit {
   promiseToDelete(deleteOptions: any) {
 
     return new Promise((onResolve, onReject) => {
-      this.mongoAgencyWebSiteService.delete('about', deleteOptions)
+      this.mongoAgencyWebSiteService.delete('team/members', deleteOptions)
         .toPromise()
         .then(
           response => {
