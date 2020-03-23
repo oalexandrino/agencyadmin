@@ -53,8 +53,45 @@ export class WebsiteConfigComponent implements OnInit {
     this.subscribeData();
   }
 
+  private changeSpinnerCSSClass() {
+    const htmlDivElement = (window.document.getElementById('overlayProgressSpinner') as HTMLDivElement);
+    if (this.loading) {
+      htmlDivElement.className = 'overlay';
+    } else {
+      htmlDivElement.className = '';
+    }
+  }
+
   onSubmit(value) {
+    this.loading = true;
+    this.changeSpinnerCSSClass();
     this.update(value);
+  }
+
+  private update(value: any) {
+
+    const updateOptions = {
+      site_title: value.site_title,
+      site_headline: value.site_headline,
+      link_site: value.link_site,
+      service_headline: value.service_headline,
+      portfolio_headline: value.portfolio_headline,
+      about_headline: value.about_headline,
+      contact_headline: value.contact_headline
+    };
+
+    this.mongoAgencyWebSiteService.update('/config/', updateOptions)
+      .subscribe(data => {
+        this.showMessage = true;
+        this.message = data.message;
+        setTimeout(() => {
+          this.showMessage = false;
+          this.loading = false;
+          this.changeSpinnerCSSClass();
+        }, 1500);  // 2s
+      }, err => {
+        console.log(err);
+      });
   }
 
   private createForm() {
@@ -85,7 +122,6 @@ export class WebsiteConfigComponent implements OnInit {
     this.route.data.subscribe(routeData => {
 
       let webSiteData;
-      console.log(routeData);
 
       if (routeData) {
         webSiteData = routeData.webSiteConfigData.config[0];
@@ -101,30 +137,6 @@ export class WebsiteConfigComponent implements OnInit {
         this.createForm();
       }
     });
-  }
-
-  private update(value: any) {
-
-    const updateOptions = {
-      site_title: value.site_title,
-      site_headline: value.site_headline,
-      link_site: value.link_site,
-      service_headline: value.service_headline,
-      portfolio_headline: value.portfolio_headline,
-      about_headline: value.about_headline,
-      contact_headline: value.contact_headline
-    };
-
-    this.mongoAgencyWebSiteService.update('/config/', updateOptions)
-      .subscribe(data => {
-        this.showMessage = true;
-        this.message = data.message;
-        setTimeout(() => {
-          this.showMessage = false;
-        }, 2000);  // 2s
-      }, err => {
-        console.log(err);
-      });
   }
 
   cancel() {

@@ -1,7 +1,29 @@
+/*
+MIT License
+
+Copyright (c) 2020 Olavo Alexandrino, http://www.oalexandrino.com.br
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
 import { UploadService } from 'src/app/app-services/db/upload/upload-service.service';
 // import main itens
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -9,16 +31,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { NgxNavbarModule  } from 'ngx-bootstrap-navbar';
+import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 
 // import GUI Angular material modules
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatExpansionModule } from '@angular/material/expansion';
 import {
   MatButtonModule,
   MatInputModule,
-  MatDialogModule,
   MatSliderModule,
   MatSlideToggleModule,
   MatTabsModule,
@@ -31,7 +52,8 @@ import {
   MatListModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatFormFieldModule } from '@angular/material';
+  MatFormFieldModule
+} from '@angular/material';
 
 // import application`s modules
 import { PortfolioViewComponent } from './app-components/agency/portfolio/portfolio-view/portfolio-view.component';
@@ -117,13 +139,16 @@ import { WebsiteConfigComponent } from './app-components/agency/website-configur
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
-      ],
+  ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
   ],
-  entryComponents: [DeleteMsgComponent, AboutDialogComponent, TeamDialogComponent],
+  entryComponents: [
+    DeleteMsgComponent,
+    AboutDialogComponent,
+    TeamDialogComponent],
   providers: [
     PortfolioService,
     FirebaseAgencyWebSiteService,
