@@ -15,6 +15,8 @@ import { TeamFormComponent } from './app-components/agency/team/team-form/team-f
 import { TeamFormResolver } from './app-components/agency/team/team-form/TeamForm.resolver';
 import { TeamInfoComponent } from './app-components/agency/team-info/team-info.component';
 import { TeamInfoFormResolver } from './app-components/agency/team-info/TeamInfoForm.resolver';
+import { WebSiteConfigFormResolver } from './app-components/agency/website-configuration/WebSiteConfigurationForm.resolver';
+import { WebsiteConfigComponent } from './app-components/agency/website-configuration/website-configuration.component';
 
 
 
@@ -34,6 +36,7 @@ const routes: Routes = [
   { path: 'service-new', component: ServiceFormComponent },
   { path: 'service-view', component: ServiceViewComponent },
   { path: 'service-view/:id', component: ServiceFormComponent, resolve: { service: ServiceFormResolver } },
+  { path: 'website-config', component: WebsiteConfigComponent, resolve: { webSiteConfigData: WebSiteConfigFormResolver } },
 ];
 
 @NgModule({
