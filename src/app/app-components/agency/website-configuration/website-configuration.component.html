@@ -6,16 +6,7 @@
     </ol>
   </nav>
   <div class="page-content">
-    <div id="overlayProgressSpinner">
-      <div class="center">
-        <mat-progress-spinner
-          style="margin:0 auto;"
-          mode="indeterminate"
-          diameter="100"
-          *ngIf="loading">
-        </mat-progress-spinner>
-      </div>
-    </div>
+    <app-progress-spinner [loading]="spinnerloading"></app-progress-spinner>
     <div *ngIf="showMessage" class="row">
       <div class="col col-md-8">
         <div class="w-100 p-3">

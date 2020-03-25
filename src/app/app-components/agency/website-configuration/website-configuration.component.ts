@@ -12,9 +12,10 @@ export class WebsiteConfigComponent implements OnInit {
 
   public documentForm: FormGroup;
   webSiteData: any;
-  loading = false;
   message = 'Please provide data';
   showMessage = false;
+  spinnerloading = false;
+
 
   validationMessages = {
     site_title: [
@@ -53,18 +54,8 @@ export class WebsiteConfigComponent implements OnInit {
     this.subscribeData();
   }
 
-  private changeSpinnerCSSClass() {
-    const htmlDivElement = (window.document.getElementById('overlayProgressSpinner') as HTMLDivElement);
-    if (this.loading) {
-      htmlDivElement.className = 'overlay';
-    } else {
-      htmlDivElement.className = '';
-    }
-  }
-
   onSubmit(value) {
-    this.loading = true;
-    this.changeSpinnerCSSClass();
+    this.spinnerloading = true;
     this.update(value);
   }
 
@@ -86,8 +77,7 @@ export class WebsiteConfigComponent implements OnInit {
         this.message = data.message;
         setTimeout(() => {
           this.showMessage = false;
-          this.loading = false;
-          this.changeSpinnerCSSClass();
+          this.spinnerloading = false;
         }, 1500);  // 2s
       }, err => {
         console.log(err);

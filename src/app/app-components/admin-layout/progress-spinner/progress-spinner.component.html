@@ -1,6 +1,13 @@
 <div id="overlayProgressSpinner" class="{{cssClass}}">
     <div class="center">
-        <mat-progress-spinner style="margin:0 auto;" mode="indeterminate" diameter="100" *ngIf="internaLoading">
+        <mat-progress-spinner style="margin:0 auto;" mode="indeterminate" diameter="100" *ngIf="loading">
         </mat-progress-spinner>
+    </div>
+</div>
+<div *ngIf="showMessage" class="row">
+    <div class="col col-md-8">
+    <div class="w-100 p-3">
+        <div class="justify-content-center alert alert-success">{{message}}</div>
+    </div>
     </div>
 </div>

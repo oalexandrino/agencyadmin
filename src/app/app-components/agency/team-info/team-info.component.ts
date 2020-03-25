@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProgressSpinnerComponent } from '../../admin-layout/progress-spinner/progress-spinner.component';
 
 @Component({
   selector: 'app-team-info',
@@ -12,9 +13,13 @@ export class TeamInfoComponent implements OnInit {
 
   public documentForm: FormGroup;
   teamInfoData: any;
-  message = 'Please provide data';
-  showMessage = false;
-  spinnerloading = false;
+
+  spinnerData = {
+    loading: false,
+    message: 'Please provide data',
+    showMessage: false,
+    timeoutInterval: 1500
+  };
 
   validationMessages = {
     description: [
@@ -33,6 +38,7 @@ export class TeamInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
+    private progressSpinnerComponent: ProgressSpinnerComponent,
   ) {
 
   }
@@ -42,7 +48,7 @@ export class TeamInfoComponent implements OnInit {
   }
 
   onSubmit(value) {
-    this.spinnerloading = true;
+    this.spinnerData.loading = true;
     this.update(value);
   }
 
@@ -56,12 +62,9 @@ export class TeamInfoComponent implements OnInit {
 
     this.mongoAgencyWebSiteService.update('/team/', updateOptions)
       .subscribe(data => {
-        this.showMessage = true;
-        this.message = data.message;
-        setTimeout(() => {
-          this.showMessage = false;
-          this.spinnerloading = false;
-        }, 1500);  // 2s
+        this.spinnerData.message = data.message;
+        this.spinnerData.showMessage = true;
+        this.progressSpinnerComponent.resetStatus(this.spinnerData);
       }, err => {
         console.log(err);
       });
