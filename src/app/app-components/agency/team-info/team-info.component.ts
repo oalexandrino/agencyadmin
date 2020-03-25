@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProgressSpinnerComponent } from '../../admin-layout/progress-spinner/progress-spinner.component';
 
 @Component({
   selector: 'app-team-info',
@@ -12,9 +13,10 @@ export class TeamInfoComponent implements OnInit {
 
   public documentForm: FormGroup;
   teamInfoData: any;
-  loading = false;
   message = 'Please provide data';
   showMessage = false;
+  spinnerloading = false;
+  cssClass = '';
 
   validationMessages = {
     description: [
@@ -32,7 +34,8 @@ export class TeamInfoComponent implements OnInit {
     public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private progressSpinner: ProgressSpinnerComponent,
   ) {
 
   }
@@ -42,7 +45,31 @@ export class TeamInfoComponent implements OnInit {
   }
 
   onSubmit(value) {
-      this.update(value);
+    this.spinnerloading = true;
+    this.cssClass = 'overlay';
+    this.update(value);
+  }
+
+  private update(value: any) {
+
+    const updateOptions = {
+      description: value.description,
+      headline: value.headline,
+      title: value.title,
+    };
+
+    this.mongoAgencyWebSiteService.update('/team/', updateOptions)
+      .subscribe(data => {
+        this.showMessage = true;
+        this.message = data.message;
+        setTimeout(() => {
+          this.showMessage = false;
+          this.spinnerloading = false;
+          this.cssClass = '';
+        }, 1500);  // 2s
+      }, err => {
+        console.log(err);
+      });
   }
 
   private createForm() {
@@ -80,26 +107,6 @@ export class TeamInfoComponent implements OnInit {
         this.createForm();
       }
     });
-  }
-
-  private update(value: any) {
-
-    const updateOptions = {
-      description: value.description,
-      headline: value.headline,
-      title: value.title,
-    };
-
-    this.mongoAgencyWebSiteService.update('/team/', updateOptions)
-      .subscribe(data => {
-        this.showMessage = true;
-        this.message = data.message;
-        setTimeout(() => {
-          this.showMessage = false;
-        }, 2000);  // 2s
-      }, err => {
-        console.log(err);
-      });
   }
 
   cancel() {

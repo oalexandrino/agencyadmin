@@ -85,6 +85,7 @@ import { TeamDialogComponent } from './app-components/agency/team/team-dialog/te
 import { TeamFormComponent } from './app-components/agency/team/team-form/team-form.component';
 import { TeamInfoComponent } from './app-components/agency/team-info/team-info.component';
 import { WebsiteConfigComponent } from './app-components/agency/website-configuration/website-configuration.component';
+import { ProgressSpinnerComponent } from './app-components/admin-layout/progress-spinner/progress-spinner.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { WebsiteConfigComponent } from './app-components/agency/website-configur
     TeamFormComponent,
     TeamInfoComponent,
     WebsiteConfigComponent,
+    ProgressSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -153,7 +155,8 @@ import { WebsiteConfigComponent } from './app-components/agency/website-configur
     PortfolioService,
     FirebaseAgencyWebSiteService,
     MatDatepickerModule,
-    UploadService
+    UploadService,
+    ProgressSpinnerComponent
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
