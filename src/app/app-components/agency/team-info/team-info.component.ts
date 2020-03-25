@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProgressSpinnerComponent } from '../../admin-layout/progress-spinner/progress-spinner.component';
 
 @Component({
   selector: 'app-team-info',
@@ -16,7 +15,6 @@ export class TeamInfoComponent implements OnInit {
   message = 'Please provide data';
   showMessage = false;
   spinnerloading = false;
-  cssClass = '';
 
   validationMessages = {
     description: [
@@ -35,7 +33,6 @@ export class TeamInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private progressSpinner: ProgressSpinnerComponent,
   ) {
 
   }
@@ -46,7 +43,6 @@ export class TeamInfoComponent implements OnInit {
 
   onSubmit(value) {
     this.spinnerloading = true;
-    this.cssClass = 'overlay';
     this.update(value);
   }
 
@@ -65,7 +61,6 @@ export class TeamInfoComponent implements OnInit {
         setTimeout(() => {
           this.showMessage = false;
           this.spinnerloading = false;
-          this.cssClass = '';
         }, 1500);  // 2s
       }, err => {
         console.log(err);

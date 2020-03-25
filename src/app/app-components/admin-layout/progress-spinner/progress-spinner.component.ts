@@ -5,10 +5,10 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange, DoChe
   templateUrl: './progress-spinner.component.html',
   styleUrls: ['./progress-spinner.component.scss']
 })
-export class ProgressSpinnerComponent implements OnInit{
+export class ProgressSpinnerComponent implements OnInit, OnChanges{
 
-  internaLoading;
-  internalClass = '';
+  private internaLoading;
+  cssClass = '';
 
   constructor() { }
 
@@ -24,13 +24,11 @@ export class ProgressSpinnerComponent implements OnInit{
     this.internaLoading = val;
   }
 
-  get cssClass(): any {
-    return this.internalClass;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.internaLoading) {
+      this.cssClass = 'overlay';
+    } else {
+      this.cssClass = '';
+    }
   }
-
-  @Input()
-  set cssClass(val: any) {
-    this.internalClass = val;
-  }
-
 }
