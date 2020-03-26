@@ -125,9 +125,14 @@ export class TeamFormComponent implements OnInit {
 
     this.mongoAgencyWebSiteService.insert('/team/members/', insertOptions)
       .subscribe(data => {
-        this.spinnerData.message = data.message + ' Redirecting to the team members listing...';
         this.spinnerData.showMessage = true;
-        this.progressSpinnerComponent.resetStatus(this.spinnerData, this.router, 'team-members-view');
+        if (data.memberFound) {
+          this.spinnerData.message = data.message;
+          this.progressSpinnerComponent.resetStatus(this.spinnerData);
+        } else {
+          this.spinnerData.message = data.message + ' Redirecting to the team members listing...';
+          this.progressSpinnerComponent.resetStatus(this.spinnerData, this.router, 'team-members-view');
+        }
       }, err => {
         console.log(err);
       });
@@ -157,11 +162,9 @@ export class TeamFormComponent implements OnInit {
   delete(email: any) {
     if (confirm('Are you sure you want do delete this member?')) {
       this.spinnerData.loading = true;
-      const deleteOptions = {
-        id: email
-      };
+      const deleteOptions = { id: email };
       this.promiseToDelete(deleteOptions).then(() => {
-        this.spinnerData.message = this.spinnerData.message + ' Redirecting to the team member listing...';
+        this.spinnerData.message += ' Redirecting to the team member listing...';
         this.spinnerData.showMessage = true;
         this.progressSpinnerComponent.resetStatus(this.spinnerData, this.router, 'team-members-view');
       });
@@ -174,8 +177,6 @@ export class TeamFormComponent implements OnInit {
         .toPromise()
         .then(
           response => {
-            this.spinnerData.loading = false;
-            this.spinnerData.showMessage = true;
             this.spinnerData.message = response.message;
             console.log(response.message);
             onResolve();
