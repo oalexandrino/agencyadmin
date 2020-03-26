@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
 import { UploadService } from 'src/app/app-services/db/upload/upload-service.service';
 import { Router } from '@angular/router';
+import { ProgressSpinnerComponent } from 'src/app/app-components/admin-layout/progress-spinner/progress-spinner.component';
 
 const endpointUpload = 'http://localhost:3000/api/team/image/';
 
@@ -30,6 +31,12 @@ export class TeamDialogComponent implements OnInit {
   errorMessage;
   showError: boolean;
 
+  spinnerData = {
+    loading: false,
+    message: 'Please provide data',
+    showMessage: false,
+    timeoutInterval: 1500
+  };
 
   constructor(
     private router: Router,
@@ -37,26 +44,26 @@ export class TeamDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
     private dialogRef: MatDialogRef<TeamDialogComponent>,
+    private progressSpinner: ProgressSpinnerComponent,
     @Inject(MAT_DIALOG_DATA) { email }) {
     this.teamForm = this.formBuilder.group({ email: [''] });
     this.email = email;
     this.imageLoaded = false;
-
   }
 
   public upload() {
     if (!this.fileToUpload) {
       alert('Please select a file before uploading.');
     } else {
-
+      this.spinnerData.loading = true;
       const formData: FormData = this.addFormData();
-
       this.fileUploadService.postFile(formData, endpointUpload)
         .subscribe(data => {
-          alert(data.message);
           this.uploadResult = data;
+          this.spinnerData.message = data.message;
+          this.spinnerData.showMessage = true;
+          this.progressSpinner.resetStatus(this.spinnerData);
           this.close();
-          this.router.navigate(['/team-members-view']);
         }, error => {
           this.showError = true;
           this.errorMessage = error;
@@ -102,7 +109,6 @@ export class TeamDialogComponent implements OnInit {
   }
 
   private bindTeamMemberItemData(data: any) {
-
     this.teamMember = data[0].members[0];
     this.teamMemberName = this.teamMember.name;
     this.teamMemberRole = this.teamMember.role;

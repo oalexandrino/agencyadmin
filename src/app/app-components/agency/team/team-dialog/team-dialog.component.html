@@ -1,5 +1,12 @@
 <div class="page-content">
   <h1 class="display-7">Update image</h1>
+  <app-progress-spinner 
+    [loading]="spinnerData.loading" 
+    [message]="spinnerData.message"
+    [showMessage]="spinnerData.showMessage" 
+    [timeoutInterval]="spinnerData.timeoutInterval"
+  >
+  </app-progress-spinner>
   <div class="jumbotron jumbotron-fluid overflow-auto">
     <div class="container">
       <mat-dialog-content class="mat-typography">
