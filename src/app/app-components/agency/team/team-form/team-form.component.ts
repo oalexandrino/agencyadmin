@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MongoAgencyWebSiteService } from 'src/app/app-services/db/mongo/MongoAgencyWebSiteService.service';
+import { ProgressSpinnerComponent } from 'src/app/app-components/admin-layout/progress-spinner/progress-spinner.component';
 
 @Component({
   selector: 'app-team-form',
@@ -13,10 +14,13 @@ export class TeamFormComponent implements OnInit {
   public documentForm: FormGroup;
   teamMemberData: any;
   isNew = true;
-  loading = false;
-  message = 'Please provide data';
-  showMessage = false;
   email: string;
+  spinnerData = {
+    loading: false,
+    message: 'Please provide data',
+    showMessage: false,
+    timeoutInterval: 1500
+  };
 
   validationMessages = {
     email: [
@@ -46,7 +50,8 @@ export class TeamFormComponent implements OnInit {
     public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private progressSpinnerComponent: ProgressSpinnerComponent,
   ) {
 
   }
@@ -57,6 +62,7 @@ export class TeamFormComponent implements OnInit {
   }
 
   onSubmit(value) {
+    this.spinnerData.loading = true;
     if (this.isNew) {
       this.insert(value);
     } else {
@@ -89,13 +95,10 @@ export class TeamFormComponent implements OnInit {
 
   private subscribeData() {
     this.route.data.subscribe(routeData => {
-
-      var teamMemberData;
-
+      let teamMemberData;
       if (routeData.teamMember) {
         teamMemberData = routeData.teamMember[0].members[0];
       }
-
       if (teamMemberData) {
         this.isNew = false;
         this.teamMemberData = teamMemberData;
@@ -122,12 +125,9 @@ export class TeamFormComponent implements OnInit {
 
     this.mongoAgencyWebSiteService.insert('/team/members/', insertOptions)
       .subscribe(data => {
-        this.showMessage = true;
-        this.message = data.message + ' Redirecting to the team members listing...';
-        setTimeout(() => {
-          this.router.navigate(['team-members-view']);
-        }, 2000);  // 2s
-
+        this.spinnerData.message = data.message + ' Redirecting to the team members listing...';
+        this.spinnerData.showMessage = true;
+        this.progressSpinnerComponent.resetStatus(this.spinnerData, this.router, 'team-members-view');
       }, err => {
         console.log(err);
       });
@@ -144,47 +144,39 @@ export class TeamFormComponent implements OnInit {
       facebook: value.facebook,
       linkedin: value.linkedin,
     };
-
     this.mongoAgencyWebSiteService.update('/team/members/', updateOptions)
       .subscribe(data => {
-        this.showMessage = true;
-        this.message = data.message + ' Redirecting to the team member listing...';
-        setTimeout(() => {
-          this.router.navigate(['team-members-view']);
-        }, 2000);  // 2s
-
+        this.spinnerData.message = data.message + ' Redirecting to the team members listing...';
+        this.spinnerData.showMessage = true;
+        this.progressSpinnerComponent.resetStatus(this.spinnerData, this.router, 'team-members-view');
       }, err => {
         console.log(err);
       });
-
   }
 
   delete(email: any) {
     if (confirm('Are you sure you want do delete this member?')) {
-      this.loading = true;
+      this.spinnerData.loading = true;
       const deleteOptions = {
         id: email
       };
       this.promiseToDelete(deleteOptions).then(() => {
-        this.showMessage = true;
-        this.message = this.message + ' Redirecting to the team member listing...';
-        setTimeout(() => {
-          this.router.navigate(['team-members-view']);
-        }, 2000);  // 2s
+        this.spinnerData.message = this.spinnerData.message + ' Redirecting to the team member listing...';
+        this.spinnerData.showMessage = true;
+        this.progressSpinnerComponent.resetStatus(this.spinnerData, this.router, 'team-members-view');
       });
     }
   }
 
   promiseToDelete(deleteOptions: any) {
-
     return new Promise((onResolve, onReject) => {
       this.mongoAgencyWebSiteService.delete('team/members', deleteOptions)
         .toPromise()
         .then(
           response => {
-            this.loading = false;
-            this.showMessage = true;
-            this.message = response.message;
+            this.spinnerData.loading = false;
+            this.spinnerData.showMessage = true;
+            this.spinnerData.message = response.message;
             console.log(response.message);
             onResolve();
           },
@@ -192,12 +184,9 @@ export class TeamFormComponent implements OnInit {
             onReject(message);
           }
         ).catch(function (err) {
-          alert(err);
           console.error(err);
         });
-
     });
-
   }
 
   cancel() {

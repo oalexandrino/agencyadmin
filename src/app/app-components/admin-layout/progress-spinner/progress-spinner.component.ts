@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange, DoCheck } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-progress-spinner',
@@ -64,10 +65,13 @@ export class ProgressSpinnerComponent implements OnInit, OnChanges {
     }
   }
 
-  resetStatus(parentComponent: any) {
+  resetStatus(parentComponent: any, router?: Router, view?: string) {
     setTimeout(() => {
       parentComponent.showMessage = false;
       parentComponent.loading = false;
+      if (router) {
+        router.navigate([view]);
+      }
     }, parentComponent.timeoutInterval);
   }
 }
