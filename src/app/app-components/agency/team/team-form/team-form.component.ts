@@ -51,7 +51,7 @@ export class TeamFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private progressSpinnerComponent: ProgressSpinnerComponent,
+    private progressSpinner: ProgressSpinnerComponent,
   ) {
 
   }
@@ -128,10 +128,10 @@ export class TeamFormComponent implements OnInit {
         this.spinnerData.showMessage = true;
         if (data.memberFound) {
           this.spinnerData.message = data.message;
-          this.progressSpinnerComponent.resetStatus(this.spinnerData);
+          this.progressSpinner.resetStatus(this.spinnerData);
         } else {
           this.spinnerData.message = data.message + ' Redirecting to the team members listing...';
-          this.progressSpinnerComponent.resetStatus(this.spinnerData, this.router, 'team-members-view');
+          this.progressSpinner.resetStatus(this.spinnerData, this.router, 'team-members-view');
         }
       }, err => {
         console.log(err);
@@ -153,7 +153,7 @@ export class TeamFormComponent implements OnInit {
       .subscribe(data => {
         this.spinnerData.message = data.message + ' Redirecting to the team members listing...';
         this.spinnerData.showMessage = true;
-        this.progressSpinnerComponent.resetStatus(this.spinnerData, this.router, 'team-members-view');
+        this.progressSpinner.resetStatus(this.spinnerData, this.router, 'team-members-view');
       }, err => {
         console.log(err);
       });
@@ -166,7 +166,7 @@ export class TeamFormComponent implements OnInit {
       this.promiseToDelete(deleteOptions).then(() => {
         this.spinnerData.message += ' Redirecting to the team member listing...';
         this.spinnerData.showMessage = true;
-        this.progressSpinnerComponent.resetStatus(this.spinnerData, this.router, 'team-members-view');
+        this.progressSpinner.resetStatus(this.spinnerData, this.router, 'team-members-view');
       });
     }
   }

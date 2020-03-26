@@ -20,7 +20,6 @@ export class WebsiteConfigComponent implements OnInit {
     timeoutInterval: 1500
   };
 
-
   validationMessages = {
     site_title: [
       { type: 'required', message: 'Site title is required.' }
@@ -50,7 +49,7 @@ export class WebsiteConfigComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private progressSpinnerComponent: ProgressSpinnerComponent,
+    private progressSpinner: ProgressSpinnerComponent,
   ) {
 
   }
@@ -80,7 +79,7 @@ export class WebsiteConfigComponent implements OnInit {
       .subscribe(data => {
         this.spinnerData.message = data.message;
         this.spinnerData.showMessage = true;
-        this.progressSpinnerComponent.resetStatus(this.spinnerData);
+        this.progressSpinner.resetStatus(this.spinnerData);
       }, err => {
         console.log(err);
       });

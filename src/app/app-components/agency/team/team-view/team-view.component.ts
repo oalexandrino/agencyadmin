@@ -6,6 +6,7 @@ import { TeamDialogComponent } from '../team-dialog/team-dialog.component';
 import { TeamMember } from 'src/model/teamMember';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
+import { ProgressSpinnerComponent } from 'src/app/app-components/admin-layout/progress-spinner/progress-spinner.component';
 
 @Component({
   selector: 'app-team-view',
@@ -16,16 +17,20 @@ export class TeamViewComponent implements OnInit {
 
   teamMembers: TeamMember[];
   teamMembersImages: any[];
-  loading = false;
-  showMessage = false;
-  message;
   responseError;
   email;
+  spinnerData = {
+    loading: false,
+    message: 'Please provide data',
+    showMessage: false,
+    timeoutInterval: 1500
+  };
 
   constructor(
     public mongoAgencyWebSiteService: MongoAgencyWebSiteService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private progressSpinner: ProgressSpinnerComponent,
   ) { }
 
   ngOnInit() {
@@ -45,8 +50,8 @@ export class TeamViewComponent implements OnInit {
         // tslint:disable-next-line: no-string-literal
         this.teamMembersImages = data['teamMemberImages'];
       }, err => {
-        this.showMessage = true;
-        this.message = err;
+        this.spinnerData.showMessage = true;
+        this.spinnerData.message = err;
       });
   }
 
@@ -58,8 +63,8 @@ export class TeamViewComponent implements OnInit {
         this.teamMembers = data['team'][0]['members'];
         console.log(this.teamMembers);
       }, err => {
-        this.showMessage = true;
-        this.message = err;
+        this.spinnerData.showMessage = true;
+        this.spinnerData.message = err;
       });
   }
 
@@ -94,20 +99,14 @@ export class TeamViewComponent implements OnInit {
 
   deleteItem(email: any, index) {
     if (confirm('Are you sure you want to remove this member?')) {
-      this.loading = true;
-      const deleteOptions = {
-        id: email
-      };
+      this.spinnerData.loading = true;
+      const deleteOptions = { id: email };
       this.promiseToDelete(deleteOptions).then(() => {
-
         if (this.responseError === 'false') {
           this.deleteRow(index);
         }
-
-        this.showMessage = true;
-        setTimeout(() => {
-          this.showMessage = false;
-        }, 2000);
+        this.spinnerData.showMessage = true;
+        this.progressSpinner.resetStatus(this.spinnerData);
       });
     }
   }
@@ -117,28 +116,21 @@ export class TeamViewComponent implements OnInit {
   }
 
   promiseToDelete(deleteOptions: any) {
-
     return new Promise((resolve, reject) => {
       this.mongoAgencyWebSiteService.delete('team/members', deleteOptions)
         .toPromise()
         .then(
           response => {
-            this.loading = false;
-            this.showMessage = true;
-            this.message = response.message;
+            this.spinnerData.message = response.message;
             this.responseError = response.error;
             console.log(response.message);
             resolve();
           },
-          message => {
-            reject(message);
-          }
+          message => { reject(message); }
         ).catch(function (err) {
           console.error(err);
         });
-
     });
-
   }
 
 }

@@ -38,7 +38,7 @@ export class TeamInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private progressSpinnerComponent: ProgressSpinnerComponent,
+    private progressSpinner: ProgressSpinnerComponent,
   ) {
 
   }
@@ -64,7 +64,7 @@ export class TeamInfoComponent implements OnInit {
       .subscribe(data => {
         this.spinnerData.message = data.message;
         this.spinnerData.showMessage = true;
-        this.progressSpinnerComponent.resetStatus(this.spinnerData);
+        this.progressSpinner.resetStatus(this.spinnerData);
       }, err => {
         console.log(err);
       });

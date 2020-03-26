@@ -7,8 +7,13 @@
     </ol>
   </nav>
   <div class="page-content">
-    <div *ngIf="loading" class="alert alert-success" role="alert">Processing</div>
-    <div *ngIf="showMessage" class="alert alert-info" role="alert">{{message}}</div>
+      <app-progress-spinner
+        [loading]="spinnerData.loading"
+        [message]="spinnerData.message"
+        [showMessage]="spinnerData.showMessage"
+        [timeoutInterval]="spinnerData.timeoutInterval"
+      >
+      </app-progress-spinner>
     <table class="table table-hover">
       <thead>
         <tr>
